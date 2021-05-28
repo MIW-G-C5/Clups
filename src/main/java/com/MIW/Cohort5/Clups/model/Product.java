@@ -6,6 +6,8 @@ import javax.persistence.Id;
 
 /**
  * @author Kimberley Hommes
+ *
+ * this class describes products
  */
 @Entity
 public class Product {
@@ -23,7 +25,4 @@ public class Product {
         return productCode;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
 }
