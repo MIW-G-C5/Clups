@@ -17,6 +17,8 @@ public class Product {
 
     private String productName;
 
+    private double productPrice;
+
     public String getProductName() {
         return productName;
     }
@@ -25,4 +27,7 @@ public class Product {
         return productCode;
     }
 
+    public double getProductPrice() {
+        return productPrice;
+    }
 }
