@@ -24,7 +24,7 @@ public class ProductController {
     @GetMapping({"/", "/products"})
     protected String showProducts(Model model) {
         model.addAttribute("allProducts", productRepository.findAll());
-        return "productOverview";
+        return "mainPage";
     }
 
 }
