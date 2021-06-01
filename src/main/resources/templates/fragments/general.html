@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 
 <head th:fragment="baseHeader(title)">
     <meta charset="UTF-8">
@@ -21,6 +21,9 @@
             </li>
             <li class="nav-link">
                 <a class="nav-link" th:href="@{/accounts}">Accounts</a>
+            </li>
+            <li class="nav-link" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{/logout}">Logout <span sec:authentication="name"></span></a>
             </li>
         </ul>
     </div>

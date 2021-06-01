@@ -65,4 +65,14 @@ public class ClupsUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
+

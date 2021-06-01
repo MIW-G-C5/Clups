@@ -42,4 +42,5 @@ public class Product {
     public BigDecimal getProductPrice() {
         return productPrice;
     }
+
 }

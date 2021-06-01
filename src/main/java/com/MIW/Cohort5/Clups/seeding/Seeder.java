@@ -5,7 +5,6 @@ import com.MIW.Cohort5.Clups.services.ProductService;
 import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -20,9 +19,11 @@ import java.math.BigDecimal;
 public class Seeder {
 
     private ProductService productService;
+    private ClupsUserDetailsServiceImpl clupsUserDetailsService;
 
-    public Seeder(ProductService productService) {
+    public Seeder(ProductService productService,  ClupsUserDetailsServiceImpl clupsUserDetailsService) {
         this.productService = productService;
+        this.clupsUserDetailsService = clupsUserDetailsService;
     }
 
     // This generates the test data when launching the program.
@@ -30,6 +31,13 @@ public class Seeder {
     @EventListener
     public void seed(ContextRefreshedEvent event) {
         seedProduct();
+        seedUser();
+    }
+
+    private void seedUser() {
+        if (clupsUserDetailsService.getAll().size() == 0) {
+            clupsUserDetailsService.addUser("admin", "admin");
+        }
     }
 
     private void seedProduct() {

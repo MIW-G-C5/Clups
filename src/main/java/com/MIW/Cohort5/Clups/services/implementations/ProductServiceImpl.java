@@ -41,4 +41,5 @@ public class ProductServiceImpl implements ProductService {
     public Product addNew(Product product) {
         return productRepository.save(product);
     }
+
 }

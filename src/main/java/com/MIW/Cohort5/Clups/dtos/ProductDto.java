@@ -31,4 +31,5 @@ public class ProductDto {
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
     }
+
 }
