@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.controller;
 
-import com.MIW.Cohort5.Clups.repository.ProductRepository;
+import com.MIW.Cohort5.Clups.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,21 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Johnnie Meijer
  * j.j.meijer@st.hanze.nl
  *
- * this class controls product views
+ * This class controls product views
  */
 
 @Controller
 public class ProductController {
 
-    private ProductRepository productRepository;
+    public final ProductService productService;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    @Autowired
+    public ProductController(ProductService products) {
+        this.productService = products;
     }
 
     @GetMapping({"/", "/products"})
     protected String showProducts(Model model) {
-        model.addAttribute("allProducts", productRepository.findAll());
+        model.addAttribute("allProducts", productService.getAll());
         return "productOverview";
     }
 

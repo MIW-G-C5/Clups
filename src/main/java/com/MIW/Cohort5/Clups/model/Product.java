@@ -7,8 +7,9 @@ import javax.persistence.Id;
 /**
  * @author Kimberley Hommes
  *
- * this class describes products
+ * This class describes products
  */
+
 @Entity
 public class Product {
     @Id
@@ -25,7 +26,7 @@ public class Product {
 
     public Integer getProductCode() {
         return productCode;
-    }
+    } //todo is deze nodig?
 
     public double getProductPrice() {
         return productPrice;
