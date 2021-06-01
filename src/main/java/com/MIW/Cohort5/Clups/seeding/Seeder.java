@@ -2,8 +2,10 @@ package com.MIW.Cohort5.Clups.seeding;
 
 import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.services.ProductService;
+import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -34,7 +36,6 @@ public class Seeder {
         if (productService.getAll().size() == 0) {
             productService.addNew(new Product("Heineken", BigDecimal.valueOf(1.20)));
             productService.addNew(new Product("Grolsch", BigDecimal.valueOf(1.40)));
-
         }
     }
 

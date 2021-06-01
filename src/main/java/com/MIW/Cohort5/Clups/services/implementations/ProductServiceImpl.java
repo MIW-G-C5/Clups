@@ -17,14 +17,14 @@ import java.util.List;
  */
 
 @Service
-public class ProductServiceImplementation implements ProductService {
+public class ProductServiceImpl implements ProductService {
 
     ProductDtoConverter dtoConverter = new ProductDtoConverter();
 
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductServiceImplementation(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
