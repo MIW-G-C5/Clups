@@ -8,7 +8,7 @@ package com.MIW.Cohort5.Clups.dtos;
 
 public class ProductDto {
 
-    private String name;
+     private String name;
 
     private double price;
 
