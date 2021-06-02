@@ -3,6 +3,7 @@ package com.MIW.Cohort5.Clups.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 /**
  * @author Kimberley Hommes
@@ -18,17 +19,28 @@ public class Product {
 
     private String productName;
 
-    private double productPrice;
+    private BigDecimal productPrice;
+
+    public Product(Integer productCode, String productName, BigDecimal productPrice) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
+
+    public Product(String productName, BigDecimal productPrice) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
+
+    public Product() {
+    }
 
     public String getProductName() {
         return productName;
     }
 
-    public Integer getProductCode() {
-        return productCode;
-    } //todo is deze nodig?
-
-    public double getProductPrice() {
+    public BigDecimal getProductPrice() {
         return productPrice;
     }
+
 }

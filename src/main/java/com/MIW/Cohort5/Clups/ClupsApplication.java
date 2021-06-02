@@ -8,7 +8,6 @@ public class ClupsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClupsApplication.class, args);
-
 	}
 
 }
