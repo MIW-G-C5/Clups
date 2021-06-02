@@ -12,6 +12,8 @@ public class ProductDto {
 
     private String productName;
 
+    private int productCode;
+
     private BigDecimal productPrice;
 
     public ProductDto() {}
@@ -22,6 +24,14 @@ public class ProductDto {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public int getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(int productCode) {
+        this.productCode = productCode;
     }
 
     public BigDecimal getProductPrice() {

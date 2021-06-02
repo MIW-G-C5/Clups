@@ -30,6 +30,7 @@ public class ProductDtoConverter {
     public ProductDto toDto(Product model) {
         ProductDto result = new ProductDto();
         result.setProductName(model.getProductName());
+        result.setProductCode(model.getProductCode());
         result.setProductPrice(model.getProductPrice());
 
         return result;
