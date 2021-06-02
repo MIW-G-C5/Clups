@@ -18,6 +18,14 @@ public class ProductDto {
 
     public ProductDto() {}
 
+    public boolean equals(ProductDto o) {
+        if (this.productCode == o.productCode) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String getProductName() {
         return productName;
     }

@@ -20,30 +20,34 @@ public class OrderDto {
         return orderedItems;
     }
 
-    public void setOrderedItems(List<OrderedItemDto> orderedItems) {
-        this.orderedItems = orderedItems;
-    }
-
     public void addToOrder(ProductDto orderedProduct) {
-        if (orderedItems.isEmpty()) {
-            addNewItem(orderedProduct);
-        } else if (orderedItems.contains(orderedProduct)) {
-            addCountToExistingItem(orderedProduct);
+        int index = checkItemPresentInList(orderedProduct);
+
+        if (index >= 0) {
+            addCountToExistingItem(index);
         } else {
             addNewItem(orderedProduct);
         }
     }
 
-    private void addCountToExistingItem(ProductDto orderedProduct) {
-        for (int i = 0; i < orderedItems.size(); i++) {
-            if (orderedItems.get(i).getOrderedProduct().equals(orderedProduct)) {
-                orderedItems.get(i).addCount();
-            }
-        }
+    private void addCountToExistingItem(int index) {
+        orderedItems.get(index).addCount();
     }
 
     private void addNewItem(ProductDto orderedProduct) {
         OrderedItemDto orderedItem = new OrderedItemDto(orderedProduct, 1);
         orderedItems.add(orderedItem);
+    }
+
+    private int checkItemPresentInList(ProductDto orderedProduct) {
+        int index = -1;
+
+        for (int i = 0; i < orderedItems.size(); i++) {
+            if (orderedItems.get(i).getOrderedProduct().equals(orderedProduct)) {
+                index = i;
+            }
+        }
+
+        return index;
     }
 }
