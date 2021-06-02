@@ -1,5 +1,7 @@
 package com.MIW.Cohort5.Clups.dtos;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,5 +51,15 @@ public class OrderDto {
         }
 
         return index;
+    }
+
+    public BigDecimal calculateTotalCostOrder() {
+        BigDecimal totalCost = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
+
+        for (OrderedItemDto orderedItem : orderedItems) {
+            totalCost = totalCost.add(orderedItem.calculateTotalPrice());
+        }
+
+        return totalCost;
     }
 }

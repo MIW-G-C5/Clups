@@ -15,12 +15,12 @@
         <tr th:each="orderItem : ${orderList}">
             <td th:text="${orderItem.count}"></td>
             <td th:text="${orderItem.orderedProduct.productName}"></td>
-            <td th:text="${orderItem.orderedProduct.productPrice * orderItem.count}"></td>
+            <td th:text="${orderItem.calculateTotalPrice}"></td>
         </tr>
         <tr>
             <td>Total price:</td>
             <td></td>
-            <td></td>
+            <td th:text="${orderTotal}"></td>
         </tr>
 
 

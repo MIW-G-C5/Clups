@@ -1,5 +1,8 @@
 package com.MIW.Cohort5.Clups.dtos;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
  */
@@ -15,6 +18,14 @@ public class OrderedItemDto {
 
     public void addCount() {
         this.count++;
+    }
+
+    public BigDecimal calculateTotalPrice() {
+        BigDecimal priceNotRounded = orderedProduct.getProductPrice().multiply(new BigDecimal(count));
+
+        BigDecimal priceRounded = priceNotRounded.setScale(2, RoundingMode.HALF_EVEN);
+
+        return priceRounded;
     }
 
     public ProductDto getOrderedProduct() {
