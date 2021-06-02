@@ -15,4 +15,5 @@ public interface ProductService {
     List<ProductDto> getAll();
 
     Product addNew(Product product);
+
 }

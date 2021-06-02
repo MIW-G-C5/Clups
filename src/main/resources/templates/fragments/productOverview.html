@@ -11,11 +11,13 @@
       <tr>
         <th>Product name</th>
         <th>Price</th>
+        <th></th>
       </tr>
       <tbody>
       <tr th:each="product : ${allProducts}">
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.price}"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.productPrice}"></td>
+        <td><a th:href="@{/order/{productName}(productName=${product.productName})}">Add</a></td>
       </tr>
       </tbody>
     </table>

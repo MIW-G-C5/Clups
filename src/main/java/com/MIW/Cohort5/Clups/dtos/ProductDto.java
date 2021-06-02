@@ -1,5 +1,7 @@
 package com.MIW.Cohort5.Clups.dtos;
 
+import java.math.BigDecimal;
+
 /**
  * @author S.K.C.Reijntjes
  *
@@ -7,32 +9,45 @@ package com.MIW.Cohort5.Clups.dtos;
  */
 
 public class ProductDto {
+    
+    private String productName;
 
-     private String name;
+    private int productCode;
 
-    private double price;
-
-    // TODO: 01/06/2021 Kijk hier nog even naar: is deze constructor nodig? en getters?
-/*
-     public ProductDto(String name, Double price) {
-     this.name = name;
-     this.price = price;
-    }
- */
+    private BigDecimal productPrice;
 
     public ProductDto() {}
 
-    public String getName() {
-        return name;
+    public boolean equals(ProductDto o) {
+        if (this.productCode == o.productCode) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public double getPrice() {
-        return price;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {this.name = name;}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-    public void setPrice(double price) {this.price = price;}
+    public int getProductCode() {
+        return productCode;
+    }
 
+    public void setProductCode(int productCode) {
+        this.productCode = productCode;
+    }
+
+    public BigDecimal getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
+    }
 
 }

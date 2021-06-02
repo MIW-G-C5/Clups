@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" th:fragment="order">
+    <table>
+        <tr>
+            <th>Count</th>
+            <th>Product</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="orderItem : ${orderList}">
+            <td th:text="${orderItem.count}"></td>
+            <td th:text="${orderItem.orderedProduct.productName}"></td>
+            <td th:text="${orderItem.orderedProduct.productPrice * orderItem.count}"></td>
+        </tr>
+        <tr>
+            <td>Total price:</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+
+    </table>
+</div>
+</body>
+</html>

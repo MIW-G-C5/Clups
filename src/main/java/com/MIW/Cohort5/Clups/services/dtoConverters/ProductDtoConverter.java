@@ -12,8 +12,9 @@ import java.util.List;
  * This class converts products to a DTO to filter out any unnecessary data.
  */
 
-public class ProductConverter {
+public class ProductDtoConverter {
 
+    //This method calls the toDto method for all objects from a database table.
     public List<ProductDto> toProductDtos(List<Product> models) {
         List<ProductDto> result = new ArrayList<>();
 
@@ -25,10 +26,12 @@ public class ProductConverter {
         return result;
     }
 
+    //This converts an objects to a DTO
     public ProductDto toDto(Product model) {
         ProductDto result = new ProductDto();
-        result.setName(model.getProductName());
-        result.setPrice(model.getProductPrice());
+        result.setProductName(model.getProductName());
+        result.setProductCode(model.getProductCode());
+        result.setProductPrice(model.getProductPrice());
 
         return result;
     }
