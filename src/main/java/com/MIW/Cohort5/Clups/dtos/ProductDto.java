@@ -26,6 +26,8 @@ public class ProductDto {
         this.productName = productName;
     }
 
+    //This getter is grey because Intellij can't make the connection between
+    // this method and the fragments it is used in.
     public int getProductCode() {
         return productCode;
     }
@@ -34,6 +36,8 @@ public class ProductDto {
         this.productCode = productCode;
     }
 
+    //This getter is grey because Intellij can't make the connection between
+    // this method and the fragments it is used in.
     public BigDecimal getProductPrice() {
         return productPrice;
     }
