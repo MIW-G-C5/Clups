@@ -36,6 +36,7 @@ public class ClupsUser implements UserDetails {
         return authorityList;
     }
 
+
     @Override
     public String getPassword() {
         return password;

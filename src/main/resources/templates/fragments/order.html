@@ -12,7 +12,7 @@
             <th>Count</th>
         </tr>
         <tr th:each="orderItem : ${orderList}">
-            <td th:text="${orderItem.orderedProduct.name}"></td>
+            <td th:text="${orderItem.orderedProduct.productName}"></td>
             <td th:text="${orderItem.count}"></td>
         </tr>
 

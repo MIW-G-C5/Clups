@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                     .anyRequest().authenticated().and()
                 .formLogin().and()
-                .logout().logoutSuccessUrl("/products");
+                .logout().logoutSuccessUrl("/");
     }
 
     @Bean

@@ -29,7 +29,6 @@ public class UserDtoConverter {
     public UserDto toDto(ClupsUser model) {
         UserDto result = new UserDto();
         result.setUsername(model.getUsername());
-        result.setPassword(model.getPassword());
 
         return result;
     }

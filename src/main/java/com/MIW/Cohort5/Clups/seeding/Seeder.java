@@ -28,6 +28,7 @@ public class Seeder {
 
     // This generates the test data when launching the program.
     // The database must be reset manually by clearing all data in MySQL.
+    // The event variable is grey because it only exists when running the program.
     @EventListener
     public void seed(ContextRefreshedEvent event) {
         seedProduct();

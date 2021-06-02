@@ -51,7 +51,7 @@ public class MainPageController {
 
         ProductDto productByName = null;
         for (ProductDto product : allProducts) {
-            if (product.getName().equals(name)) {
+            if (product.getProductName().equals(name)) {
                 productByName = product;
             }
         }
