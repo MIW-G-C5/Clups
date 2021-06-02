@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author S.K.C.Reijntjes
  *
- * This interface defines the structure of a service.
+ * This interface defines the structure of a product service.
  */
 
 public interface ProductService {

@@ -1,6 +1,8 @@
 package com.MIW.Cohort5.Clups.seeding;
 
+import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
+import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -19,11 +21,14 @@ import java.math.BigDecimal;
 public class Seeder {
 
     private ProductService productService;
+    private CategoryService categoryService;
     private ClupsUserDetailsServiceImpl clupsUserDetailsService;
 
-    public Seeder(ProductService productService,  ClupsUserDetailsServiceImpl clupsUserDetailsService) {
+    public Seeder(ProductService productService,  ClupsUserDetailsServiceImpl clupsUserDetailsService,
+                  CategoryService categoryService) {
         this.productService = productService;
         this.clupsUserDetailsService = clupsUserDetailsService;
+        this.categoryService = categoryService;
     }
 
     // This generates the test data when launching the program.
@@ -33,11 +38,22 @@ public class Seeder {
     public void seed(ContextRefreshedEvent event) {
         seedProduct();
         seedUser();
+        seedCategory();
     }
 
     private void seedUser() {
         if (clupsUserDetailsService.getAll().size() == 0) {
             clupsUserDetailsService.addUser("admin", "admin");
+        }
+    }
+
+    private void seedCategory() {
+        if (categoryService.getAll().size() == 0) {
+            categoryService.addNew(new Category("Snacks"));
+            categoryService.addNew(new Category("Beer"));
+            categoryService.addNew(new Category("Wine"));
+            categoryService.addNew(new Category("Warm beverages"));
+            categoryService.addNew(new Category("Soft drinks"));
         }
     }
 

@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
+import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,15 +24,19 @@ import java.util.List;
 public class MainPageController {
 
     public final ProductService productService;
+    public final CategoryService categoryService;
+
     private OrderDto order;
 
     @Autowired
-    public MainPageController(ProductService products) {
+    public MainPageController(ProductService products, CategoryService categories) {
         this.productService = products;
+        this.categoryService = categories;
     }
 
     @GetMapping({"/"})
     protected String showPage(Model model) {
+        model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProducts", productService.getAll());
         if (order == null) {
             order = new OrderDto();
