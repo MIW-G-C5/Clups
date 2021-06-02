@@ -1,9 +1,8 @@
 package com.MIW.Cohort5.Clups.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.context.annotation.Primary;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -26,17 +25,21 @@ public class Product {
     private String productName;
     private BigDecimal productPrice;
 
-    public Product(Integer productDbId, String productName, BigDecimal productPrice) {
+    @ManyToOne
+    private Category productCategory;
+
+    public Product(Integer productDbId, String productName, BigDecimal productPrice, Category productCategory) {
         this.productDbId = productDbId;
         addProductCode();
         this.productName = productName;
         this.productPrice = productPrice;
+        this.productCategory = productCategory;
     }
 
     public Product(String productName, BigDecimal productPrice) {
+        addProductCode();
         this.productName = productName;
         this.productPrice = productPrice;
-        addProductCode();
     }
 
     private void addProductCode() {
@@ -57,6 +60,10 @@ public class Product {
 
     public BigDecimal getProductPrice() {
         return productPrice;
+    }
+
+    public Category getProductCategory() {
+        return productCategory;
     }
 
 }
