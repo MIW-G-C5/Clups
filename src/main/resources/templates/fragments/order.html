@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container" th:fragment="order">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Count</th>
+        </tr>
+        <tr th:each="orderItem : ${orderList}">
+            <td th:text="${orderItem.orderedProduct.name}"></td>
+            <td th:text="${orderItem.count}"></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

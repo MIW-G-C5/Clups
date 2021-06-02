@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="EN" xmlns:th="https://www.thymeleaf.org">
-
-
 <head th:replace="fragments/general :: baseHeader(~{::title})">
     <meta charset="UTF-8">
     <title>Order</title>
 </head>
-
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
-<div th:replace="fragments/productOverview :: productOverview"></div>
-<div th:replace="fragments/general :: bottomScripts"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Products</h2>
+            <div th:replace="fragments/productOverview :: productOverview"></div>
+        </div>
+        <div class="col">
+            <div th:replace="fragments/order :: order"></div>
+        </div>
+    </div>
+    <div th:replace="fragments/general :: bottomScripts"></div>
+</div>
 </body>
 </html>
