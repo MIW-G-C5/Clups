@@ -21,8 +21,14 @@ public class Category {
     @Column(unique = true)
     private int categoryCode;
 
-    @OneToMany
+    @OneToMany (mappedBy ="productCategory", fetch = FetchType.EAGER)
     private List<Product> products;
+
+    public Category(String categoryName, int categoryCode, List<Product> products) {
+        this.categoryName = categoryName;
+        this.categoryCode = categoryCode;
+        this.products = products;
+    }
 
     public Category(String categoryName, int categoryCode) {
         this.categoryName = categoryName;
@@ -34,10 +40,6 @@ public class Category {
 
     public List<Product> getProducts() {
         return products;
-    }
-
-    public Integer getCategoryDbId() {
-        return categoryDbId;
     }
 
     public int getCategoryCode() {

@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    CategoryDtoConverter dtoConverter = new CategoryDtoConverter();
+    private CategoryDtoConverter dtoConverter = new CategoryDtoConverter();
 
     private final CategoryRepository categoryRepository;
 

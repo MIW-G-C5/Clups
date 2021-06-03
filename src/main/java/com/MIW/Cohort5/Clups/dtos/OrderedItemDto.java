@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
+ *
+ * This is a line of the order, with the ordered product and the amount of times the product has been ordered.
  */
 public class OrderedItemDto {
 

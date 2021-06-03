@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class ClupsUserDetailsServiceImpl implements UserDetailsService {
 
-    UserDtoConverter dtoConverter = new UserDtoConverter();
+    private UserDtoConverter dtoConverter = new UserDtoConverter();
 
     private final ClupsUserRepository clupsUserRepository;
 

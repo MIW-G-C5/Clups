@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    ProductDtoConverter dtoConverter = new ProductDtoConverter();
+    private ProductDtoConverter dtoConverter = new ProductDtoConverter();
 
     private final ProductRepository productRepository;
 
@@ -35,12 +35,6 @@ public class ProductServiceImpl implements ProductService {
         List<Product> models = productRepository.findAll();
         return dtoConverter.toProductDtos(models);
     }
-
-    //todo weghalen
-//    public List<Product> getByCategory(String categoryName) {
-//        List<Product> productsByCategory = productRepository.findProductsByCategory(categoryName);
-//        return dtoConverter.toProductDtos(models);
-//    }
 
     //This method saves objects in the database.
     @Override

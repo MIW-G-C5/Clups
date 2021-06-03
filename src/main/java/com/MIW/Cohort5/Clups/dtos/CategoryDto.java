@@ -1,7 +1,4 @@
 package com.MIW.Cohort5.Clups.dtos;
-
-import com.MIW.Cohort5.Clups.model.Product;
-
 import java.util.List;
 
 /**
@@ -16,7 +13,7 @@ public class CategoryDto {
 
     private int categoryCode;
 
-    private List<Product> products;
+    private List<ProductDto> products;
 
     public CategoryDto() {
     }
@@ -29,6 +26,7 @@ public class CategoryDto {
         this.categoryName = categoryName;
     }
 
+    //This getter is used in the CategoryDtoConverter
     public int getCategoryCode() {
         return categoryCode;
     }
@@ -37,11 +35,11 @@ public class CategoryDto {
         this.categoryCode = categoryCode;
     }
 
-    public List<Product> getProducts() {
+    public List<ProductDto> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<ProductDto> products) {
         this.products = products;
     }
 

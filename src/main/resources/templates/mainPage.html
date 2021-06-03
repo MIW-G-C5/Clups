@@ -5,22 +5,22 @@
     <title>Order</title>
 </head>
 <body>
-<nav th:replace="fragments/general :: navbar"></nav>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h2>Categories</h2>
-            <div th:replace="fragments/categoryOverview :: categoryOverview"></div>
+    <nav th:replace="fragments/general :: navbar"></nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Categories</h2>
+                <div th:replace="fragments/categoryOverview :: categoryOverview"></div>
+            </div>
+            <div class="col">
+                <h2>Products</h2>
+                <div th:replace="fragments/productOverview :: productOverview"></div>
+            </div>
+            <div class="col">
+                <div th:replace="fragments/order :: order"></div>
+            </div>
         </div>
-        <div class="col">
-            <h2>Products</h2>
-            <div th:replace="fragments/productOverview :: productOverview"></div>
-        </div>
-        <div class="col">
-            <div th:replace="fragments/order :: order"></div>
-        </div>
+        <div th:replace="fragments/general :: bottomScripts"></div>
     </div>
-    <div th:replace="fragments/general :: bottomScripts"></div>
-</div>
 </body>
 </html>

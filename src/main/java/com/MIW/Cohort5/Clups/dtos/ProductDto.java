@@ -18,12 +18,8 @@ public class ProductDto {
 
     public ProductDto() {}
 
-    public boolean equals(ProductDto o) {
-        if (this.productCode == o.productCode) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean equals(ProductDto other) {
+        return this.productCode == other.productCode;
     }
 
     public String getProductName() {
@@ -34,8 +30,6 @@ public class ProductDto {
         this.productName = productName;
     }
 
-    //This getter is grey because Intellij can't make the connection between
-    // this method and the fragments it is used in.
     public int getProductCode() {
         return productCode;
     }
@@ -44,8 +38,6 @@ public class ProductDto {
         this.productCode = productCode;
     }
 
-    //This getter is grey because Intellij can't make the connection between
-    // this method and the fragments it is used in.
     public BigDecimal getProductPrice() {
         return productPrice;
     }

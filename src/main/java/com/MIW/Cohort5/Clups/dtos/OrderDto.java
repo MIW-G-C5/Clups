@@ -10,6 +10,7 @@ import java.util.List;
  *
  * A collection of Products a customer wants to order
  */
+
 public class OrderDto {
 
     List<OrderedItemDto> orderedItems;
@@ -62,4 +63,5 @@ public class OrderDto {
 
         return totalCost;
     }
+
 }

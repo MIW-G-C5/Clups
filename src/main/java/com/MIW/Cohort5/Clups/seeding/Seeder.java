@@ -74,13 +74,15 @@ public class Seeder {
             productService.addNew(new Product("Coffee", BigDecimal.valueOf(1.50), findCategory(4)));
             productService.addNew(new Product("Hot choc", BigDecimal.valueOf(2), findCategory(4)));
             productService.addNew(new Product("Coke", BigDecimal.valueOf(1.50), findCategory(5)));
-            productService.addNew(new Product("Whipped Cream", BigDecimal.valueOf(1), findCategory(5)));
+            productService.addNew(new Product("Lemonade", BigDecimal.valueOf(0.50), findCategory(5)));
+            productService.addNew(new Product("Whipped Cream", BigDecimal.valueOf(1), findCategory(6)));
             productService.addNew(new Product("Mayonnaise", BigDecimal.valueOf(0.25), findCategory(6)));
-            productService.addNew(new Product("Lemonade", BigDecimal.valueOf(0.50), findCategory(6)));
+
         }
     }
 
     public Category findCategory(int categoryCode) {
         return categoryRepository.findCategoryByCategoryCode(categoryCode);
     }
+
 }
