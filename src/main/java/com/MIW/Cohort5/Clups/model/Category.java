@@ -1,7 +1,6 @@
 package com.MIW.Cohort5.Clups.model;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,18 +13,20 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue
-    private Integer categoryCode;
+    private Integer categoryDbId;
 
     @Column(unique = true)
     private String categoryName;
 
+    @Column(unique = true)
+    private int categoryCode;
+
     @OneToMany
     private List<Product> products;
 
-
-
-    public Category(String categoryName) {
+    public Category(String categoryName, int categoryCode) {
         this.categoryName = categoryName;
+        this.categoryCode = categoryCode;
     }
 
     public Category() {
@@ -35,11 +36,15 @@ public class Category {
         return products;
     }
 
-    public Integer getCategoryCode() {
-        return categoryCode;
+    public Integer getCategoryDbId() {
+        return categoryDbId;
     }
 
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public int getCategoryCode() {
+        return categoryCode;
     }
 }

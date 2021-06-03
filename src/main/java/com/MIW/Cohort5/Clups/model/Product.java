@@ -19,6 +19,7 @@ public class Product {
 
     // this productcode can be used to compare products and can safely be transferred to a productDto object
     private static int productCodeCounter = 0;
+
     @Column(unique = true)
     private int productCode;
 
@@ -36,10 +37,11 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Product(String productName, BigDecimal productPrice) {
-        addProductCode();
+    public Product(String productName, BigDecimal productPrice, Category productCategory) {
         this.productName = productName;
+        addProductCode();
         this.productPrice = productPrice;
+        this.productCategory = productCategory;
     }
 
     private void addProductCode() {
