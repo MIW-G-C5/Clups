@@ -42,4 +42,17 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.save(category);
     }
 
+    public CategoryDto findByCategoryName(String name) {
+        List<CategoryDto> allCategories = getAll();
+
+        CategoryDto categoryByName = null;
+        for (CategoryDto category : allCategories) {
+            if (category.getCategoryName().equals(name)) {
+                categoryByName = category;
+            }
+        }
+
+        return categoryByName;
+    }
+
 }
