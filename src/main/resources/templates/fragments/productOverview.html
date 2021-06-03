@@ -15,9 +15,9 @@
       </tr>
       <tbody>
       <tr th:each="product : ${allProductsByCategory}">
-        <td th:text="${product.productName}"></td>
-        <td th:text="${product.productPrice}"></td>
-        <td><a th:href="@{/order/{productName}(productName=${product.productName})}">Add</a></td>
+        <td><a class="btn btn-info" th:href="@{/order/{productName}(productName=${product.productName})}" th:text="${product.productName + ' ' + product.productPrice}"
+        </a></td>
+<!--        <td><a class="btn btn-info" th:href="@{/order/{productName}(productName=${product.productName})}">Add</a></td>-->
       </tr>
       </tbody>
     </table>
