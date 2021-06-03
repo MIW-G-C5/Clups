@@ -16,7 +16,7 @@
       <tr th:each="category : ${allCategories}">
         <td>
           <button th:text="${category.categoryName}"
-                    th:onclick="@{/productOverview/{categoryName}(categoryName=${cagtegory.categoryName})}">
+                    th:onclick="@{/productOverview/{categoryName}(categoryName=${category.categoryName})}">
           </button>
         </td>
       </tr>

@@ -38,7 +38,7 @@ public class MainPageController {
     protected String showPage(Model model) {
         model.addAttribute("allCategories", categoryService.getAll());
         //todo weghalen?
-//        model.addAttribute("allProducts", productService.getAll());
+//        model.addAttribute("allProductsByCategory", ???);
         if (order == null) {
             order = new OrderDto();
         }

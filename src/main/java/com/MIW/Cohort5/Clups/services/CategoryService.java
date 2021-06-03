@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.services;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.model.Category;
+import com.MIW.Cohort5.Clups.model.Product;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ import java.util.List;
 
 public interface CategoryService {
     List<CategoryDto> getAll();
-
+    
     Category addNew(Category category);
 }
