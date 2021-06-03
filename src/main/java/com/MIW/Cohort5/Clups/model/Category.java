@@ -15,16 +15,18 @@ public class Category {
     @GeneratedValue
     private Integer categoryDbId;
 
-    private int categoryCode;
-
     @Column(unique = true)
     private String categoryName;
+
+    @Column(unique = true)
+    private int categoryCode;
 
     @OneToMany
     private List<Product> products;
 
-    public Category(String categoryName) {
+    public Category(String categoryName, int categoryCode) {
         this.categoryName = categoryName;
+        this.categoryCode = categoryCode;
     }
 
     public Category() {
@@ -45,4 +47,5 @@ public class Category {
     public String getCategoryName() {
         return categoryName;
     }
+
 }
