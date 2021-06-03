@@ -14,7 +14,7 @@
       </tr>
       <tbody>
       <tr th:each="category : ${allCategories}">
-        <td th:text="${category.categoryName}"></td>
+        <td><button th:text="${category.categoryName}">Button</button></td>
       </tr>
       </tbody>
     </table>
