@@ -14,7 +14,7 @@
         <th></th>
       </tr>
       <tbody>
-      <tr th:each="product : ${allProducts}">
+      <tr th:each="product : ${allProductsByCategory}">
         <td th:text="${product.productName}"></td>
         <td th:text="${product.productPrice}"></td>
         <td><a th:href="@{/order/{productName}(productName=${product.productName})}">Add</a></td>

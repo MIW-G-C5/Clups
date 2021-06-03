@@ -1,5 +1,9 @@
 package com.MIW.Cohort5.Clups.dtos;
 
+import com.MIW.Cohort5.Clups.model.Product;
+
+import java.util.List;
+
 /**
  * @author S.K.C.Reijntjes
  *
@@ -11,6 +15,8 @@ public class CategoryDto {
     private String categoryName;
 
     private int categoryCode;
+
+    private List<Product> products;
 
     public CategoryDto() {
     }
@@ -30,4 +36,13 @@ public class CategoryDto {
     public void setCategoryCode(int categoryCode) {
         this.categoryCode = categoryCode;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
 }

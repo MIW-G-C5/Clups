@@ -41,5 +41,5 @@ public class CategoryServiceImpl implements CategoryService {
     public Category addNew(Category category) {
         return categoryRepository.save(category);
     }
-    
+
 }

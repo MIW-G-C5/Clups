@@ -1,7 +1,5 @@
 package com.MIW.Cohort5.Clups.model;
 
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 

@@ -1,5 +1,6 @@
 package com.MIW.Cohort5.Clups.controller;
 
+import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.services.CategoryService;
@@ -10,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -37,13 +37,22 @@ public class MainPageController {
     @GetMapping({"/"})
     protected String showPage(Model model) {
         model.addAttribute("allCategories", categoryService.getAll());
-        model.addAttribute("allProducts", productService.getAll());
+        //todo weghalen?
+//        model.addAttribute("allProducts", productService.getAll());
         if (order == null) {
             order = new OrderDto();
         }
         model.addAttribute("orderList", order.getOrderedItems());
         model.addAttribute("orderTotal", order.calculateTotalCostOrder());
         return "mainPage";
+    }
+
+    @GetMapping({"/productOverview/{categoryName}"})
+    protected String showProductsByCategory(
+            @PathVariable("categoryName") String categoryName, Model model) {
+        CategoryDto categoryDto = findByCategoryName(categoryName);
+        model.addAttribute("allProductsByCategory", categoryDto.getProducts());
+        return "redirect:/";
     }
 
     @GetMapping({"/order/{productName}"})
@@ -64,6 +73,19 @@ public class MainPageController {
         }
 
         return productByName;
+    }
+
+    private CategoryDto findByCategoryName(String name) {
+        List<CategoryDto> allCategories = categoryService.getAll();
+
+        CategoryDto categoryByName = null;
+        for (CategoryDto category : allCategories) {
+            if (category.getCategoryName().equals(name)) {
+                categoryByName = category;
+            }
+        }
+
+        return categoryByName;
     }
 
 }

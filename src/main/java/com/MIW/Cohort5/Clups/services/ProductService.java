@@ -14,6 +14,9 @@ import java.util.List;
 public interface ProductService {
     List<ProductDto> getAll();
 
+    //todo weghalen
+//    List<ProductDto> getByCategory(String categoryName);
+
     Product addNew(Product product);
 
 }

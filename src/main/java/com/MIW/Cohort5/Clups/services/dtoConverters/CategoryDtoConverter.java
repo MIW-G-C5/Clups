@@ -31,6 +31,7 @@ public class CategoryDtoConverter {
         CategoryDto result = new CategoryDto();
         result.setCategoryName(model.getCategoryName());
         result.setCategoryCode(model.getCategoryCode());
+        result.setProducts(model.getProducts());
 
         return result;
     }

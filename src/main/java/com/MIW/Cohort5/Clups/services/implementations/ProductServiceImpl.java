@@ -36,6 +36,12 @@ public class ProductServiceImpl implements ProductService {
         return dtoConverter.toProductDtos(models);
     }
 
+    //todo weghalen
+//    public List<Product> getByCategory(String categoryName) {
+//        List<Product> productsByCategory = productRepository.findProductsByCategory(categoryName);
+//        return dtoConverter.toProductDtos(models);
+//    }
+
     //This method saves objects in the database.
     @Override
     public Product addNew(Product product) {
