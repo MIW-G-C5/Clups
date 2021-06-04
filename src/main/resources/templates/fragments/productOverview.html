@@ -15,7 +15,8 @@
       </tr>
       <tbody>
       <tr th:each="product : ${allProductsByCategory}">
-        <td><a class="btn btn-info" th:href="@{/order/{productName}(productName=${product.productName})}" th:text="${product.productName + ' ' + product.productPrice}"
+        <td><a class="btn btn-info" th:href="@{/order/{productName}(productName=${product.productName})}"
+               th:text="${product.productName + ' ' + product.productPrice}">
         </a></td>
 <!--        <td><a class="btn btn-info" th:href="@{/order/{productName}(productName=${product.productName})}">Add</a></td>-->
       </tr>
