@@ -24,7 +24,7 @@ public class OrderDto {
     }
 
     public void addToOrder(ProductDto orderedProduct) {
-        int index = checkItemPresentInList(orderedProduct);
+        int index = getIndexFromProductInOrderList(orderedProduct);
 
         if (index >= 0) {
             addCountToExistingItem(index);
@@ -42,7 +42,18 @@ public class OrderDto {
         orderedItems.add(orderedItem);
     }
 
-    private int checkItemPresentInList(ProductDto orderedProduct) {
+    public void removeFromOrder(ProductDto product) {
+        int index = getIndexFromProductInOrderList(product);
+
+        if (orderedItems.get(index).getCount() > 1) {
+            orderedItems.get(index).decreaseCount();
+        } else {
+            orderedItems.remove(index);
+        }
+    }
+
+
+    private int getIndexFromProductInOrderList(ProductDto orderedProduct) {
         int index = -1;
 
         for (int i = 0; i < orderedItems.size(); i++) {

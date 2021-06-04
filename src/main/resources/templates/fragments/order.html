@@ -13,9 +13,12 @@
             <th>Price</th>
         </tr>
         <tr th:each="orderItem : ${orderList}">
-            <td th:text="${orderItem.count}"></td>
-            <td th:text="${orderItem.orderedProduct.productName}"></td>
-            <td th:text="${orderItem.calculateTotalPrice}"></td>
+            <td>
+                <a class="btn btn-info" th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
+                   th:text="${orderItem.count + '    ' + orderItem.orderedProduct.productName + '   ' + orderItem.calculateTotalPrice}">
+
+                </a>
+            </td>
         </tr>
         <tr>
             <td>Total price:</td>

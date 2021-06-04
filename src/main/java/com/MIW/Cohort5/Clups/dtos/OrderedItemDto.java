@@ -30,6 +30,10 @@ public class OrderedItemDto {
         return priceRounded;
     }
 
+    public void decreaseCount() {
+        this.count--;
+    }
+
     public ProductDto getOrderedProduct() {
         return orderedProduct;
     }

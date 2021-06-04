@@ -57,6 +57,13 @@ public class MainPageController {
         return "redirect:/";
     }
 
+    @GetMapping({"/order/remove/{productName}"})
+    protected String removeProductFromOrder(@PathVariable("productName") String productName) {
+        ProductDto orderedProduct = productService.findProductByName(productName);
+        order.removeFromOrder(orderedProduct);
+        return "redirect:/";
+    }
+
     private void createOrder() {
         if (order == null) {
             order = new OrderDto();
