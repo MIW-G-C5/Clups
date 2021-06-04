@@ -5,27 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container" th:fragment="order">
-    <table>
-        <tr>
-            <th>Count</th>
-            <th>Product</th>
-            <th>Price</th>
-        </tr>
-        <tr th:each="orderItem : ${orderList}">
-            <td>
-                <a class="btn btn-info" th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
-                   th:text="${orderItem.count + '    ' + orderItem.orderedProduct.productName + '   ' + orderItem.calculateTotalPrice}">
+    <div class="container" th:fragment="order">
+        <table>
+            <tr>
+                <th>Count</th>
+                <th>Product</th>
+                <th>Price</th>
+            </tr>
+            <tr th:each="orderItem : ${orderList}">
+                <td>
+                    <a class="btn btn-info" th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
+                       th:text="${orderItem.count + '    ' + orderItem.orderedProduct.productName + '   ' + orderItem.calculateTotalPrice}">
 
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td>Total price:</td>
-            <td></td>
-            <td th:text="${orderTotal}"></td>
-        </tr>
-    </table>
-</div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>Total price:</td>
+                <td></td>
+                <td th:text="${orderTotal}"></td>
+            </tr>
+        </table>
+        <a class="btn btn-info" th:text="Pay" th:href="@{/order/clear}"></a>
+    </div>
 </body>
 </html>

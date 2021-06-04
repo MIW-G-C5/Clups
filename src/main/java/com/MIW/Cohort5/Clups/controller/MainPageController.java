@@ -64,6 +64,12 @@ public class MainPageController {
         return "redirect:/";
     }
 
+    @GetMapping({"/order/clear"})
+    protected String clearOrder() {
+        order.emptyOrder();
+        return "redirect:/";
+    }
+
     private void createOrder() {
         if (order == null) {
             order = new OrderDto();
