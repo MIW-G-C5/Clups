@@ -14,7 +14,7 @@
       </tr>
       <tbody>
       <tr th:each="category : ${allCategories}">
-        <td><a th:text="${category.categoryName}" th:href="@{/productOverview/{categoryName}(categoryName=${category.categoryName})}" class="btn btn-info">Add</a></td>
+        <td><a th:text="${category.categoryName}" th:href="@{/selectCategory/{categoryName}(categoryName=${category.categoryName})}" class="btn btn-info">Add</a></td>
       </tr>
       </tbody>
     </table>

@@ -37,13 +37,13 @@ public class MainPageController {
         createOrder();
 
         model.addAttribute("allCategories", categoryService.getAll());
-        model.addAttribute("allProductsByCategory", productService.getProductsByCategory(selectedCategoryName)); //todo servicelayer
+        model.addAttribute("allProductsByCategory", productService.getProductsByCategory(selectedCategoryName));
         model.addAttribute("orderList", order.getOrderedItems());
         model.addAttribute("orderTotal", order.calculateTotalCostOrder());
         return "mainPage";
     }
 
-    @GetMapping({"/productOverview/{categoryName}"})
+    @GetMapping({"/selectCategory/{categoryName}"})
     protected String showProductsByCategory(
             @PathVariable("categoryName") String categoryName) {
         selectedCategoryName = categoryName;
@@ -52,7 +52,7 @@ public class MainPageController {
 
     @GetMapping({"/order/{productName}"})
     protected String addProductToOrder(@PathVariable("productName") String productName) {
-        ProductDto orderedProduct = productService.findProductByName(productName); //todo servicelayer
+        ProductDto orderedProduct = productService.findProductByName(productName);
         order.addToOrder(orderedProduct);
         return "redirect:/";
     }

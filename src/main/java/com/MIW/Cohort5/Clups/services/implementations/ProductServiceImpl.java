@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> productsByCategory = new ArrayList<>();
         CategoryServiceImpl categoryService = new CategoryServiceImpl(categoryRepository);
         if (selectedCategoryName != null) {
-            productsByCategory = categoryService.findByCategoryName(selectedCategoryName).getProducts(); //todo servicelayer
+            productsByCategory = categoryService.findByCategoryName(selectedCategoryName).getProducts();
         }
 
         return productsByCategory;

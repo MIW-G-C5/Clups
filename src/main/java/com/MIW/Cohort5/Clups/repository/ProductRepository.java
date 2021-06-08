@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    //todo weghalen
-//    List<Product> findProductsByCategory(String categoryName);
 }
