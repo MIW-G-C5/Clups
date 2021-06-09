@@ -2,13 +2,13 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
+import com.MIW.Cohort5.Clups.dtos.StateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Johnnie Meijer
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 
 @Controller
+@SessionAttributes("stateKeeper")
 public class MainPageController {
 
     public final ProductService productService;
     public final CategoryService categoryService;
 
     private OrderDto order;
-    private String selectedCategoryName;
 
     @Autowired
     public MainPageController(ProductService products, CategoryService categories) {
@@ -32,12 +32,18 @@ public class MainPageController {
         this.categoryService = categories;
     }
 
+    @ModelAttribute("stateKeeper")
+    public StateKeeper stateKeeper(){
+        return new StateKeeper();
+    }
+
     @GetMapping({"/"})
-    protected String showPage(Model model) {
+    protected String showPage(Model model, @ModelAttribute("stateKeeper") StateKeeper stateKeeper) {
         createOrder();
 
         model.addAttribute("allCategories", categoryService.getAll());
-        model.addAttribute("allProductsByCategory", productService.getProductsByCategory(selectedCategoryName));
+        model.addAttribute
+                ("allProductsByCategory", productService.getProductsByCategory(stateKeeper.getCategoryName()));
         model.addAttribute("orderList", order.getOrderedItems());
         model.addAttribute("orderTotal", order.calculateTotalCostOrder());
         return "mainPage";
@@ -45,8 +51,9 @@ public class MainPageController {
 
     @GetMapping({"/selectCategory/{categoryName}"})
     protected String showProductsByCategory(
-            @PathVariable("categoryName") String categoryName) {
-        selectedCategoryName = categoryName;
+            @PathVariable("categoryName") String categoryName,
+            @SessionAttribute("stateKeeper") StateKeeper stateKeeper) {
+        stateKeeper.setCategoryName(categoryName);
         return "redirect:/";
     }
 
@@ -75,11 +82,5 @@ public class MainPageController {
             order = new OrderDto();
         }
     }
-
-
-
-
-
-
 
 }
