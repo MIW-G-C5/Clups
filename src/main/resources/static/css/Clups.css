@@ -1,4 +1,58 @@
 .navbar{
     font-family: sans-serif;
-    background-color: indianred;
+    background-color: dodgerblue;
+    color: midnightblue;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.categoriesBlock {
+    border-radius: 0;
+    font-family: sans-serif;
+    height: auto;
+    padding: 30px;
+    border-style: solid;
+    border-color: white;
+    background-color: #2c6082;
+    color: white;
+    text-align: left;
+    margin: 0;
+}
+
+.productsBlock {
+    border-radius: 0;
+    font-family: sans-serif;
+    height: auto;
+    padding: 10px;
+    border-style: solid;
+    border-color: white;
+    background-color: lightslategray;
+    color: white;
+    text-align: left;
+    margin: 0;
+}
+
+.order {
+    border-radius: 0;
+    font-family: Courier;
+    height: auto;
+    padding: 10px;
+    text-align: left;
+    margin: 0;
+}
+
+.zeroPadding {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.section {
+    border: solid 2px black;
+}
+
+.topBottomMargin {
+    margin-top: 25px;
+    margin-bottom: 25px;
 }

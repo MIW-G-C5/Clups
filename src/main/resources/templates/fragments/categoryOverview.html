@@ -6,18 +6,13 @@
 </head>
 <body>
 
-  <div th:fragment="categoryOverview" class="container">
-    <table>
-      <tr>
-        <th>Category</th>
-        <th></th>
-      </tr>
-      <tbody>
-      <tr th:each="category : ${allCategories}">
-        <td><a th:text="${category.categoryName}" th:href="@{/productOverview/{categoryName}(categoryName=${category.categoryName})}" class="btn btn-info">Add</a></td>
-      </tr>
-      </tbody>
-    </table>
+  <div th:fragment="categoryOverview" class="container-fluid zeroPadding btn-block">
+      <div th:each="category : ${allCategories}">
+          <a class="btn btn-primary btn-lg btn-block categoriesBlock"
+             th:text="${category.categoryName}"
+             th:href="@{/productOverview/{categoryName}(categoryName=${category.categoryName})}">
+          </a>
+      </div>
   </div>
 
 </body>
