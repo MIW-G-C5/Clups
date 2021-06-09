@@ -19,9 +19,8 @@
             <li class="nav-link">
                 <a class="nav-link" th:href="@{/products}">Products</a>
             </li>
-            <li class="nav-link">
-                <a class="nav-link" th:href="@{/accounts}">Accounts</a>
-            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-link" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/logout}">Logout <span sec:authentication="name"></span></a>
             </li>

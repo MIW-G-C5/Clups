@@ -52,6 +52,9 @@ public class OrderDto {
         }
     }
 
+    public void emptyOrder() {
+        orderedItems.clear();
+    }
 
     private int getIndexFromProductInOrderList(ProductDto orderedProduct) {
         int index = -1;
