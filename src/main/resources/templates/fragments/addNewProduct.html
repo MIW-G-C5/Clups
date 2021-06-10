@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div >
+  <form th:fragment="addNewProduct" th:action="@{/products/addNew}" method="post" th:object="${product}">
+    <label for="productName">Product Name</label>
+    <div class="form-group input-group">
+      <input type="text" id="productName" th:field="*{productName}">
+    </div>
+
+    <label for="productPrice">Product Price</label>
+    <div class="form-group input-group">
+      <input type="text" id="productPrice" th:field="*{productPrice}">
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Save product</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

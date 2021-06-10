@@ -1,5 +1,7 @@
 package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
+import com.MIW.Cohort5.Clups.dtos.ProductDto;
+
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
  *
@@ -9,7 +11,13 @@ public class ProductPageStateKeeper {
 
     private String categoryName;
 
+    private ProductDto currentProduct;
+
     public ProductPageStateKeeper() {
+    }
+
+    public void clearCurrentProduct() {
+        this.currentProduct = null;
     }
 
     public String getCategoryName() {
@@ -18,5 +26,13 @@ public class ProductPageStateKeeper {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public ProductDto getCurrentProduct() {
+        return currentProduct;
+    }
+
+    public void setCurrentProduct(ProductDto currentProduct) {
+        this.currentProduct = currentProduct;
     }
 }
