@@ -59,6 +59,8 @@ public class ProductPageController {
 
     @GetMapping({"/products/addNew"})
     protected String addNewProduct(Model model) {
+        model.addAttribute("allCategoryNames", categoryService.getAll());
+
         return "redirect:/products";
     }
 
@@ -70,7 +72,9 @@ public class ProductPageController {
             productPageStateKeeper.setCurrentProduct(productDto);
             System.out.println(productPageStateKeeper.getCurrentProduct().getProductName()
                     + " "
-                    + productPageStateKeeper.getCurrentProduct().getProductPrice());
+                    + productPageStateKeeper.getCurrentProduct().getProductPrice()
+                    + " "
+                    + productPageStateKeeper.getCurrentProduct().getCategoryName());
             productPageStateKeeper.clearCurrentProduct();
         }
 
