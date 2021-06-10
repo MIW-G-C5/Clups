@@ -24,8 +24,6 @@ public class MainPageController {
     public final ProductService productService;
     public final CategoryService categoryService;
 
-    private OrderDto order;
-
     @Autowired
     public MainPageController(ProductService products, CategoryService categories) {
         this.productService = products;
@@ -39,14 +37,20 @@ public class MainPageController {
 
     @GetMapping({"/"})
     protected String showPage(Model model, @ModelAttribute("stateKeeper") StateKeeper stateKeeper) {
-        createOrder();
+        createOrder(stateKeeper);
 
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute
                 ("allProductsByCategory", productService.getProductsByCategory(stateKeeper.getCategoryName()));
-        model.addAttribute("orderList", order.getOrderedItems());
-        model.addAttribute("orderTotal", order.calculateTotalCostOrder());
+        model.addAttribute("orderList", stateKeeper.getOrder().getOrderedItems());
+        model.addAttribute("orderTotal", stateKeeper.getOrder().calculateTotalCostOrder());
         return "mainPage";
+    }
+
+    private void createOrder(StateKeeper stateKeeper) {
+        if (stateKeeper.getOrder() == null) {
+            stateKeeper.setOrder(new OrderDto());
+        }
     }
 
     @GetMapping({"/selectCategory/{categoryName}"})
@@ -58,29 +62,27 @@ public class MainPageController {
     }
 
     @GetMapping({"/order/{productName}"})
-    protected String addProductToOrder(@PathVariable("productName") String productName) {
+    protected String addProductToOrder(@PathVariable("productName") String productName,
+                                       @SessionAttribute("stateKeeper") StateKeeper stateKeeper) {
         ProductDto orderedProduct = productService.findProductByName(productName);
-        order.addToOrder(orderedProduct);
+        stateKeeper.getOrder().addToOrder(orderedProduct);
         return "redirect:/";
     }
 
     @GetMapping({"/order/remove/{productName}"})
-    protected String removeProductFromOrder(@PathVariable("productName") String productName) {
+    protected String removeProductFromOrder(@PathVariable("productName") String productName,
+                                            @SessionAttribute("stateKeeper") StateKeeper stateKeeper) {
         ProductDto orderedProduct = productService.findProductByName(productName);
-        order.removeFromOrder(orderedProduct);
+        stateKeeper.getOrder().removeFromOrder(orderedProduct);
         return "redirect:/";
     }
 
     @GetMapping({"/order/clear"})
-    protected String clearOrder() {
-        order.emptyOrder();
+    protected String clearOrder(@SessionAttribute("stateKeeper") StateKeeper stateKeeper) {
+        stateKeeper.getOrder().emptyOrder();
         return "redirect:/";
     }
 
-    private void createOrder() {
-        if (order == null) {
-            order = new OrderDto();
-        }
-    }
+
 
 }

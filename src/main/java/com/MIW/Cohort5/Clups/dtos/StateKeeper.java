@@ -10,6 +10,8 @@ public class StateKeeper {
 
     private String categoryName;
 
+    private OrderDto order;
+
     public StateKeeper() {
     }
 
@@ -19,5 +21,13 @@ public class StateKeeper {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public OrderDto getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderDto order) {
+        this.order = order;
     }
 }
