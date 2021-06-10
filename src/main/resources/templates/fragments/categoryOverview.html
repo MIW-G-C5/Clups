@@ -5,15 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-
-  <div th:fragment="categoryOverview" class="container-fluid zeroPadding btn-block">
-      <div th:each="category : ${allCategories}">
-          <a class="btn btn-primary btn-lg btn-block categoriesBlock"
-             th:text="${category.categoryName}"
-             th:href="@{/productOverview/{categoryName}(categoryName=${category.categoryName})}">
-          </a>
-      </div>
-  </div>
-
+<div class="container-fluid zeroPadding btn-block" th:fragment="categoryOverview">
+    <div th:each="category : ${allCategories}">
+        <a class="btn btn-primary btn-lg btn-block buttonBlock categoriesBlock"
+           th:href="@{/selectCategory/{categoryName}(categoryName=${category.categoryName})}"
+           th:text="${category.categoryName}">
+        </a>
+    </div>
+</div>
 </body>
 </html>

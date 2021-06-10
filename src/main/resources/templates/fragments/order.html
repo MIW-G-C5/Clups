@@ -5,30 +5,35 @@
     <title>Title</title>
 </head>
 <body>
-    <div class="container" th:fragment="order">
+<div class="container" th:fragment="order">
+    <div class="d-flex align-items-start flex-column" >
+        <div class="orderTable">
+            <table>
+                <tr>
+                    <th>RECEIPT</th>
+                </tr>
+                <tr th:each="orderItem : ${orderList}">
+                    <td>
+                        <a class="order"
+                           th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
+                           th:text="${orderItem.count +
+                                    '    ' +
+                                    orderItem.orderedProduct.productName +
+                                    '   ' +
+                                    orderItem.calculateTotalPrice}">
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <table>
-            <tr>
-                <th>RECEIPT</th>
-            </tr>
-            <tr th:each="orderItem : ${orderList}">
-                <td>
-                    <a class="order"
-                       th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
-                       th:text="${orderItem.count +
-                                '    ' +
-                                orderItem.orderedProduct.productName +
-                                '   ' +
-                                orderItem.calculateTotalPrice}">
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>Total price:</td>
-                <td></td>
+            <tr class="order">
+                <td class="totalPrice alignPrice">Total price:</td>
                 <td th:text="${orderTotal}"></td>
             </tr>
         </table>
-        <a class="btn btn-info" th:text="Pay" th:href="@{/order/clear}"></a>
+        <a class="btn btn-info payButton" th:text="PAY" th:href="@{/order/clear}"></a>
     </div>
+</div>
 </body>
 </html>

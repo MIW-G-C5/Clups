@@ -5,24 +5,24 @@
     <title>Order</title>
 </head>
 <body>
-    <nav th:replace="fragments/general :: navbar"></nav>
-    <div class="container-fluid zeroPadding">
-        <div class="row topBottomMargin no-gutters justify-content-between">
-            <div class="col-7 section" >
-                 <div class="row no-gutters">
-                    <div class="col-5">
-                        <div th:replace="fragments/categoryOverview :: categoryOverview"></div>
-                    </div>
-                    <div class="col-7">
-                        <div th:replace="fragments/productOverview :: productOverview"></div>
-                    </div>
-                 </div>
-            </div>
-            <div class="col-4 section">
-                <div th:replace="fragments/order :: order"></div>
+<nav th:replace="fragments/general :: navbar"></nav>
+<div class="container-fluid zeroPadding">
+    <div class="row topBottomMargin no-gutters justify-content-between">
+        <div class="col-7 borderedSection">
+            <div class="row no-gutters">
+                <div class="col-5 zeroPadding">
+                    <div th:replace="fragments/categoryOverview :: categoryOverview"></div>
+                </div>
+                <div class="col-7 zeroPadding">
+                    <div th:replace="fragments/productOverview :: productOverview"></div>
+                </div>
             </div>
         </div>
-        <div th:replace="fragments/general :: bottomScripts"></div>
+            <div class="col-4 borderedSection">
+                <div th:replace="fragments/order :: order"></div>
+            </div>
     </div>
+    <div th:replace="fragments/general :: bottomScripts"></div>
+</div>
 </body>
 </html>
