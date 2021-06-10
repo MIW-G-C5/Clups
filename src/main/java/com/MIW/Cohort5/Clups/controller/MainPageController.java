@@ -2,13 +2,13 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
+import com.MIW.Cohort5.Clups.dtos.stateKeeper.MainPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Johnnie Meijer
@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 
 @Controller
+@SessionAttributes("mainPageStateKeeper")
 public class MainPageController {
 
     public final ProductService productService;
     public final CategoryService categoryService;
-
-    private OrderDto order;
-    private String selectedCategoryName;
 
     @Autowired
     public MainPageController(ProductService products, CategoryService categories) {
@@ -32,48 +30,59 @@ public class MainPageController {
         this.categoryService = categories;
     }
 
+    @ModelAttribute("mainPageStateKeeper")
+    public MainPageStateKeeper stateKeeper(){
+        return new MainPageStateKeeper();
+    }
+
     @GetMapping({"/"})
-    protected String showPage(Model model) {
-        createOrder();
+    protected String showPage(Model model, @ModelAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
+        createOrder(mainPageStateKeeper);
 
         model.addAttribute("allCategories", categoryService.getAll());
-        model.addAttribute("allProductsByCategory", productService.getProductsByCategory(selectedCategoryName));
-        model.addAttribute("orderList", order.getOrderedItems());
-        model.addAttribute("orderTotal", order.calculateTotalCostOrder());
+        model.addAttribute
+                ("allProductsByCategory", productService.getProductsByCategory(mainPageStateKeeper.getCategoryName()));
+        model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
+        model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
         return "mainPage";
+    }
+
+    private void createOrder(MainPageStateKeeper mainPageStateKeeper) {
+        if (mainPageStateKeeper.getOrder() == null) {
+            mainPageStateKeeper.setOrder(new OrderDto());
+        }
     }
 
     @GetMapping({"/selectCategory/{categoryName}"})
     protected String showProductsByCategory(
-            @PathVariable("categoryName") String categoryName) {
-        selectedCategoryName = categoryName;
+            @PathVariable("categoryName") String categoryName,
+            @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
+        mainPageStateKeeper.setCategoryName(categoryName);
         return "redirect:/";
     }
 
     @GetMapping({"/order/{productName}"})
-    protected String addProductToOrder(@PathVariable("productName") String productName) {
+    protected String addProductToOrder(@PathVariable("productName") String productName,
+                                       @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         ProductDto orderedProduct = productService.findProductByName(productName);
-        order.addToOrder(orderedProduct);
+        mainPageStateKeeper.getOrder().addToOrder(orderedProduct);
         return "redirect:/";
     }
 
     @GetMapping({"/order/remove/{productName}"})
-    protected String removeProductFromOrder(@PathVariable("productName") String productName) {
+    protected String removeProductFromOrder(@PathVariable("productName") String productName,
+                                            @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         ProductDto orderedProduct = productService.findProductByName(productName);
-        order.removeFromOrder(orderedProduct);
+        mainPageStateKeeper.getOrder().removeFromOrder(orderedProduct);
         return "redirect:/";
     }
 
     @GetMapping({"/order/clear"})
-    protected String clearOrder() {
-        order.emptyOrder();
+    protected String clearOrder(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
+        mainPageStateKeeper.getOrder().emptyOrder();
         return "redirect:/";
     }
 
-    private void createOrder() {
-        if (order == null) {
-            order = new OrderDto();
-        }
-    }
+
 
 }

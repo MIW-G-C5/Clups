@@ -16,6 +16,8 @@ public class ProductDto {
 
     private BigDecimal productPrice;
 
+    private String categoryName;
+
     public ProductDto() {}
 
     public boolean equals(ProductDto other) {
@@ -46,4 +48,11 @@ public class ProductDto {
         this.productPrice = productPrice;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
