@@ -18,8 +18,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 borderedSection" th:if="${formState} == true">
-            <div th:replace="fragments/addNewProduct :: addNewProduct"></div>
+        <div class="col-4 borderedSection">
+            <div th:if="${formState} == true">
+                <div th:replace="fragments/addNewProduct :: addNewProduct"></div>
+            </div>
         </div>
     </div>
     <div th:replace="fragments/general :: bottomScripts"></div>
