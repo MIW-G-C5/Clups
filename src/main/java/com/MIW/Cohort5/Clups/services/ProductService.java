@@ -22,4 +22,6 @@ public interface ProductService {
 
     ProductDto findProductByName(String name);
 
+    int getHighestProductCode();
+
 }

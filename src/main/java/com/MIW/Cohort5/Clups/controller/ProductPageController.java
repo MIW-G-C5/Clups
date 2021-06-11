@@ -1,5 +1,6 @@
 package com.MIW.Cohort5.Clups.controller;
 
+import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
@@ -40,12 +41,14 @@ public class ProductPageController {
         model.addAttribute("allProductsByCategory",
                 productService.getProductsByCategory(productPageStateKeeper.getCategoryName()));
         model.addAttribute("formState", productPageStateKeeper.isShowForm());
+        model.addAttribute("formCatState", productPageStateKeeper.isShowCatForm());
 
         if (productPageStateKeeper.getCurrentProduct() == null) {
             productPageStateKeeper.setCurrentProduct(new ProductDto());
         }
 
         model.addAttribute("product", productPageStateKeeper.getCurrentProduct());
+        model.addAttribute("category", productPageStateKeeper.getCurrentCategory());
 
         return "productEditor";
     }
@@ -61,6 +64,8 @@ public class ProductPageController {
     @GetMapping({"/products/addNew"})
     protected String addNewProduct(Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         model.addAttribute("allCategoryNames", categoryService.getAll());
+
+        productPageStateKeeper.setShowCatForm(false);
 
         if (!productPageStateKeeper.isShowForm()) {
             productPageStateKeeper.setShowForm(true);
@@ -88,4 +93,36 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
+    @GetMapping({"/categories/addNew"})
+    protected String addNewCategory
+            (Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
+        productPageStateKeeper.setShowForm(false);
+
+        if (!productPageStateKeeper.isShowCatForm()) {
+            productPageStateKeeper.setShowCatForm(true);
+        }
+
+        return "redirect:/products";
+    }
+
+    @PostMapping({"/categories/addNew"})
+    protected String saveCategory
+            (@ModelAttribute("category") CategoryDto categoryDto, BindingResult result,
+             @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
+        if (!result.hasErrors()) {
+            productPageStateKeeper.setCurrentCategory(categoryDto);
+
+            categoryService.saveCategory(productPageStateKeeper.getCurrentCategory());
+
+            // save category of added product to statekeeper, so you get to see the product immediately in its category
+            productPageStateKeeper.setCategoryName(categoryDto.getCategoryName());
+
+            productPageStateKeeper.clearCurrentCategory();
+            productPageStateKeeper.setShowCatForm(false);
+
+        }
+        return "redirect:/products";
+    }
 }

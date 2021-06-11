@@ -71,6 +71,7 @@ public class ProductServiceImpl implements ProductService {
         return productsByCategory;
     }
 
+    @Override
     public ProductDto findProductByName(String name) {
         List<ProductDto> allProducts = getAll();
 
@@ -84,6 +85,7 @@ public class ProductServiceImpl implements ProductService {
         return productByName;
     }
 
+    @Override
     public int getHighestProductCode() {
         int productCode = 0;
 

@@ -1,5 +1,6 @@
 package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
+import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
 
 /**
@@ -32,4 +33,5 @@ public class MainPageStateKeeper {
     public void setOrder(OrderDto order) {
         this.order = order;
     }
+
 }

@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.model.Category;
+import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.CategoryDtoConverter;
@@ -36,10 +37,31 @@ public class CategoryServiceImpl implements CategoryService {
         return dtoConverter.toCategoryDtos(models);
     }
 
+    @Override
+    public void saveCategory(CategoryDto categoryDto) {
+        categoryDto.setCategoryCode(getHighestCategoryCode() +1);
+        Category category = dtoConverter.toModel(categoryDto);
+        addNew(category);
+    }
+
     //This method saves objects in the database.
     @Override
     public Category addNew(Category category) {
         return categoryRepository.save(category);
+    }
+
+    @Override
+    public int getHighestCategoryCode() {
+        int categoryCode = 0;
+
+        List<Category> allCategories = categoryRepository.findAll();
+        for (Category category : allCategories) {
+            if (category.getCategoryCode() > categoryCode) {
+                categoryCode = category.getCategoryCode();
+            }
+        }
+
+        return categoryCode;
     }
 
     public CategoryDto findDtoByCategoryName(String name) {

@@ -27,6 +27,13 @@ public class CategoryDtoConverter {
         return result;
     }
 
+    public Category toModel(CategoryDto dto){
+        Category model = new Category();
+        model.setCategoryName(dto.getCategoryName());
+        model.setCategoryCode(dto.getCategoryCode());
+        return model;
+    }
+
     //This converts an objects to a DTO
     public CategoryDto toDto(Category model) {
         CategoryDto result = new CategoryDto();

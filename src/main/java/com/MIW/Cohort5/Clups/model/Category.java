@@ -50,4 +50,11 @@ public class Category {
         return categoryName;
     }
 
+    public void setCategoryCode(int categoryCode) {
+        this.categoryCode = categoryCode;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

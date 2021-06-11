@@ -22,6 +22,9 @@
             <div th:if="${formState} == true">
                 <div th:replace="fragments/addNewProduct :: addNewProduct"></div>
             </div>
+            <div th:if="${formCatState} == true">
+                <div th:replace="fragments/addNewCategory :: addNewCategory"></div>
+            </div>
         </div>
     </div>
     <div th:replace="fragments/general :: bottomScripts"></div>

@@ -13,10 +13,14 @@ import java.util.List;
 
 public interface CategoryService {
     List<CategoryDto> getAll();
-    
+
+    void saveCategory(CategoryDto categoryDto);
+
     Category addNew(Category category);
 
     CategoryDto findDtoByCategoryName(String name);
 
     Category findModelByCategoryName(String name);
+
+    int getHighestCategoryCode();
 }
