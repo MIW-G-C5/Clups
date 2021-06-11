@@ -46,6 +46,10 @@ public class ProductDtoConverter {
 
         model.setProductCategory(category);
 
+        if (dto.getProductCode() > 0) {
+            model.setProductCode(dto.getProductCode());
+        }
+
         return model;
     }
 

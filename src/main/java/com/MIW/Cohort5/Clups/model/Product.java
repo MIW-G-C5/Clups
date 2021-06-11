@@ -17,7 +17,7 @@ public class Product {
 
     // this productcode can be used to compare products and can safely be transferred to a productDto object
     @Column(unique = true)
-    private int productCode;
+    private Integer productCode;
 
     private String productName;
     private BigDecimal productPrice;
@@ -57,6 +57,10 @@ public class Product {
         return productCategory;
     }
 
+    public Integer getProductDbId() {
+        return productDbId;
+    }
+
     public void setProductName(String productName) {
         this.productName = productName;
     }
@@ -71,5 +75,9 @@ public class Product {
 
     public void setProductCategory(Category productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public void setProductDbId(Integer productDbId) {
+        this.productDbId = productDbId;
     }
 }

@@ -78,32 +78,57 @@ public class ProductPageController {
     }
 
     @PostMapping({"/products/addNew"})
-    protected String saveProduct(@ModelAttribute("product") ProductDto productDto,
-                                 BindingResult result,
-                                 @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String saveNewProduct(@ModelAttribute("product") ProductDto productDto,
+                                    BindingResult result,
+                                    @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
 
             productService.saveProduct(productPageStateKeeper.getCurrentProduct());
 
-            // save category of added product to statekeeper, so you get to see the product immediately in its category
-            productPageStateKeeper.setCategoryName(productDto.getCategoryName());
+            showCategoryForChangedProduct(productDto.getCategoryName(), productPageStateKeeper);
 
-            productPageStateKeeper.clearCurrentProduct();
-            productPageStateKeeper.setShowForm(false);
+            clearForm(productPageStateKeeper);
         }
 
         return "redirect:/products";
+    }
+
+    private void showCategoryForChangedProduct(String categoryName, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        // save category of added product to statekeeper, so you get to see the product immediately in its category
+        productPageStateKeeper.setCategoryName(categoryName);
+    }
+
+    private void clearForm(ProductPageStateKeeper productPageStateKeeper) {
+        productPageStateKeeper.clearCurrentProduct();
+        productPageStateKeeper.setShowForm(false);
     }
 
     @GetMapping("/products/{productCode}")
     protected String editProduct(@PathVariable("productCode") String productCodeString,
                                  @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper){
 
-        ProductDto selectedProduct = productService.findProductByCode(Integer.parseInt(productCodeString));
+        ProductDto selectedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
         productPageStateKeeper.setCurrentProduct(selectedProduct);
 
         showForm(productPageStateKeeper);
+
+        return "redirect:/products";
+    }
+
+    @PostMapping("/products/edit")
+    protected String saveExistingProduct(@ModelAttribute("product") ProductDto productDto,
+                                         BindingResult result,
+                                         @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        if(!result.hasErrors()) {
+            productPageStateKeeper.setCurrentProduct(productDto);
+
+            productService.saveProduct(productPageStateKeeper.getCurrentProduct());
+
+            showCategoryForChangedProduct(productDto.getCategoryName(), productPageStateKeeper);
+
+            clearForm(productPageStateKeeper);
+        }
 
         return "redirect:/products";
     }

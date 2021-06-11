@@ -22,7 +22,7 @@ public interface ProductService {
 
     ProductDto findProductByName(String name);
 
-    ProductDto findProductByCode(int productCode);
+    ProductDto findDtoByCode(int productCode);
 
 
 }
