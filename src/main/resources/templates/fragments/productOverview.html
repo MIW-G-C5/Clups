@@ -5,15 +5,17 @@
     <title>Products</title>
 </head>
 <body>
-
-  <div th:fragment="productOverview" class="container zeroPadding btn-block">
-      <div th:each="product : ${allProductsByCategory}">
-           <a class="btn btn-primary btn-block productsBlock"
-              th:href="@{/order/{productName}(productName=${product.productName})}"
-              th:text="${product.productName + ' ' + product.productPrice}">
-           </a>
-      </div>
-  </div>
-
+<div class="container-fluid zeroPadding" th:fragment="productOverview">
+    <div th:each="product : ${allProductsByCategory}">
+        <div class="btn btn-primary btn-block buttonBlock productBlock">
+            <a th:href="@{/order/{productName}(productName=${product.productName})}">
+                <table>
+                        <td class="productItem" th:text="${product.productName}"></td>
+                        <td class="productItem alignPrice" th:text="${product.productPrice}"></td>
+                </table>
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

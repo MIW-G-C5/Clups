@@ -1,44 +1,40 @@
-.navbar{
+.navbar {
     font-family: sans-serif;
     background-color: dodgerblue;
-    color: midnightblue;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.categoriesBlock {
-    border-radius: 0;
+.buttonBlock {
+    border-radius: 10px;
     font-family: sans-serif;
-    height: auto;
-    padding: 30px;
-    border-style: solid;
-    border-color: white;
-    background-color: #2c6082;
+    border: solid white medium;
     color: white;
     text-align: left;
-    margin: 0;
 }
 
-.productsBlock {
-    border-radius: 0;
-    font-family: sans-serif;
-    height: auto;
-    padding: 10px;
-    border-style: solid;
-    border-color: white;
+.categoriesBlock {
+    background-color: steelblue;
+    padding: 30px;
+}
+
+.productBlock {
     background-color: lightslategray;
-    color: white;
+    padding: 20px;
+}
+
+.orderTable {
+    display: inline-block;
+    overflow: auto;
+    height: 475px;
+    width: 485px;
     text-align: left;
-    margin: 0;
 }
 
 .order {
     border-radius: 0;
     font-family: Courier;
-    height: auto;
     padding: 10px;
-    text-align: left;
-    margin: 0;
 }
 
 .zeroPadding {
@@ -48,11 +44,34 @@
     margin-right: 0;
 }
 
-.section {
-    border: solid 2px black;
+.borderedSection {
+    border: solid 3px black;
 }
 
 .topBottomMargin {
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+.alignPrice{
+    text-align: right;
+}
+
+.payButton {
+    height: 50px;
+    width: 200px;
+}
+
+a:focus, a:hover, a:active, a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.productItem {
+    width: 250px;
+}
+
+.totalPrice {
+    width: 420px;
+    font-weight: bold;
 }
