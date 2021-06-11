@@ -16,14 +16,8 @@
             </table>
         </div>
     </div>
-    <button class="btn btn-info" onclick="showForm()" th:href="@{/products/addNew}">Add new product</button>
+    <button class="btn btn-info" th:href="@{/products/addNew}">Add new product</button>
 
 </div>
 </body>
-<script>
-    function showForm(){
-        let x = document.getElementById("editProductForm");
-        x.style.visibility = "visible";
-    }
-</script>
 </html>

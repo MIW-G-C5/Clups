@@ -13,6 +13,9 @@ public class ProductPageStateKeeper {
 
     private ProductDto currentProduct;
 
+    // this should always be false, until changed by user input in the application
+    private boolean showForm = false;
+
     public ProductPageStateKeeper() {
     }
 
@@ -34,5 +37,13 @@ public class ProductPageStateKeeper {
 
     public void setCurrentProduct(ProductDto currentProduct) {
         this.currentProduct = currentProduct;
+    }
+
+    public boolean isShowForm() {
+        return showForm;
+    }
+
+    public void setShowForm(boolean showForm) {
+        this.showForm = showForm;
     }
 }

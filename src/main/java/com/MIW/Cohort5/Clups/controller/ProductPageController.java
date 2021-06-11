@@ -39,6 +39,7 @@ public class ProductPageController {
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProductsByCategory",
                 productService.getProductsByCategory(productPageStateKeeper.getCategoryName()));
+        model.addAttribute("formState", productPageStateKeeper.isShowForm());
 
         if (productPageStateKeeper.getCurrentProduct() == null) {
             productPageStateKeeper.setCurrentProduct(new ProductDto());
@@ -58,8 +59,12 @@ public class ProductPageController {
     }
 
     @GetMapping({"/products/addNew"})
-    protected String addNewProduct(Model model) {
+    protected String addNewProduct(Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         model.addAttribute("allCategoryNames", categoryService.getAll());
+
+        if (!productPageStateKeeper.isShowForm()) {
+            productPageStateKeeper.setShowForm(true);
+        }
 
         return "redirect:/products";
     }
@@ -70,12 +75,14 @@ public class ProductPageController {
                                  @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
-            System.out.println(productPageStateKeeper.getCurrentProduct().getProductName()
-                    + " "
-                    + productPageStateKeeper.getCurrentProduct().getProductPrice()
-                    + " "
-                    + productPageStateKeeper.getCurrentProduct().getCategoryName());
+
+            productService.saveProduct(productPageStateKeeper.getCurrentProduct());
+
+            // save category of added product to statekeeper, so you get to see the product immediately in its category
+            productPageStateKeeper.setCategoryName(productDto.getCategoryName());
+
             productPageStateKeeper.clearCurrentProduct();
+            productPageStateKeeper.setShowForm(false);
         }
 
         return "redirect:/products";
