@@ -3,7 +3,7 @@
     background-color: dodgerblue;
     text-transform: uppercase;
     font-weight: bold;
-    }
+}
 
 .buttonBlock {
     border-radius: 10px;
@@ -79,6 +79,12 @@ a:focus, a:hover, a:active, a {
 .totalPrice {
     width: 420px;
     font-weight: bold;
+}
+
+.currentPage {
+    border-top: solid black;
+    border-left: solid black;
+    border-right: solid black;
 }
 
 .addNewButton {
