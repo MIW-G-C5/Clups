@@ -88,4 +88,18 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
+    @GetMapping("/products/{productName}")
+    protected String editProduct(@PathVariable("productName") String productName,
+                                 @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper){
+        ProductDto selectedProduct = productService.findProductByName(productName);
+        productPageStateKeeper.setCurrentProduct(selectedProduct);
+
+        if (!productPageStateKeeper.isShowForm()) {
+            productPageStateKeeper.setShowForm(true);
+        }
+
+        System.out.println(productPageStateKeeper.getCurrentProduct().getProductName());
+        return "redirect:/products";
+    }
+
 }
