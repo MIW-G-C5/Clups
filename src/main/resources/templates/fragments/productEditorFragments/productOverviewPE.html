@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<div class="container-fluid zeroPadding" th:fragment="productOverviewPE">
+    <div th:each="product : ${allProductsByCategory}">
+        <div>
+            <a class="btn btn-primary btn-block buttonBlock productBlock"  th:href="@{/products/{productCode}(productCode=${product.productCode})}">
+                <table>
+                    <td class="productItem" th:text="${product.productName}"></td>
+                    <td class="productItem alignPrice" th:text="${product.productPrice}"></td>
+                </table>
+            </a>
+        </div>
+    </div>
+    <a class="btn btn-primary btn-block buttonBlock productBlock addNewButton" th:href="@{/products/addNew}">Add new product</a>
+</div>
+</body>
+</html>

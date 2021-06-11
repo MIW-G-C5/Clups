@@ -5,64 +5,31 @@
   <title>Product Editor</title>
 </head>
 <body>
-
 <nav th:replace="fragments/general :: navbar"></nav>
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <div class="container">
-        <table>
-          <tr>
-            <th>Category</th>
-            <th></th>
-          </tr>
-          <tbody>
-          <tr th:each="category : ${allCategories}">
-            <td><a th:text="${category.categoryName}" th:href="@{/products/selectCategory/{categoryName}(categoryName=${category.categoryName})}" class="btn btn-info">Add</a></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+<div class="container-fluid zeroPadding">
+    <div class="row topBottomMargin no-gutters justify-content-between">
+        <div class="col-7 borderedSection">
+            <div class="row no-gutters">
+                <div class="col-5 zeroPadding">
+                    <div th:replace="fragments/productEditorFragments/categoryOverviewPE :: categoryOverviewPE"></div>
+                </div>
+                <div class="col-7 zeroPadding">
+                    <div th:replace="fragments/productEditorFragments/productOverviewPE :: productOverviewPE"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 borderedSection">
+            <div th:if="${formState} == true">
+                <th:block th:if="${product.productName} == null">
+                    <div th:replace="fragments/productEditorFragments/addNewProduct :: addNewProduct"></div>
+                </th:block>
+                <th:block th:unless="${product.productName} == null">
+                    <div th:replace="/fragments/productEditorFragments/editProduct.html :: editProduct"></div>
+                </th:block>
+            </div>
+        </div>
     </div>
-    <div class="col">
-
-      <div class="container">
-        <table>
-          <tr>
-            <th>Product name</th>
-            <th>Price</th>
-            <th></th>
-          </tr>
-          <tbody>
-          <tr th:each="product : ${allProductsByCategory}">
-            <td>
-              <a class="btn btn-info" th:text="${product.productName + ' ' + product.productPrice}">
-            </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a class="btn btn-info" th:href="@{/products/addNew}">Add new product</a>
-            </td>
-          </tr>
-
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-    <div class="col">
-      <div class="container" th:if="${formState} == true">
-
-          <form th:replace="fragments/addNewProduct :: addNewProduct"></form>
-
-      </div>
-    </div>
-  </div>
-  <div th:replace="fragments/general :: bottomScripts"></div>
-
-
+    <div th:replace="fragments/general :: bottomScripts"></div>
 </div>
 </body>
 </html>

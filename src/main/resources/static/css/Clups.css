@@ -37,6 +37,11 @@
     padding: 10px;
 }
 
+.editProduct{
+    padding: 10px;
+    font-family: sans-serif;
+}
+
 .zeroPadding {
     padding-left: 0;
     padding-right: 0;
@@ -80,4 +85,8 @@ a:focus, a:hover, a:active, a {
     border-top: solid black;
     border-left: solid black;
     border-right: solid black;
+}
+
+.addNewButton {
+    background-color: cadetblue;
 }
