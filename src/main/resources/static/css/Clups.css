@@ -75,3 +75,9 @@ a:focus, a:hover, a:active, a {
     width: 420px;
     font-weight: bold;
 }
+
+.currentPage {
+    border-top: solid black;
+    border-left: solid black;
+    border-right: solid black;
+}

@@ -14,10 +14,16 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-link">
-                <a class="nav-link" th:href="@{/}">Start</a>
+<!--                <a class="nav-link" th:if="${selectedPage} == 'mainPage' " th:href="@{/}">Start</a>-->
+
+                <a class="nav-link"
+                   th:classappend="${selectedPage == 'mainPage'} ? currentPage : ' '"
+                   th:href="@{/}">Start</a>
             </li>
             <li class="nav-link">
-                <a class="nav-link" th:href="@{/products}">Products</a>
+                <a class="nav-link"
+                   th:classappend="${selectedPage == 'productPage'} ? currentPage : ' '"
+                   th:href="@{/products}">Products</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
