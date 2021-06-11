@@ -50,13 +50,14 @@ public class ProductServiceImpl implements ProductService {
     public void saveProduct(ProductDto productDto) {
         Category category = categoryService.findModelByCategoryName(productDto.getCategoryName());
         Product product = dtoConverter.toModel(category, productDto);
+        product.setProductCode(getHighestProductCode() + 1);
+
         addNew(product);
     }
 
     //This method saves objects in the database.
     @Override
     public Product addNew(Product product) {
-        product.addProductCode();
         return productRepository.save(product);
     }
 
@@ -81,6 +82,19 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return productByName;
+    }
+
+    public int getHighestProductCode() {
+        int productCode = 0;
+
+        List<Product> allProducts = productRepository.findAll();
+        for (Product product : allProducts) {
+            if (product.getProductCode() > productCode) {
+                productCode = product.getProductCode();
+            }
+        }
+
+        return productCode;
     }
 
 
