@@ -3,7 +3,7 @@
     background-color: dodgerblue;
     text-transform: uppercase;
     font-weight: bold;
-}
+    }
 
 .buttonBlock {
     border-radius: 10px;
@@ -35,6 +35,11 @@
     border-radius: 0;
     font-family: Courier;
     padding: 10px;
+}
+
+.editProduct{
+    padding: 10px;
+    font-family: sans-serif;
 }
 
 .zeroPadding {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<div class="container-fluid zeroPadding" th:fragment="productOverviewPE">
+    <div th:each="product : ${allProductsByCategory}">
+        <div class="btn btn-primary btn-block buttonBlock productBlock">
+            <table>
+                <tr>
+                    <td class="productItem" th:text="${product.productName}"></td>
+                    <td class="productItem alignPrice" th:text="${product.productPrice}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <button class="btn btn-info" onclick="showForm()" th:href="@{/products/addNew}">Add new product</button>
+
+</div>
+</body>
+<script>
+    function showForm(){
+        let x = document.getElementById("editProductForm");
+        x.style.visibility = "visible";
+    }
+</script>
+</html>
