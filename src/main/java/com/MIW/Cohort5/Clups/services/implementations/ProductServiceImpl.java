@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author S.K.C.Reijntjes
@@ -83,16 +82,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public ProductDto findProductByName(String name) {
-        List<ProductDto> allProducts = getAll();
+        Product product = productRepository.findProductByProductName(name);
 
-        ProductDto productByName = null;
-        for (ProductDto product : allProducts) {
-            if (product.getProductName().equals(name)) {
-                productByName = product;
-            }
-        }
-
-        return productByName;
+        return dtoConverter.toDto(product);
     }
 
     @Override

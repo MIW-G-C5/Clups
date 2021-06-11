@@ -43,30 +43,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public CategoryDto findDtoByCategoryName(String name) {
-        List<CategoryDto> allCategories = getAll();
+       Category model = categoryRepository.findCategoryByCategoryName(name);
 
-        CategoryDto categoryByName = null;
-        for (CategoryDto category : allCategories) {
-            if (category.getCategoryName().equals(name)) {
-                categoryByName = category;
-            }
-        }
-
-        return categoryByName;
+        return dtoConverter.toDto(model);
     }
 
     @Override
     public Category findModelByCategoryName(String name) {
-        List<Category> categories = categoryRepository.findAll();
+        Category model = categoryRepository.findCategoryByCategoryName(name);
 
-        Category category = null;
-        for (Category cat : categories) {
-            if(cat.getCategoryName().equals(name)) {
-                category = cat;
-            }
-        }
-
-        return category;
+        return model;
     }
 
 }
