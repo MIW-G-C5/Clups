@@ -84,6 +84,20 @@ public class ProductServiceImpl implements ProductService {
         return productByName;
     }
 
+    @Override
+    public ProductDto findProductByCode(int productCode) {
+        List<ProductDto> allProducts = getAll();
+
+        ProductDto productByCode = null;
+        for (ProductDto product : allProducts) {
+            if (product.getProductCode() == productCode) {
+                productByCode = product;
+            }
+        }
+
+        return productByCode;
+    }
+
     public int getHighestProductCode() {
         int productCode = 0;
 

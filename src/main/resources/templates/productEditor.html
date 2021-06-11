@@ -24,7 +24,7 @@
                     <div th:replace="fragments/productEditorFragments/addNewProduct :: addNewProduct"></div>
                 </th:block>
                 <th:block th:unless="${product.productName} == null">
-                    <div th:replace="/fragments/productEditorFragments/editProduct.html"></div>
+                    <div th:replace="/fragments/productEditorFragments/editProduct.html :: editProduct"></div>
                 </th:block>
             </div>
         </div>

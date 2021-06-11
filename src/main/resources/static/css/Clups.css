@@ -80,3 +80,7 @@ a:focus, a:hover, a:active, a {
     width: 420px;
     font-weight: bold;
 }
+
+.addNewButton {
+    background-color: cadetblue;
+}

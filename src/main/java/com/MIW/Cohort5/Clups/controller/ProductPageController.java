@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Johnnie Meijer
  * j.j.meijer@st.hanze.nl
+ *
+ * This controller arranges all views and actions for the Products page
  */
 
 @Controller
@@ -62,11 +64,17 @@ public class ProductPageController {
     protected String addNewProduct(Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         model.addAttribute("allCategoryNames", categoryService.getAll());
 
-        if (!productPageStateKeeper.isShowForm()) {
-            productPageStateKeeper.setShowForm(true);
-        }
+        clearSelectedProduct(productPageStateKeeper);
+
+        showForm(productPageStateKeeper);
 
         return "redirect:/products";
+    }
+
+    private void clearSelectedProduct(ProductPageStateKeeper productPageStateKeeper) {
+        if(productPageStateKeeper.getCurrentProduct() != null) {
+            productPageStateKeeper.setCurrentProduct(null);
+        }
     }
 
     @PostMapping({"/products/addNew"})
@@ -88,18 +96,22 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
-    @GetMapping("/products/{productName}")
-    protected String editProduct(@PathVariable("productName") String productName,
+    @GetMapping("/products/{productCode}")
+    protected String editProduct(@PathVariable("productCode") String productCodeString,
                                  @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper){
-        ProductDto selectedProduct = productService.findProductByName(productName);
+
+        ProductDto selectedProduct = productService.findProductByCode(Integer.parseInt(productCodeString));
         productPageStateKeeper.setCurrentProduct(selectedProduct);
 
+        showForm(productPageStateKeeper);
+
+        return "redirect:/products";
+    }
+
+    private void showForm(@SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         if (!productPageStateKeeper.isShowForm()) {
             productPageStateKeeper.setShowForm(true);
         }
-
-        System.out.println(productPageStateKeeper.getCurrentProduct().getProductName());
-        return "redirect:/products";
     }
 
 }

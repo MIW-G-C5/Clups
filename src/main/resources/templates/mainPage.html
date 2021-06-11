@@ -11,15 +11,15 @@
         <div class="col-7 borderedSection">
             <div class="row no-gutters">
                 <div class="col-5 zeroPadding">
-                    <div th:replace="fragments/categoryOverview :: categoryOverview"></div>
+                    <div th:replace="fragments/mainPageFragments/categoryOverview :: categoryOverview"></div>
                 </div>
                 <div class="col-7 zeroPadding">
-                    <div th:replace="fragments/productOverview :: productOverview"></div>
+                    <div th:replace="fragments/mainPageFragments/productOverview :: productOverview"></div>
                 </div>
             </div>
         </div>
             <div class="col-4 borderedSection">
-                <div th:replace="fragments/order :: order"></div>
+                <div th:replace="fragments/mainPageFragments/order :: order"></div>
             </div>
     </div>
     <div th:replace="fragments/general :: bottomScripts"></div>
