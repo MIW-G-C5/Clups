@@ -29,7 +29,6 @@ public class Product {
 
     public Product(Integer productDbId, String productName, BigDecimal productPrice, Category productCategory) {
         this.productDbId = productDbId;
-        addProductCode();
         this.productName = productName;
         this.productPrice = productPrice;
         this.productCategory = productCategory;
@@ -37,12 +36,11 @@ public class Product {
 
     public Product(String productName, BigDecimal productPrice, Category productCategory) {
         this.productName = productName;
-        addProductCode();
         this.productPrice = productPrice;
         this.productCategory = productCategory;
     }
 
-    private void addProductCode() {
+    public void addProductCode() {
         this.productCode = productCodeCounter + 1;
         productCodeCounter++;
     }
@@ -66,4 +64,15 @@ public class Product {
         return productCategory;
     }
 
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public void setProductCategory(Category productCategory) {
+        this.productCategory = productCategory;
+    }
 }

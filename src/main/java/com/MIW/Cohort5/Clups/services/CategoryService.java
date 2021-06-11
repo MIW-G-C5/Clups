@@ -16,5 +16,7 @@ public interface CategoryService {
     
     Category addNew(Category category);
 
-    CategoryDto findByCategoryName(String name);
+    CategoryDto findDtoByCategoryName(String name);
+
+    Category findModelByCategoryName(String name);
 }

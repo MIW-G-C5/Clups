@@ -1,9 +1,11 @@
 package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
+import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
 import com.MIW.Cohort5.Clups.repository.ProductRepository;
+import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.ProductDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,14 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository,
+                              CategoryService categoryService) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
     }
 
     // This method sends all objects from a repository to the DTO converter.
@@ -40,9 +45,18 @@ public class ProductServiceImpl implements ProductService {
         return dtoConverter.toProductDtos(models);
     }
 
+    //This method saves objects in the database from application input
+    @Override
+    public void saveProduct(ProductDto productDto) {
+        Category category = categoryService.findModelByCategoryName(productDto.getCategoryName());
+        Product product = dtoConverter.toModel(category, productDto);
+        addNew(product);
+    }
+
     //This method saves objects in the database.
     @Override
     public Product addNew(Product product) {
+        product.addProductCode();
         return productRepository.save(product);
     }
 
@@ -50,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDto> productsByCategory = new ArrayList<>();
         CategoryServiceImpl categoryService = new CategoryServiceImpl(categoryRepository);
         if (selectedCategoryName != null) {
-            productsByCategory = categoryService.findByCategoryName(selectedCategoryName).getProducts();
+            productsByCategory = categoryService.findDtoByCategoryName(selectedCategoryName).getProducts();
         }
 
         return productsByCategory;

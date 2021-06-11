@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.services.dtoConverters;
 
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
+import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
 
 import java.util.ArrayList;
@@ -35,6 +36,17 @@ public class ProductDtoConverter {
         result.setCategoryName(model.getProductCategory().getCategoryName());
 
         return result;
+    }
+
+    public Product toModel(Category category, ProductDto dto) {
+        Product model = new Product();
+
+        model.setProductName(dto.getProductName());
+        model.setProductPrice(dto.getProductPrice());
+
+        model.setProductCategory(category);
+
+        return model;
     }
 
 }

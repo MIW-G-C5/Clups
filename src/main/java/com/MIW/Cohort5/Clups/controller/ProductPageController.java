@@ -70,11 +70,9 @@ public class ProductPageController {
                                  @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
-            System.out.println(productPageStateKeeper.getCurrentProduct().getProductName()
-                    + " "
-                    + productPageStateKeeper.getCurrentProduct().getProductPrice()
-                    + " "
-                    + productPageStateKeeper.getCurrentProduct().getCategoryName());
+
+            productService.saveProduct(productPageStateKeeper.getCurrentProduct());
+
             productPageStateKeeper.clearCurrentProduct();
         }
 

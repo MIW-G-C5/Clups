@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.save(category);
     }
 
-    public CategoryDto findByCategoryName(String name) {
+    public CategoryDto findDtoByCategoryName(String name) {
         List<CategoryDto> allCategories = getAll();
 
         CategoryDto categoryByName = null;
@@ -53,6 +53,20 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return categoryByName;
+    }
+
+    @Override
+    public Category findModelByCategoryName(String name) {
+        List<Category> categories = categoryRepository.findAll();
+
+        Category category = null;
+        for (Category cat : categories) {
+            if(cat.getCategoryName().equals(name)) {
+                category = cat;
+            }
+        }
+
+        return category;
     }
 
 }

@@ -16,6 +16,8 @@ public interface ProductService {
 
     Product addNew(Product product);
 
+    void saveProduct(ProductDto productDto);
+
     List<ProductDto> getProductsByCategory(String selectedCategoryName);
 
     ProductDto findProductByName(String name);
