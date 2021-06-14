@@ -5,6 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product, Integer> {
 
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+    // this method should only be used when editing existing products, so does not need to return an Optional <Product>
+    Product findProductByProductCode(Integer productCode);
+
+    // this method should only be used when editing existing products, so does not need to return an Optional <Product>
+    Product findProductByProductName(String productName);
 }
