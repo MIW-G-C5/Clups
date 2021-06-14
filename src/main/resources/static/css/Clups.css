@@ -43,8 +43,7 @@
 }
 
 .zeroPadding {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
     margin-left: 0;
     margin-right: 0;
 }
@@ -56,6 +55,11 @@
 .topBottomMargin {
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+.topBottomPadding {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .alignPrice{
@@ -82,9 +86,8 @@ a:focus, a:hover, a:active, a {
 }
 
 .currentPage {
-    border-top: solid black;
-    border-left: solid black;
-    border-right: solid black;
+    background-color: white;
+
 }
 
 .addNewButton {

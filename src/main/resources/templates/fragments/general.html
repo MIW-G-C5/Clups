@@ -10,18 +10,14 @@
     <link href="/css/Clups.css" rel="stylesheet" type="text/css">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light active" th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-light zeroPadding" th:fragment="navbar">
     <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-link">
-                <a class="nav-link"
-                   th:classappend="${selectedPage == 'mainPage'} ? currentPage : ' '"
-                   th:href="@{/}">Start</a>
+            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'mainPage'} ? currentPage : ' '">
+                <a class="nav-link" th:href="@{/}">Start</a>
             </li>
-            <li class="nav-link">
-                <a class="nav-link"
-                   th:classappend="${selectedPage == 'productPage'} ? currentPage : ' '"
-                   th:href="@{/products}">Products</a>
+            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'productPage'} ? currentPage : ' '">
+                <a class="nav-link" th:href="@{/products}">Products</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
