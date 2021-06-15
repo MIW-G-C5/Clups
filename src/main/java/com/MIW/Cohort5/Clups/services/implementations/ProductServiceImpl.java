@@ -55,8 +55,8 @@ public class ProductServiceImpl implements ProductService {
         Product newProduct = dtoConverter.toModel(category, productDto);
         if (oldProduct != null) {
                 newProduct.setProductDbId(oldProduct.getProductDbId());
-                addNew(newProduct);
             }
+        addNew(newProduct);
         }
 
     //This method saves objects in the database.

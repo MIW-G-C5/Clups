@@ -45,8 +45,12 @@ public class Product {
         return productName;
     }
 
-    public int getProductCode() {
-        return productCode;
+    public Integer getProductCode() {
+        if (productCode == null) {
+            return -1;
+        } else {
+            return productCode;
+        }
     }
 
     public BigDecimal getProductPrice() {
