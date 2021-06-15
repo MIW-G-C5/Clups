@@ -1,24 +1,14 @@
-package com.MIW.Cohort5.Clups.model;
+package com.MIW.Cohort5.Clups.dtos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
  *
- * A customer has an account in the application for prepaid payment options
+ * A description of a Customer without exposing unnecessary details to the View
  */
-@Entity
-public class Customer {
+public class CustomerDto {
 
-    @Id
-    @GeneratedValue
-    private Integer customerDbId;
-
-    @Column(unique = true)
     private Integer customerCode;
 
     private String firstName;
@@ -27,31 +17,11 @@ public class Customer {
 
     private BigDecimal prepaidBalance;
 
-    public Customer() {
-    }
-
-    public Customer(String firstName, String infixName, String lastName, BigDecimal prepaidBalance) {
-        this.firstName = firstName;
-        this.infixName = infixName;
-        this.lastName = lastName;
-        this.prepaidBalance = prepaidBalance;
-    }
-
-    public Integer getCustomerDbId() {
-        return customerDbId;
-    }
-
-    public void setCustomerDbId(Integer customerDbId) {
-        this.customerDbId = customerDbId;
+    public CustomerDto() {
     }
 
     public Integer getCustomerCode() {
-        // this method cannot return null to ensure no nullPointerExceptions in the application
-        if (customerCode == null) {
-            return -1;
-        } else {
-            return customerCode;
-        }
+        return customerCode;
     }
 
     public void setCustomerCode(Integer customerCode) {

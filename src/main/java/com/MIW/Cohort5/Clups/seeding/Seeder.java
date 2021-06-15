@@ -1,9 +1,11 @@
 package com.MIW.Cohort5.Clups.seeding;
 
 import com.MIW.Cohort5.Clups.model.Category;
+import com.MIW.Cohort5.Clups.model.Customer;
 import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
 import com.MIW.Cohort5.Clups.services.CategoryService;
+import com.MIW.Cohort5.Clups.services.CustomerService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -25,13 +27,15 @@ public class Seeder {
     private CategoryService categoryService;
     private ClupsUserDetailsServiceImpl clupsUserDetailsService;
     private CategoryRepository categoryRepository;
+    private CustomerService customerService;
 
     public Seeder(ProductService productService, ClupsUserDetailsServiceImpl clupsUserDetailsService,
-                  CategoryService categoryService, CategoryRepository categoryRepository) {
+                  CategoryService categoryService, CategoryRepository categoryRepository, CustomerService customerService) {
         this.productService = productService;
         this.clupsUserDetailsService = clupsUserDetailsService;
         this.categoryService = categoryService;
         this.categoryRepository = categoryRepository;
+        this.customerService = customerService;
     }
 
     // This generates the test data when launching the program.
@@ -42,6 +46,7 @@ public class Seeder {
         seedUser();
         seedCategory();
         seedProduct();
+        seedCustomer();
     }
 
     private void seedUser() {
@@ -82,6 +87,14 @@ public class Seeder {
             productService.addNew(new Product("Lemonade", BigDecimal.valueOf(0.50), findCategory(5)));
             productService.addNew(new Product("Whipped Cream", BigDecimal.valueOf(1), findCategory(6)));
             productService.addNew(new Product("Mayonnaise", BigDecimal.valueOf(0.25), findCategory(6)));
+        }
+    }
+
+    private void seedCustomer() {
+        if (customerService.getAll().size() == 0) {
+            customerService.addNew(new Customer("Pietje", "", "Puck", BigDecimal.valueOf(10)));
+            customerService.addNew(new Customer("Jan", "van", "Vliet", BigDecimal.valueOf(8.50)));
+            customerService.addNew(new Customer("Marie", "van der", "Zande", BigDecimal.valueOf(0)));
         }
     }
 
