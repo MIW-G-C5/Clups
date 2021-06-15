@@ -1,7 +1,6 @@
 package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
