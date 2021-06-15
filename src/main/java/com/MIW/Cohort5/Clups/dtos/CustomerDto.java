@@ -20,6 +20,10 @@ public class CustomerDto {
     public CustomerDto() {
     }
 
+    public String getFullName() {
+        return firstName + " " + infixName + " " + lastName;
+    }
+
     public Integer getCustomerCode() {
         return customerCode;
     }

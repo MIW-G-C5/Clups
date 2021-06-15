@@ -9,10 +9,8 @@
   <a class="btn btn-primary btn-lg btn-block buttonBlock categoriesBlock"
      th:href="@{/customers/{customerCode}(customerCode=${customer.getCustomerCode()})}">
     <table>
-      <td class="customerAccountBlock" th:text="${customer.firstName}"></td>
-      <td class="customerAccountBlock" th:text="${customer.infixName}"></td>
-      <td class="customerAccountBlock" th:text="${customer.lastName}"></td>
-      <td class="customerAccountBlock" th:text="${customer.prepaidBalance}"></td>
+      <td class="customerAccountBlock" th:text="${customer.getFullName}"></td>
+      <td class="customerAccountBlock alignTextRight" th:text="${customer.prepaidBalance}"></td>
 
     </table>
   </a>

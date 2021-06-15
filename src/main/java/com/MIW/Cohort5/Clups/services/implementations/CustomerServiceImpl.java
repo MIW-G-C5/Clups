@@ -35,7 +35,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(CustomerDto customerDto) {
+        Customer newCustomer = dtoConverter.toModel(customerDto);
 
+        addNew(newCustomer);
     }
 
     @Override

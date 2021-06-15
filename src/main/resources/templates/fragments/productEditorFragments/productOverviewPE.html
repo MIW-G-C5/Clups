@@ -11,7 +11,7 @@
             <a class="btn btn-primary btn-block buttonBlock productBlock"  th:href="@{/products/{productCode}(productCode=${product.productCode})}">
                 <table>
                     <td class="productItem" th:text="${product.productName}"></td>
-                    <td class="productItem alignPrice" th:text="${product.productPrice}"></td>
+                    <td class="productItem alignTextRight" th:text="${product.productPrice}"></td>
                 </table>
             </a>
         </div>

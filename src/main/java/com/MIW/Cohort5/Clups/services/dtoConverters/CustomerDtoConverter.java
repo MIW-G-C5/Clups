@@ -34,4 +34,15 @@ public class CustomerDtoConverter {
 
         return result;
     }
+
+    public Customer toModel(CustomerDto dto) {
+        Customer model = new Customer();
+
+        model.setFirstName(dto.getFirstName());
+        model.setInfixName(dto.getInfixName());
+        model.setLastName(dto.getLastName());
+        model.setPrepaidBalance(dto.getPrepaidBalance());
+
+        return model;
+    }
 }

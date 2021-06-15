@@ -69,17 +69,11 @@ public class ProductPageController {
 
         productPageStateKeeper.setShowCatForm(false);
 
-        clearSelectedProduct(productPageStateKeeper);
+        productPageStateKeeper.clearCurrentProduct();
 
         showForm(productPageStateKeeper);
 
         return "redirect:/products";
-    }
-
-    private void clearSelectedProduct(ProductPageStateKeeper productPageStateKeeper) {
-        if(productPageStateKeeper.getCurrentProduct() != null) {
-            productPageStateKeeper.setCurrentProduct(null);
-        }
     }
 
     @PostMapping({"/products/addNew"})

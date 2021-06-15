@@ -8,14 +8,23 @@
 <nav th:replace="fragments/general :: navbar"></nav>
 <div class="container-fluid zeroPadding">
   <div class="row topBottomMargin no-gutters justify-content-between">
-    <div class="col-4 borderedSection">
-      <div th:replace="fragments/CustomerAccountFragments/customerAccountOverview :: customerAccountList">
-      </div>
+    <div class="col-4">
+    </div>
+    <div class="col-7">
       <a class="btn btn-primary btn-block buttonBlock categoriesBlock addNewButton" th:href="@{/customers/addNew}">Add new customer</a>
     </div>
-    <div class="col-8 borderedSection">
-      <div>
+  </div>
+  <div class="row topBottomMargin no-gutters justify-content-between">
+    <div class="col-4 borderedSection">
+      <div class="d-flex align-items-start flex-column">
+        <div th:replace="fragments/customerAccountFragments/customerAccountOverview :: customerAccountList"
+             class="customerOverviewTable"></div>
       </div>
+    </div>
+    <div class="col-7 borderedSection">
+      <th:block th:if="${formState} == true">
+        <div th:replace="fragments/customerAccountFragments/addCustomerForm :: addCustomerForm"></div>
+      </th:block>
     </div>
   </div>
   <div th:replace="fragments/general :: bottomScripts"></div>

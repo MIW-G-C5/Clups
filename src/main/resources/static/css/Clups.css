@@ -62,7 +62,7 @@
     padding-bottom: 15px;
 }
 
-.alignPrice{
+.alignTextRight{
     text-align: right;
 }
 
@@ -95,6 +95,12 @@ a:focus, a:hover, a:active, a {
 }
 
 .customerAccountBlock {
-    width: 200px;
+    width: 300px;
     font-size: 1rem;
+}
+
+.customerOverviewTable {
+    display: inline-block;
+    overflow: auto;
+    height: 400px;
 }
