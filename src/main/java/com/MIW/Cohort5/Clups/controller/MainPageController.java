@@ -44,6 +44,7 @@ public class MainPageController {
                 ("allProductsByCategory", productService.getProductsByCategory(mainPageStateKeeper.getCategoryName()));
         model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
+        model.addAttribute("selectedPage", "mainPage");
         return "mainPage";
     }
 

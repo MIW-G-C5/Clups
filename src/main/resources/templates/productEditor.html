@@ -11,16 +11,21 @@
         <div class="col-7 borderedSection">
             <div class="row no-gutters">
                 <div class="col-5 zeroPadding">
-                    <div th:replace="fragments/categoryOverviewPE :: categoryOverviewPE"></div>
+                    <div th:replace="fragments/productEditorFragments/categoryOverviewPE :: categoryOverviewPE"></div>
                 </div>
                 <div class="col-7 zeroPadding">
-                    <div th:replace="fragments/productOverviewPE :: productOverviewPE"></div>
+                    <div th:replace="fragments/productEditorFragments/productOverviewPE :: productOverviewPE"></div>
                 </div>
             </div>
         </div>
         <div class="col-4 borderedSection">
             <div th:if="${formState} == true">
-                <div th:replace="fragments/addNewProduct :: addNewProduct"></div>
+                <th:block th:if="${product.productName} == null">
+                    <div th:replace="fragments/productEditorFragments/addNewProduct :: addNewProduct"></div>
+                </th:block>
+                <th:block th:unless="${product.productName} == null">
+                    <div th:replace="/fragments/productEditorFragments/editProduct.html :: editProduct"></div>
+                </th:block>
             </div>
             <div th:if="${formCatState} == true">
                 <div th:replace="fragments/addNewCategory :: addNewCategory"></div>

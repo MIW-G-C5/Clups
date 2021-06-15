@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
+import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Johnnie Meijer
  * j.j.meijer@st.hanze.nl
+ *
+ * This controller arranges all views and actions for the Products page
  */
 
 @Controller
@@ -48,8 +51,8 @@ public class ProductPageController {
         }
 
         model.addAttribute("product", productPageStateKeeper.getCurrentProduct());
+        model.addAttribute("selectedPage", "productPage");
         model.addAttribute("category", productPageStateKeeper.getCurrentCategory());
-
         return "productEditor";
     }
 
@@ -67,30 +70,79 @@ public class ProductPageController {
 
         productPageStateKeeper.setShowCatForm(false);
 
-        if (!productPageStateKeeper.isShowForm()) {
-            productPageStateKeeper.setShowForm(true);
-        }
+        clearSelectedProduct(productPageStateKeeper);
+
+        showForm(productPageStateKeeper);
 
         return "redirect:/products";
     }
 
+    private void clearSelectedProduct(ProductPageStateKeeper productPageStateKeeper) {
+        if(productPageStateKeeper.getCurrentProduct() != null) {
+            productPageStateKeeper.setCurrentProduct(null);
+        }
+    }
+
     @PostMapping({"/products/addNew"})
-    protected String saveProduct(@ModelAttribute("product") ProductDto productDto,
-                                 BindingResult result,
-                                 @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String saveNewProduct(@ModelAttribute("product") ProductDto productDto,
+                                    BindingResult result,
+                                    @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
 
             productService.saveProduct(productPageStateKeeper.getCurrentProduct());
 
-            // save category of added product to statekeeper, so you get to see the product immediately in its category
-            productPageStateKeeper.setCategoryName(productDto.getCategoryName());
+            showCategoryForChangedProduct(productDto.getCategoryName(), productPageStateKeeper);
 
-            productPageStateKeeper.clearCurrentProduct();
-            productPageStateKeeper.setShowForm(false);
+            clearForm(productPageStateKeeper);
         }
 
         return "redirect:/products";
+    }
+
+    private void showCategoryForChangedProduct(String categoryName, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        // save category of added product to statekeeper, so you get to see the product immediately in its category
+        productPageStateKeeper.setCategoryName(categoryName);
+    }
+
+    private void clearForm(ProductPageStateKeeper productPageStateKeeper) {
+        productPageStateKeeper.clearCurrentProduct();
+        productPageStateKeeper.setShowForm(false);
+    }
+
+    @GetMapping("/products/{productCode}")
+    protected String editProduct(@PathVariable("productCode") String productCodeString,
+                                 @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper){
+
+        ProductDto selectedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
+        productPageStateKeeper.setCurrentProduct(selectedProduct);
+
+        showForm(productPageStateKeeper);
+
+        return "redirect:/products";
+    }
+
+    @PostMapping("/products/edit")
+    protected String saveExistingProduct(@ModelAttribute("product") ProductDto productDto,
+                                         BindingResult result,
+                                         @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        if(!result.hasErrors()) {
+            productPageStateKeeper.setCurrentProduct(productDto);
+
+            productService.saveProduct(productPageStateKeeper.getCurrentProduct());
+
+            showCategoryForChangedProduct(productDto.getCategoryName(), productPageStateKeeper);
+
+            clearForm(productPageStateKeeper);
+        }
+
+        return "redirect:/products";
+    }
+
+    private void showForm(@SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        if (!productPageStateKeeper.isShowForm()) {
+            productPageStateKeeper.setShowForm(true);
+        }
     }
 
     @GetMapping({"/categories/addNew"})

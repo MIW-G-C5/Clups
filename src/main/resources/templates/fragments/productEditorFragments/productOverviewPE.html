@@ -7,17 +7,16 @@
 <body>
 <div class="container-fluid zeroPadding" th:fragment="productOverviewPE">
     <div th:each="product : ${allProductsByCategory}">
-        <div class="btn btn-primary btn-block buttonBlock productBlock">
-            <table>
-                <tr>
+        <div>
+            <a class="btn btn-primary btn-block buttonBlock productBlock"  th:href="@{/products/{productCode}(productCode=${product.productCode})}">
+                <table>
                     <td class="productItem" th:text="${product.productName}"></td>
                     <td class="productItem alignPrice" th:text="${product.productPrice}"></td>
-                </tr>
-            </table>
+                </table>
+            </a>
         </div>
     </div>
-    <a class="btn btn-info" th:href="@{/products/addNew}">Add new product</a>
-
+    <a class="btn btn-primary btn-block buttonBlock productBlock addNewButton" th:href="@{/products/addNew}">Add new product</a>
 </div>
 </body>
 </html>

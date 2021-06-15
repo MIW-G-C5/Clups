@@ -3,7 +3,7 @@
     background-color: dodgerblue;
     text-transform: uppercase;
     font-weight: bold;
-    }
+}
 
 .buttonBlock {
     border-radius: 10px;
@@ -43,8 +43,7 @@
 }
 
 .zeroPadding {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
     margin-left: 0;
     margin-right: 0;
 }
@@ -56,6 +55,11 @@
 .topBottomMargin {
     margin-top: 25px;
     margin-bottom: 25px;
+}
+
+.topBottomPadding {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .alignPrice{
@@ -79,4 +83,13 @@ a:focus, a:hover, a:active, a {
 .totalPrice {
     width: 420px;
     font-weight: bold;
+}
+
+.currentPage {
+    background-color: white;
+
+}
+
+.addNewButton {
+    background-color: cadetblue;
 }
