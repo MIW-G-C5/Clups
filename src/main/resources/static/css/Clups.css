@@ -93,3 +93,8 @@ a:focus, a:hover, a:active, a {
 .addNewButton {
     background-color: cadetblue;
 }
+
+.customerAccountBlock {
+    width: 200px;
+    font-size: 1rem;
+}

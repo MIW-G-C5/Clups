@@ -8,24 +8,15 @@
 <nav th:replace="fragments/general :: navbar"></nav>
 <div class="container-fluid zeroPadding">
   <div class="row topBottomMargin no-gutters justify-content-between">
-    <div class="col-7 borderedSection">
-      <div class="row no-gutters">
-        <div class="col-5 zeroPadding" th:each="customer : ${allCustomers}">
-          <a class="btn btn-primary btn-lg btn-block buttonBlock categoriesBlock"
-            th:href="@{/customers/{customerCode}(customerCode=${customer.getCustomerCode()})}">
-              <table>
-                <td class="productItem" th:text="${customer.firstName}"></td>
-                <td class="productItem" th:text="${customer.infixName}"></td>
-                <td class="productItem" th:text="${customer.lastName}"></td>
-
-              </table>
-          </a>
-
-        </div>
-
+    <div class="col-4 borderedSection">
+      <div th:replace="fragments/CustomerAccountFragments/customerAccountOverview :: customerAccountList">
+      </div>
+      <a class="btn btn-primary btn-block buttonBlock categoriesBlock addNewButton" th:href="@{/customers/addNew}">Add new customer</a>
+    </div>
+    <div class="col-8 borderedSection">
+      <div>
       </div>
     </div>
-
   </div>
   <div th:replace="fragments/general :: bottomScripts"></div>
 </div>
