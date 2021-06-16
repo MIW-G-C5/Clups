@@ -62,7 +62,7 @@
     padding-bottom: 15px;
 }
 
-.alignPrice{
+.alignTextRight{
     text-align: right;
 }
 
@@ -92,4 +92,14 @@ a:focus, a:hover, a:active, a {
 
 .addNewButton {
     background-color: cadetblue;
+}
+
+.customerAccountBlock {
+    width: 300px;
+}
+
+.customerOverviewTable {
+    display: inline-block;
+    overflow: auto;
+    height: 400px;
 }

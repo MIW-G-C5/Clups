@@ -46,6 +46,7 @@ public class Product {
     }
 
     public Integer getProductCode() {
+        // this method cannot return null to ensure no nullPointerExceptions in the application
         if (productCode == null) {
             return -1;
         } else {

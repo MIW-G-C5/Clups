@@ -22,6 +22,9 @@
             <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'userPage'} ? currentPage : ' '">
                 <a class="nav-link" th:href="@{/users}">Accounts</a>
             </li>
+            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'customerPage'} ? currentPage : ' '">
+                <a class="nav-link" th:href="@{/customers}">Customer Accounts</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-link" sec:authorize="isAuthenticated()">

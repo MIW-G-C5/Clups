@@ -1,7 +1,6 @@
 package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
@@ -70,17 +69,11 @@ public class ProductPageController {
 
         productPageStateKeeper.setShowCatForm(false);
 
-        clearSelectedProduct(productPageStateKeeper);
+        productPageStateKeeper.clearCurrentProduct();
 
         showForm(productPageStateKeeper);
 
         return "redirect:/products";
-    }
-
-    private void clearSelectedProduct(ProductPageStateKeeper productPageStateKeeper) {
-        if(productPageStateKeeper.getCurrentProduct() != null) {
-            productPageStateKeeper.setCurrentProduct(null);
-        }
     }
 
     @PostMapping({"/products/addNew"})
