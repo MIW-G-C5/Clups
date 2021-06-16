@@ -8,18 +8,10 @@
 <div>
   <form class="editProduct" th:fragment="addCustomerForm" th:action="@{/customers/addNew}"
         method="post" th:object="${customer}">
-    <label for="customerFirstName">First name</label>
+    <label for="customerFullName">First name</label>
     <div class="form-group input-group">
-      <input type="text" id="customerFirstName" th:field="*{firstName}">
+      <input type="text" id="customerFullName" th:field="*{fullName}">
     </div>
-      <label for="customerInfixName">Infix</label>
-      <div class="form-group input-group">
-          <input type="text" id="customerInfixName" th:field="*{infixName}">
-      </div>
-      <label for="customerLastName">Last name</label>
-      <div class="form-group input-group">
-          <input type="text" id="customerLastName" th:field="*{lastName}">
-      </div>
       <label for="customerPrepaidBalance">Prepaid balance</label>
       <div class="form-group input-group">
           <input type="text" id="customerPrepaidBalance" th:field="*{prepaidBalance}">

@@ -7,7 +7,7 @@
 <body>
 <div th:fragment="customerAccountList" th:each="customer : ${allCustomers}">
   <a class="btn btn-primary btn-lg btn-block buttonBlock categoriesBlock"
-     th:href="@{/customers/{customerCode}(customerCode=${customer.getCustomerCode()})}">
+     th:href="@{/customers/{customerCode}(customerCode=${customer.getUserCode()})}">
     <table>
       <td class="customerAccountBlock" th:text="${customer.getFullName}"></td>
       <td class="customerAccountBlock alignTextRight" th:text="${customer.prepaidBalance}"></td>

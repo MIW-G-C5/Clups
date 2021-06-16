@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,27 +16,70 @@ import java.util.List;
 /**
  * Johnnie Meijer
  * j.j.meijer@st.hanze.nl
+ *
+ * A user has a role. Depending on the role, it has certain privileges and attributes.
  */
 
 @Entity
-public class ClupsUser implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
     private Integer userId;
 
+    @Column(unique = true)
+    private Integer userCode;
+
     @Column(unique = true, nullable = false)
     private String username;
 
     private String password;
-
+    private String fullName;
+    private BigDecimal prepaidBalance;
     private String role;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(){}
+
+    public User(String fullName, BigDecimal prepaidBalance) {
+        this.fullName = fullName;
+        this.prepaidBalance = prepaidBalance;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorityList;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public Integer getUserCode() {
+        // this method cannot return null to ensure no nullPointerExceptions in the application
+        if (userCode == null) {
+            return -1;
+        } else {
+            return userCode;
+        }
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public BigDecimal getPrepaidBalance() {
+        return prepaidBalance;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     @Override
@@ -76,5 +120,24 @@ public class ClupsUser implements UserDetails {
         this.password = password;
     }
 
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public void setUserCode(Integer customerCode) {
+        this.userCode = customerCode;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setPrepaidBalance(BigDecimal prepaidBalance) {
+        this.prepaidBalance = prepaidBalance;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
 

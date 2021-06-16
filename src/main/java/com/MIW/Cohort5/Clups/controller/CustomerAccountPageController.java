@@ -1,8 +1,8 @@
 package com.MIW.Cohort5.Clups.controller;
 
-import com.MIW.Cohort5.Clups.dtos.CustomerDto;
-import com.MIW.Cohort5.Clups.dtos.stateKeeper.CustomerAccountPageStateKeeper;
-import com.MIW.Cohort5.Clups.services.CustomerService;
+import com.MIW.Cohort5.Clups.dtos.UserDto;
+import com.MIW.Cohort5.Clups.dtos.stateKeeper.UserPageStateKeeper;
+import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,40 +14,41 @@ import org.springframework.web.bind.annotation.*;
  *
  * This controller handles all actions for customer accounts in the application
  */
+
 @Controller
 @SessionAttributes("customerPageStateKeeper")
 public class CustomerAccountPageController {
 
-    private final CustomerService customerService;
+    private final UserService userService;
 
     @Autowired
-    public CustomerAccountPageController(CustomerService customerService) {
-        this.customerService = customerService;
+    public CustomerAccountPageController(UserService userService) {
+        this.userService = userService;
     }
 
     @ModelAttribute("customerPageStateKeeper")
-    public CustomerAccountPageStateKeeper customerPageStateKeeper(){
-        return new CustomerAccountPageStateKeeper();
+    public UserPageStateKeeper userPageStateKeeper(){
+        return new UserPageStateKeeper();
     }
 
     @GetMapping({"/customers"})
     protected String showPage(Model model,
-                              @ModelAttribute("customerPageStateKeeper") CustomerAccountPageStateKeeper stateKeeper) {
+                              @ModelAttribute("customerPageStateKeeper") UserPageStateKeeper stateKeeper) {
         model.addAttribute("selectedPage", "customerPage");
-        model.addAttribute("allCustomers", customerService.getAll());
+        model.addAttribute("allCustomers", userService.getAll());
 
-        if (stateKeeper.getCurrentCustomer() == null) {
-            stateKeeper.setCurrentCustomer(new CustomerDto());
+        if (stateKeeper.getUserDto() == null) {
+            stateKeeper.setUserDto(new UserDto());
         }
 
-        model.addAttribute("customer", stateKeeper.getCurrentCustomer());
+        model.addAttribute("customer", stateKeeper.getUserDto());
         model.addAttribute("formState", stateKeeper.isShowForm());
         return "customerAccountPage";
     }
 
     @GetMapping({"/customers/addNew"})
     protected String addNewCustomer(
-            @SessionAttribute("customerPageStateKeeper") CustomerAccountPageStateKeeper stateKeeper) {
+            @SessionAttribute("customerPageStateKeeper") UserPageStateKeeper stateKeeper) {
 
         stateKeeper.setShowForm(true);
 
@@ -56,14 +57,14 @@ public class CustomerAccountPageController {
 
     @PostMapping({"/customers/addNew"})
     protected String saveNewCustomer(
-            @ModelAttribute("customer") CustomerDto customerDto,
+            @ModelAttribute("customer") UserDto userDto,
             BindingResult result,
-            @SessionAttribute("customerPageStateKeeper") CustomerAccountPageStateKeeper stateKeeper) {
+            @SessionAttribute("customerPageStateKeeper") UserPageStateKeeper stateKeeper) {
 
         if(!result.hasErrors()) {
-            stateKeeper.setCurrentCustomer(customerDto);
+            stateKeeper.setUserDto(userDto);
 
-            customerService.saveCustomer(stateKeeper.getCurrentCustomer());
+            userService.saveUser(stateKeeper.getUserDto());
 
             clearForm(stateKeeper);
         }
@@ -73,7 +74,7 @@ public class CustomerAccountPageController {
 
     @GetMapping({"/customers/cancel"})
     protected String cancelForm(
-            @SessionAttribute("customerPageStateKeeper") CustomerAccountPageStateKeeper stateKeeper) {
+            @SessionAttribute("customerPageStateKeeper") UserPageStateKeeper stateKeeper) {
 
         stateKeeper.setShowForm(false);
 
@@ -81,10 +82,9 @@ public class CustomerAccountPageController {
     }
 
 
-    private void clearForm(CustomerAccountPageStateKeeper stateKeeper) {
+    private void clearForm(UserPageStateKeeper stateKeeper) {
         stateKeeper.clearCustomer();
         stateKeeper.setShowForm(false);
     }
-
 
 }

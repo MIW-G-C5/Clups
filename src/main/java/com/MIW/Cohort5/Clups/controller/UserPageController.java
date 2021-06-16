@@ -2,7 +2,7 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
-import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
+import com.MIW.Cohort5.Clups.services.implementations.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes("productPageStateKeeper")
 public class UserPageController {
 
-    public final ClupsUserDetailsServiceImpl userService;
+    public final UserDetailsServiceImpl userService;
 
     @Autowired
-    public UserPageController(ClupsUserDetailsServiceImpl userService) {
+    public UserPageController(UserDetailsServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -57,7 +57,7 @@ public class UserPageController {
              @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
 
         if (!result.hasErrors()) {
-            userService.addUser(userDto);
+            userService.saveUser(userDto);
         }
 
         productPageStateKeeper.setUserForm(false);

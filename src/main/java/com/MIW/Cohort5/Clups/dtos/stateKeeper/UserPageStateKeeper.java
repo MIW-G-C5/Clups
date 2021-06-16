@@ -1,30 +1,30 @@
 package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
-import com.MIW.Cohort5.Clups.dtos.CustomerDto;
+import com.MIW.Cohort5.Clups.dtos.UserDto;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
  */
-public class CustomerAccountPageStateKeeper {
+public class UserPageStateKeeper {
 
-    private CustomerDto currentCustomer;
+    private UserDto userDto;
 
     //this should always be false, unless changed by user input in the application
     private boolean showForm = false;
 
-    public CustomerAccountPageStateKeeper() {
+    public UserPageStateKeeper() {
     }
 
     public void clearCustomer() {
-        currentCustomer = null;
+        userDto = null;
     }
 
-    public CustomerDto getCurrentCustomer() {
-        return currentCustomer;
+    public UserDto getUserDto() {
+        return userDto;
     }
 
-    public void setCurrentCustomer(CustomerDto currentCustomer) {
-        this.currentCustomer = currentCustomer;
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 
     public boolean isShowForm() {

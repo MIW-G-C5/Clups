@@ -1,6 +1,6 @@
 package com.MIW.Cohort5.Clups.configuration;
 
-import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
+import com.MIW.Cohort5.Clups.services.implementations.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -21,9 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    ClupsUserDetailsServiceImpl clupsUserDetailsService;
+    UserDetailsServiceImpl clupsUserDetailsService;
 
-    public SecurityConfiguration(ClupsUserDetailsServiceImpl clupsUserDetailsService) {
+    public SecurityConfiguration(UserDetailsServiceImpl clupsUserDetailsService) {
         this.clupsUserDetailsService = clupsUserDetailsService;
     }
 
