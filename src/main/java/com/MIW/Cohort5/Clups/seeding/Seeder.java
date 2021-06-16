@@ -1,5 +1,6 @@
 package com.MIW.Cohort5.Clups.seeding;
 
+import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
@@ -46,7 +47,7 @@ public class Seeder {
 
     private void seedUser() {
         if (clupsUserDetailsService.getAll().size() == 0) {
-            clupsUserDetailsService.addUser("admin", "admin");
+            clupsUserDetailsService.addUser(new UserDto("admin", "admin"));
         }
     }
 

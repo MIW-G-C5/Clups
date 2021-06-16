@@ -29,6 +29,8 @@ public class ClupsUser implements UserDetails {
 
     private String password;
 
+    private String role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();

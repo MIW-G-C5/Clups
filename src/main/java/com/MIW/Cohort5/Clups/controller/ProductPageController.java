@@ -84,9 +84,10 @@ public class ProductPageController {
     }
 
     @PostMapping({"/products/addNew"})
-    protected String saveNewProduct(@ModelAttribute("product") ProductDto productDto,
-                                    BindingResult result,
-                                    @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String saveNewProduct
+            (@ModelAttribute("product") ProductDto productDto, BindingResult result,
+             @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
 
@@ -147,7 +148,7 @@ public class ProductPageController {
 
     @GetMapping({"/categories/addNew"})
     protected String addNewCategory
-            (Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+            (@SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
 
         productPageStateKeeper.setShowForm(false);
 

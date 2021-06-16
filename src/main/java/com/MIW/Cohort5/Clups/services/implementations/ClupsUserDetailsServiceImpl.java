@@ -44,12 +44,13 @@ public class ClupsUserDetailsServiceImpl implements UserDetailsService {
         return dtoConverter.toUserDtos(models);
     }
 
-    public void addUser(String username, String password) {
+    public void addUser(UserDto userDto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(password);
+
+        String encodedPassword = encoder.encode(userDto.getPassword());
 
         ClupsUser user = new ClupsUser();
-        user.setUsername(username);
+        user.setUsername(userDto.getUsername());
         user.setPassword(encodedPassword);
 
         clupsUserRepository.save(user);

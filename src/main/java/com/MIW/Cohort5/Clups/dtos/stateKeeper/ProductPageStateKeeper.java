@@ -19,6 +19,7 @@ public class ProductPageStateKeeper {
     // this should always be false, until changed by user input in the application
     private boolean showForm = false;
     private boolean showCatForm = false;
+    private boolean showUserForm = false;
 
     public ProductPageStateKeeper() {
     }
@@ -56,6 +57,10 @@ public class ProductPageStateKeeper {
     }
 
     public boolean isShowCatForm() { return showCatForm; }
+
+    public boolean isShowUserForm() { return showUserForm; }
+
+    public void setUserForm(boolean showUserForm) { this.showUserForm = showUserForm; }
 
     public void setShowForm(boolean showForm) {
         this.showForm = showForm;

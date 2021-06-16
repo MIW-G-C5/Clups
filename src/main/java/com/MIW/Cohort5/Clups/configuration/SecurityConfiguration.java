@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-        ClupsUserDetailsServiceImpl clupsUserDetailsService;
+    ClupsUserDetailsServiceImpl clupsUserDetailsService;
 
     public SecurityConfiguration(ClupsUserDetailsServiceImpl clupsUserDetailsService) {
         this.clupsUserDetailsService = clupsUserDetailsService;
@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .anyRequest().authenticated().and()
+                .anyRequest().authenticated().and()
                 .formLogin().and()
                 .logout().logoutSuccessUrl("/");
     }
