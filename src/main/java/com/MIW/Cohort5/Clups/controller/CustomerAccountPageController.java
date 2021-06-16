@@ -71,6 +71,16 @@ public class CustomerAccountPageController {
         return "redirect:/customers";
     }
 
+    @GetMapping({"/customers/cancel"})
+    protected String cancelForm(
+            @SessionAttribute("customerPageStateKeeper") CustomerAccountPageStateKeeper stateKeeper) {
+
+        stateKeeper.setShowForm(false);
+
+        return "redirect:/customers";
+    }
+
+
     private void clearForm(CustomerAccountPageStateKeeper stateKeeper) {
         stateKeeper.clearCustomer();
         stateKeeper.setShowForm(false);
