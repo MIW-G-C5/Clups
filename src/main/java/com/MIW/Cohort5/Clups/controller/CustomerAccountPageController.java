@@ -81,7 +81,6 @@ public class CustomerAccountPageController {
         return "redirect:/customers";
     }
 
-
     private void clearForm(UserPageStateKeeper stateKeeper) {
         stateKeeper.clearCustomer();
         stateKeeper.setShowForm(false);

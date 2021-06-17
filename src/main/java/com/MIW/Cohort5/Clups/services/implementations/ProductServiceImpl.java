@@ -112,6 +112,8 @@ public class ProductServiceImpl implements ProductService {
         return productCode;
     }
 
-
+    public void deleteProduct(ProductDto productDto) {
+        productRepository.delete(productRepository.findProductByProductCode(productDto.getProductCode()));
+    }
 
 }

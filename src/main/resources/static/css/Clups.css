@@ -108,3 +108,8 @@ a:focus, a:hover, a:active, a {
     overflow: auto;
     height: 400px;
 }
+
+.formButton {
+    margin-right: 4%;
+    width: 18%;
+}
