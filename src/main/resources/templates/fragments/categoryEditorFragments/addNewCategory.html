@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-  <form class="editProduct" th:fragment="addNewCategory" th:action="@{/categories/addNew}" method="post" th:object="${product}">
+  <form class="editCategoriesAndProducts" th:fragment="addNewCategory" th:action="@{/categories/addNew}" method="post" th:object="${category}">
     <label for="categoryName">Category Name</label>
     <div class="form-group input-group">
       <input type="text" id="categoryName" th:field="*{categoryName}">

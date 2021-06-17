@@ -18,17 +18,12 @@ public class ProductPageStateKeeper {
 
     // this should always be false, until changed by user input in the application
     private boolean showForm = false;
-    private boolean showCatForm = false;
 
     public ProductPageStateKeeper() {
     }
 
     public void clearCurrentProduct() {
         this.currentProduct = null;
-    }
-
-    public void clearCurrentCategory() {
-        this.currentCategory = null;
     }
 
     public String getCategoryName() {
@@ -55,11 +50,8 @@ public class ProductPageStateKeeper {
         return showForm;
     }
 
-    public boolean isShowCatForm() { return showCatForm; }
-
     public void setShowForm(boolean showForm) {
         this.showForm = showForm;
     }
 
-    public void setShowCatForm(boolean showCatForm) { this.showCatForm = showCatForm; }
 }

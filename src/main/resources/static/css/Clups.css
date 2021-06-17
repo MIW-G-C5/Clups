@@ -37,7 +37,7 @@
     padding: 10px;
 }
 
-.editProduct{
+.editCategoriesAndProducts{
     padding: 10px;
     font-family: sans-serif;
 }
@@ -50,6 +50,11 @@
 
 .borderedSection {
     border: solid 3px black;
+}
+
+.borderedRow{
+    border: solid 3px white;
+    margin-left: 5px;
 }
 
 .topBottomMargin {

@@ -37,8 +37,8 @@ public class MainPageController {
 
     @GetMapping({"/"})
     protected String showPage(Model model, @ModelAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
-        createOrder(mainPageStateKeeper);
 
+        createOrder(mainPageStateKeeper);
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute
                 ("allProductsByCategory", productService.getProductsByCategory(mainPageStateKeeper.getCategoryName()));
