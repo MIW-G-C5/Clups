@@ -15,12 +15,14 @@
       </div>
     </div>
     <div class="col-7 borderedSection">
-      <th:block th:if="${formState} == true">
-        <div th:replace="fragments/accountFragments/addCustomerForm :: addCustomerForm"></div>
-      </th:block>
-      <th:block th:if="${formState} == false">
-        <a class="btn btn-primary btn-block buttonBlock categoriesBlock addNewButton" th:href="@{/accounts/addNew}">Add new customer</a>
-      </th:block>
+      <div class="container">
+        <th:block th:if="${formState} == true">
+          <div th:replace="fragments/accountFragments/addCustomerForm :: addCustomerForm"></div>
+        </th:block>
+        <th:block th:if="${formState} == false">
+          <a class="btn btn-primary btn-block buttonBlock categoriesBlock addNewButton" th:href="@{/accounts/addNew}">Add new user</a>
+        </th:block>
+      </div>
     </div>
   </div>
   <div th:replace="fragments/general :: bottomScripts"></div>
