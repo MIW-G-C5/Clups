@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="EN" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{::title})">
-  <meta charset="UTF-8">
-  <title>Product Editor</title>
+    <meta charset="UTF-8">
+    <title>Product Editor</title>
 </head>
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 borderedSection">
+        <block class="col-4 borderedSection">
             <div th:if="${formState} == true">
                 <th:block th:if="${product.productName} == null">
                     <div th:replace="fragments/productEditorFragments/addNewProduct :: addNewProduct"></div>
@@ -27,12 +27,10 @@
                     <div th:replace="/fragments/productEditorFragments/editProduct.html :: editProduct"></div>
                 </th:block>
             </div>
-            <div th:if="${formCatState} == true">
-                <div th:replace="fragments/addNewCategory :: addNewCategory"></div>
-            </div>
-        </div>
+        </block>
     </div>
-    <div th:replace="fragments/general :: bottomScripts"></div>
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
 </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
+import com.MIW.Cohort5.Clups.dtos.ProductDto;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
@@ -13,10 +14,13 @@ public class MainPageStateKeeper {
 
     private String categoryName;
 
+    private ProductDto currentProduct;
+
+    private CategoryDto currentCategory;
+
     private OrderDto order;
 
-    public MainPageStateKeeper() {
-    }
+    public MainPageStateKeeper() { }
 
     public String getCategoryName() {
         return categoryName;

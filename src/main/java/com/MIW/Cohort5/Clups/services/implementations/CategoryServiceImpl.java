@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
+import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
@@ -75,6 +76,12 @@ public class CategoryServiceImpl implements CategoryService {
         Category model = categoryRepository.findCategoryByCategoryName(name);
 
         return model;
+    }
+
+    @Override
+    public CategoryDto findDtoByCode(Integer categoryCode) {
+        Category category = categoryRepository.findCategoryByCategoryCode(categoryCode);
+        return dtoConverter.toDto(category);
     }
 
 }
