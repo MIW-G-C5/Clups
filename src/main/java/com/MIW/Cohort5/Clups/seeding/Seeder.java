@@ -48,7 +48,7 @@ public class Seeder {
 
     private void seedUser() {
         if (userService.getAll().size() == 0) {
-            userService.saveUser(new UserDto("admin", "admin"));
+            userService.saveUser(new UserDto("admin", "admin", "administrator"));
             userService.saveUser(new UserDto("Pietje", BigDecimal.valueOf(10)));
             userService.saveUser(new UserDto("Jan", BigDecimal.valueOf(8.50)));
             userService.saveUser(new UserDto("Marie", BigDecimal.valueOf(0)));

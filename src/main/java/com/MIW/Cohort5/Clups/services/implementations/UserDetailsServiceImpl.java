@@ -51,8 +51,12 @@ public class UserDetailsServiceImpl implements UserService {
 
         userDto.setUserCode(userCode);
 
-        if (userDto.getUsername() == null) {
+        if (userDto.getUsername() == null || userDto.getUsername() == "") {
             userDto.setUsername("user" + userDto.getUserCode());
+        }
+
+        if (userDto.getPassword() == null) {
+            userDto.setPassword("pw" + userDto.getUserCode());
         }
 
         User newUser = dtoConverter.toModel(userDto);
