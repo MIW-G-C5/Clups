@@ -40,16 +40,28 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void saveCategory(CategoryDto categoryDto) {
-        categoryDto.setCategoryCode(getHighestCategoryCode() +1);
-        Category category = dtoConverter.toModel(categoryDto);
-        addNew(category);
+
+        Category newCategory = dtoConverter.toModel(categoryDto);
+        Category oldCategory = categoryRepository.findCategoryByCategoryCode(categoryDto.getCategoryCode());
+
+        if (oldCategory != null) {
+            newCategory.setCategoryDbId(oldCategory.getCategoryDbId());
+        }
+        addNew(newCategory);
     }
 
     //This method saves objects in the database.
     @Override
     public Category addNew(Category category) {
+
+
+        if (category.getCategoryCode() <= 0){
+            category.setCategoryCode(getHighestCategoryCode() + 1);
+        }
+
         return categoryRepository.save(category);
     }
+
 
     @Override
     public int getHighestCategoryCode() {

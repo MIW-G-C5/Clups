@@ -56,4 +56,12 @@ public class Category {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+    public void setCategoryDbId(Integer categoryDbId) {
+        this.categoryDbId = categoryDbId;
+    }
+
+    public Integer getCategoryDbId() {
+        return categoryDbId;
+    }
 }
