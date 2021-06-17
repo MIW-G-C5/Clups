@@ -38,9 +38,10 @@ public class User implements UserDetails {
     private BigDecimal prepaidBalance;
     private String role;
 
-    public User(String username, String password) {
+    public User(String username, String password, String fullName) {
         this.username = username;
         this.password = password;
+        this.fullName = fullName;
     }
 
     public User(){}

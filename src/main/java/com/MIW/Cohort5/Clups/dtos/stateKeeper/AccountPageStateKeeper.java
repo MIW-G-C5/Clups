@@ -5,17 +5,17 @@ import com.MIW.Cohort5.Clups.dtos.UserDto;
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
  */
-public class UserPageStateKeeper {
+public class AccountPageStateKeeper {
 
     private UserDto userDto;
 
     //this should always be false, unless changed by user input in the application
     private boolean showForm = false;
 
-    public UserPageStateKeeper() {
+    public AccountPageStateKeeper() {
     }
 
-    public void clearCustomer() {
+    public void clearUser() {
         userDto = null;
     }
 

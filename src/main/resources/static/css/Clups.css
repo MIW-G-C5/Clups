@@ -54,7 +54,6 @@
 
 .borderedRow{
     border: solid 3px white;
-    margin-left: 5px;
 }
 
 .topBottomMargin {
@@ -92,7 +91,6 @@ a:focus, a:hover, a:active, a {
 
 .currentPage {
     background-color: white;
-
 }
 
 .addNewButton {
@@ -103,13 +101,7 @@ a:focus, a:hover, a:active, a {
     width: 300px;
 }
 
-.customerOverviewTable {
-    display: inline-block;
-    overflow: auto;
-    height: 400px;
-}
-
-.formButton {
-    margin-right: 4%;
+.formButtons {
     width: 18%;
+    margin-right: 4%;
 }

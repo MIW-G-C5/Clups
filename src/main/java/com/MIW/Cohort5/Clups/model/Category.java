@@ -15,7 +15,6 @@ public class Category {
     @GeneratedValue
     private Integer categoryDbId;
 
-    @Column(unique = true)
     private String categoryName;
 
     @Column(unique = true)

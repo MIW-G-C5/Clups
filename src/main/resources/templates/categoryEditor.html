@@ -7,11 +7,7 @@
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
 <div class="container-fluid zeroPadding">
-
-    <div class="row justify-content-between borderedRow topBottomMargin">
-        <div class="col-7"><a class="btn btn-info btn-lg" th:href="@{/categories/addNew}">Add new category</a></div>
-        <div class="col-4"></div>
-    </div>
+    <div><p></p></div>
 
     <div class="row topBottomMargin no-gutters justify-content-between">
 
@@ -29,14 +25,14 @@
             </div>
         </block>
     </div>
-    <div class="row topBottomMargin no-gutters justify-content-between">
+    <div class="row topBottomMargin justify-content-between borderedRow">
         <div class="col-4">
-            <div><a class="btn btn-info" th:href="@{/categories/addNew}">Add new category</a></div>
+            <div><a class="btn btn-info btn-lg" th:href="@{/categories/addNew}">Add new category</a></div>
         </div>
         <div class="col-7">
             <p></p>
         </div>
-</div>
+    </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </div>
 </body>
