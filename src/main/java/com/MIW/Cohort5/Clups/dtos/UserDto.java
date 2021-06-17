@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.dtos;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Johnnie Meijer
@@ -26,9 +27,11 @@ public class UserDto {
         this.prepaidBalance = prepaidBalance;
     }
 
-    public UserDto(String username, String password) {
+    public UserDto(String username, String password, String fullName) {
         this.username = username;
         this.password = password;
+        this.fullName = fullName;
+        this.prepaidBalance = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
     }
 
     public Integer getUserCode() {
