@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.InputMismatchException;
+
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
  *
@@ -63,6 +65,10 @@ public class AccountPageController {
 
         if(!result.hasErrors()) {
             stateKeeper.setUserDto(userDto);
+
+            if (userDto.getFullName() == null || userDto.getFullName() == "") {
+                throw new InputMismatchException("The full name must be filled in");
+            }
 
             userService.saveUser(stateKeeper.getUserDto());
 
