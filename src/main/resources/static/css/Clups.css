@@ -105,3 +105,8 @@ a:focus, a:hover, a:active, a {
     width: 18%;
     margin-right: 4%;
 }
+
+.deleteButton {
+    border-color: indianred;
+    background-color: indianred;
+}
