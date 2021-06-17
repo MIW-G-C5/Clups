@@ -75,6 +75,8 @@ public class CategoryPageController {
         model.addAttribute("allCategoryNames", categoryService.getAll());
         model.addAttribute("formCatState", categoryPageStateKeeper.isShowCatForm());
 
+        categoryPageStateKeeper.clearCurrentCategory();
+
         if (!categoryPageStateKeeper.isShowCatForm()) {
             categoryPageStateKeeper.setShowCatForm(true);
         }

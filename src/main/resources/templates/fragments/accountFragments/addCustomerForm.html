@@ -8,7 +8,7 @@
 <div>
     <form class="editProduct" th:fragment="addCustomerForm" th:action="@{/accounts/addNew}"
           method="post" th:object="${user}">
-        <label for="fullName">Full name</label>
+        <label for="fullName">Full name (required)</label>
         <div class="form-group input-group">
             <input type="text" id="fullName" th:field="*{fullName}">
         </div>

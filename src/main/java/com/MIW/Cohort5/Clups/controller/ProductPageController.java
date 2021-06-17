@@ -1,6 +1,5 @@
 package com.MIW.Cohort5.Clups.controller;
 
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
@@ -115,9 +114,11 @@ public class ProductPageController {
     }
 
     @PostMapping("/products/edit")
-    protected String saveExistingProduct(@ModelAttribute("product") ProductDto productDto,
-                                         BindingResult result,
-                                         @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String saveExistingProduct(
+            @ModelAttribute("product") ProductDto productDto,
+            BindingResult result,
+            @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
 
@@ -131,9 +132,29 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
+    @GetMapping("/products/delete")
+    protected  String deleteProduct(@SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        productService.deleteProduct(productPageStateKeeper.getCurrentProduct());
+
+        showCategoryForChangedProduct(productPageStateKeeper.getCurrentProduct().getCategoryName(), productPageStateKeeper);
+
+        clearForm(productPageStateKeeper);
+
+        return "redirect:/products";
+    }
+
+    @GetMapping({"/products/cancel"})
+    protected String cancelProductForm(
+            @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
+        productPageStateKeeper.setShowForm(false);
+        return "redirect:/products";
+    }
+
     private void showForm(@SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         if (!productPageStateKeeper.isShowForm()) {
             productPageStateKeeper.setShowForm(true);
         }
     }
+
 }
