@@ -1,11 +1,14 @@
 package com.MIW.Cohort5.Clups.seeding;
 
+import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
+import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
 import com.MIW.Cohort5.Clups.services.CategoryService;
+import com.MIW.Cohort5.Clups.services.UserService;
 import com.MIW.Cohort5.Clups.services.ProductService;
-import com.MIW.Cohort5.Clups.services.implementations.ClupsUserDetailsServiceImpl;
+import com.MIW.Cohort5.Clups.services.implementations.UserDetailsServiceImpl;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -23,15 +26,14 @@ public class Seeder {
 
     private ProductService productService;
     private CategoryService categoryService;
-    private ClupsUserDetailsServiceImpl clupsUserDetailsService;
     private CategoryRepository categoryRepository;
+    private UserService userService;
 
-    public Seeder(ProductService productService, ClupsUserDetailsServiceImpl clupsUserDetailsService,
-                  CategoryService categoryService, CategoryRepository categoryRepository) {
+    public Seeder(ProductService productService, CategoryService categoryService, CategoryRepository categoryRepository, UserService userService) {
         this.productService = productService;
-        this.clupsUserDetailsService = clupsUserDetailsService;
         this.categoryService = categoryService;
         this.categoryRepository = categoryRepository;
+        this.userService = userService;
     }
 
     // This generates the test data when launching the program.
@@ -45,8 +47,11 @@ public class Seeder {
     }
 
     private void seedUser() {
-        if (clupsUserDetailsService.getAll().size() == 0) {
-            clupsUserDetailsService.addUser("admin", "admin");
+        if (userService.getAll().size() == 0) {
+            userService.saveUser(new UserDto("admin", "admin"));
+            userService.saveUser(new UserDto("Pietje", BigDecimal.valueOf(10)));
+            userService.saveUser(new UserDto("Jan", BigDecimal.valueOf(8.50)));
+            userService.saveUser(new UserDto("Marie", BigDecimal.valueOf(0)));
         }
     }
 

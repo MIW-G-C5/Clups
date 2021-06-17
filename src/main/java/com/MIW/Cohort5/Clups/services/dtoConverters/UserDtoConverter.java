@@ -1,7 +1,7 @@
 package com.MIW.Cohort5.Clups.services.dtoConverters;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
-import com.MIW.Cohort5.Clups.model.ClupsUser;
+import com.MIW.Cohort5.Clups.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
 
 public class UserDtoConverter {
 
-    public List<UserDto> toUserDtos(List<ClupsUser> models) {
+    public List<UserDto> toUserDtos(List<User> models) {
         List<UserDto> result = new ArrayList<>();
 
-        for (ClupsUser model : models) {
+        for (User model : models) {
             UserDto dto = toDto(model);
             result.add(dto);
         }
@@ -26,11 +26,27 @@ public class UserDtoConverter {
         return result;
     }
 
-    public UserDto toDto(ClupsUser model) {
+    public UserDto toDto(User model) {
         UserDto result = new UserDto();
         result.setUsername(model.getUsername());
+        result.setPassword(model.getPassword());
+        result.setUserCode(model.getUserCode());
+        result.setFullName(model.getFullName());
+        result.setPrepaidBalance(model.getPrepaidBalance());
 
         return result;
+    }
+
+    public User toModel(UserDto dto) {
+        User model = new User();
+
+        model.setUsername(dto.getUsername());
+        model.setPassword(dto.getPassword());
+        model.setUserCode(dto.getUserCode());
+        model.setFullName(dto.getFullName());
+        model.setPrepaidBalance(dto.getPrepaidBalance());
+
+        return model;
     }
 
 }

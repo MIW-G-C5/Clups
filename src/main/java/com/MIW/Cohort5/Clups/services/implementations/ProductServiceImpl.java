@@ -50,12 +50,15 @@ public class ProductServiceImpl implements ProductService {
     public void saveProduct(ProductDto productDto) {
         Category category = categoryService.findModelByCategoryName(productDto.getCategoryName());
 
+        Product newProduct = dtoConverter.toModel(category, productDto);
+
         Product oldProduct = productRepository.findProductByProductCode(productDto.getProductCode());
 
-        Product newProduct = dtoConverter.toModel(category, productDto);
+
         if (oldProduct != null) {
                 newProduct.setProductDbId(oldProduct.getProductDbId());
             }
+
         addNew(newProduct);
         }
 

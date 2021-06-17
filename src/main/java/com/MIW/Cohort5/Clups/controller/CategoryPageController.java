@@ -53,6 +53,8 @@ public class CategoryPageController {
             @PathVariable("categoryName") String categoryName,
             @SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper categoryPageStateKeeper) {
         categoryPageStateKeeper.setCategoryName(categoryName);
+        showCatForm(categoryPageStateKeeper);
+
         return "redirect:/categories";
     }
 

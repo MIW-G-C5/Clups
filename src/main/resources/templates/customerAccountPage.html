@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="EN" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{::title})">
+  <meta charset="UTF-8">
+  <title>Order</title>
+</head>
+<body>
+<nav th:replace="fragments/general :: navbar"></nav>
+<div class="container-fluid zeroPadding">
+  <div class="row topBottomMargin no-gutters justify-content-between">
+    <div class="col-4 borderedSection">
+      <div class="d-flex align-items-start flex-column">
+        <div th:replace="fragments/customerAccountFragments/customerAccountOverview :: customerAccountList"
+             class="customerOverviewTable"></div>
+      </div>
+    </div>
+    <div class="col-7 borderedSection">
+      <th:block th:if="${formState} == true">
+        <div th:replace="fragments/customerAccountFragments/addCustomerForm :: addCustomerForm"></div>
+      </th:block>
+      <th:block th:if="${formState} == false">
+        <a class="btn btn-primary btn-block buttonBlock categoriesBlock addNewButton" th:href="@{/customers/addNew}">Add new customer</a>
+      </th:block>
+    </div>
+  </div>
+  <div th:replace="fragments/general :: bottomScripts"></div>
+</div>
+</body>
+</html>

@@ -1,10 +1,8 @@
 package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
-import com.MIW.Cohort5.Clups.dtos.stateKeeper.CategoryPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes("productPageStateKeeper")
 public class ProductPageController {
 
-    public final CategoryService categoryService;
     public final ProductService productService;
+    public final CategoryService categoryService;
 
     @Autowired
     public ProductPageController(ProductService products, CategoryService categories) {
@@ -69,23 +67,18 @@ public class ProductPageController {
     protected String addNewProduct(Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         model.addAttribute("allCategoryNames", categoryService.getAll());
 
-        clearSelectedProduct(productPageStateKeeper);
+        productPageStateKeeper.clearCurrentProduct();
 
         showForm(productPageStateKeeper);
 
         return "redirect:/products";
     }
 
-    private void clearSelectedProduct(ProductPageStateKeeper productPageStateKeeper) {
-        if (productPageStateKeeper.getCurrentProduct() != null) {
-            productPageStateKeeper.setCurrentProduct(null);
-        }
-    }
-
     @PostMapping({"/products/addNew"})
-    protected String saveNewProduct(@ModelAttribute("product") ProductDto productDto,
-                                    BindingResult result,
-                                    @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String saveNewProduct
+            (@ModelAttribute("product") ProductDto productDto, BindingResult result,
+             @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         if (!result.hasErrors()) {
             productPageStateKeeper.setCurrentProduct(productDto);
 
