@@ -47,7 +47,7 @@ public class CategoryPageController {
         model.addAttribute("category", categoryPageStateKeeper.getCurrentCategory());
         model.addAttribute("selectedPage", "categoryPage");
 
-        model.addAttribute("allowedToDelete", isAllowedToDelete(categoryPageStateKeeper));
+        model.addAttribute("clearedToDelete", isClearToDelete(categoryPageStateKeeper));
 
         return "categoryEditor";
     }
@@ -150,16 +150,16 @@ public class CategoryPageController {
         return "redirect:/categories";
     }
 
-    private boolean isAllowedToDelete(CategoryPageStateKeeper categoryPageStateKeeper) {
-        boolean allowedToDelete = true;
+    private boolean isClearToDelete(CategoryPageStateKeeper categoryPageStateKeeper) {
+        boolean clearedToDelete = true;
 
         if (categoryPageStateKeeper.getCurrentCategory().getProducts() != null) {
             if (!categoryPageStateKeeper.getCurrentCategory().getProducts().isEmpty()) {
-                allowedToDelete = false;
+                clearedToDelete = false;
             }
         }
 
-        return allowedToDelete;
+        return clearedToDelete;
     }
 
 }
