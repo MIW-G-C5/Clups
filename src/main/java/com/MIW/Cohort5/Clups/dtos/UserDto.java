@@ -51,10 +51,6 @@ public class UserDto {
         return prepaidBalance;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -83,7 +79,4 @@ public class UserDto {
         this.prepaidBalance = prepaidBalance;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 }

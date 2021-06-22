@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
 <div>
@@ -17,10 +17,12 @@
         <div class="form-group input-group">
             <input type="text" id="username" th:field="*{username}">
         </div>
+
         <label for="password">Password</label>
         <div>
             <input type="password" id="password" th:field="*{password}">
         </div>
+
         <div class="row zeroPadding topBottomMargin">
             <button type="submit" class="btn btn-primary formButtons">Save user</button>
             <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Cancel</a>

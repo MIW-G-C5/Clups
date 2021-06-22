@@ -9,4 +9,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     // this method should only be used when editing existing products, so does not need to return an Optional <Product>
     Product findProductByProductName(String productName);
+
 }

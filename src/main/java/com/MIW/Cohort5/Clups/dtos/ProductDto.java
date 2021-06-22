@@ -55,4 +55,5 @@ public class ProductDto {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
 }

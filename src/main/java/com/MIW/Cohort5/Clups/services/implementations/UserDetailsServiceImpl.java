@@ -130,8 +130,6 @@ public class UserDetailsServiceImpl implements UserService {
         return encodedPassword;
     }
 
-
-
     @Override
     public Integer getHighestUserCode() {
         Integer userCode = 0;
@@ -146,7 +144,6 @@ public class UserDetailsServiceImpl implements UserService {
 
         return userCode;
     }
-
 
 }
 

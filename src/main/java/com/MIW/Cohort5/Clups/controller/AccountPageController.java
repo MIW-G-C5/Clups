@@ -45,6 +45,7 @@ public class AccountPageController {
 
         model.addAttribute("user", stateKeeper.getUserDto());
         model.addAttribute("formState", stateKeeper.isShowForm());
+
         return "userAccountPage";
     }
 
@@ -78,7 +79,7 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
-    @GetMapping({"/accounts/cancel"})
+    @GetMapping("/accounts/cancel")
     protected String cancelForm(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 

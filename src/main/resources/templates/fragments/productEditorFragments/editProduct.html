@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-        <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <div>
-    <form class="editCategoriesAndProducts" th:fragment="editProduct" th:action="@{/products/edit}" method="post" th:object="${product}">
+    <form class="editCategoriesAndProducts"
+          th:fragment="editProduct"
+          th:action="@{/products/edit}" method="post"
+          th:object="${product}">
+
         <label for="productName">Product Name</label>
         <div class="form-group input-group">
             <input type="text" id="productName" th:field="*{productName}">
@@ -16,6 +20,7 @@
         <div class="form-group input-group">
             <input type="text" id="productPrice" th:field="*{productPrice}">
         </div>
+
         <label for="categoryDropDown">Category</label>
         <div>
             <select th:field="*{categoryName}" id="categoryDropDown">
@@ -23,8 +28,9 @@
                 </option>
             </select>
         </div>
+
         <input type="hidden" th:field="*{productCode}">
-        <div class="row"></div>
+
         <div class="row zeroPadding topBottomMargin">
             <a class="btn btn-primary formButtons deleteButton" th:href="@{/products/delete}">Delete</a>
             <a class="btn btn-primary formButtons " th:href="@{/products/cancel}">Cancel</a>

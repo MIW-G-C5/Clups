@@ -8,6 +8,7 @@ import com.MIW.Cohort5.Clups.dtos.ProductDto;
  *
  * This class helps to keep track of user actions in a session for the products Page.
  */
+
 public class ProductPageStateKeeper {
 
     private String categoryName;
@@ -18,7 +19,6 @@ public class ProductPageStateKeeper {
 
     // this should always be false, until changed by user input in the application
     private boolean showForm = false;
-    private boolean showUserForm = false;
 
     public ProductPageStateKeeper() {
     }
@@ -45,8 +45,6 @@ public class ProductPageStateKeeper {
 
     public CategoryDto getCurrentCategory() {return currentCategory;}
 
-    public void setCurrentCategory(CategoryDto currentCategory) {this.currentCategory = currentCategory;}
-
     public boolean isShowForm() {
         return showForm;
     }
@@ -54,9 +52,5 @@ public class ProductPageStateKeeper {
     public void setShowForm(boolean showForm) {
         this.showForm = showForm;
     }
-
-    public boolean isShowUserForm() { return showUserForm; }
-
-    public void setUserForm(boolean showUserForm) { this.showUserForm = showUserForm; }
 
 }

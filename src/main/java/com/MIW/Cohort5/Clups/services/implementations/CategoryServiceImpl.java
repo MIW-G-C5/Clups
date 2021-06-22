@@ -1,9 +1,7 @@
 package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
-import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.model.Category;
-import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.CategoryDtoConverter;
@@ -61,7 +59,6 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryRepository.save(category);
     }
-
 
     @Override
     public int getHighestCategoryCode() {

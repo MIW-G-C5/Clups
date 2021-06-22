@@ -36,30 +36,14 @@ public class User implements UserDetails {
     private String password;
     private String fullName;
     private BigDecimal prepaidBalance;
-    private String role;
-
-    public User(String username, String password, String fullName) {
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-    }
 
     public User(){}
-
-    public User(String fullName, BigDecimal prepaidBalance) {
-        this.fullName = fullName;
-        this.prepaidBalance = prepaidBalance;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
         return authorityList;
-    }
-
-    public Integer getUserId() {
-        return userId;
     }
 
     public Integer getUserCode() {
@@ -77,10 +61,6 @@ public class User implements UserDetails {
 
     public BigDecimal getPrepaidBalance() {
         return prepaidBalance;
-    }
-
-    public String getRole() {
-        return role;
     }
 
     @Override
@@ -121,10 +101,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public void setUserCode(Integer customerCode) {
         this.userCode = customerCode;
     }
@@ -137,8 +113,5 @@ public class User implements UserDetails {
         this.prepaidBalance = prepaidBalance;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 }
 

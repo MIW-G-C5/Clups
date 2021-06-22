@@ -36,8 +36,10 @@ public class ProductPageController {
     }
 
     @GetMapping({"/products"})
-    protected String showPage(Model model,
-                              @ModelAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String showPage(
+            Model model,
+            @ModelAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProductsByCategory",
                 productService.getProductsByCategory(productPageStateKeeper.getCategoryName()));
@@ -51,6 +53,7 @@ public class ProductPageController {
         model.addAttribute("product", productPageStateKeeper.getCurrentProduct());
         model.addAttribute("selectedPage", "productPage");
         model.addAttribute("category", productPageStateKeeper.getCurrentCategory());
+
         return "productEditor";
     }
 
@@ -58,12 +61,17 @@ public class ProductPageController {
     protected String showProductsByCategory(
             @PathVariable("categoryName") String categoryName,
             @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         productPageStateKeeper.setCategoryName(categoryName);
+
         return "redirect:/products";
     }
 
     @GetMapping({"/products/addNew"})
-    protected String addNewProduct(Model model, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String addNewProduct(
+            Model model,
+            @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         model.addAttribute("allCategoryNames", categoryService.getAll());
 
         productPageStateKeeper.clearCurrentProduct();
@@ -91,7 +99,10 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
-    private void showCategoryForChangedProduct(String categoryName, @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    private void showCategoryForChangedProduct(
+            String categoryName,
+            @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         // save category of added product to statekeeper, so you get to see the product immediately in its category
         productPageStateKeeper.setCategoryName(categoryName);
     }
@@ -102,8 +113,9 @@ public class ProductPageController {
     }
 
     @GetMapping("/products/{productCode}")
-    protected String editProduct(@PathVariable("productCode") String productCodeString,
-                                 @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String editProduct(
+            @PathVariable("productCode") String productCodeString,
+            @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
 
         ProductDto selectedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
         productPageStateKeeper.setCurrentProduct(selectedProduct);
@@ -143,11 +155,12 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
-    @GetMapping({"/products/cancel"})
+    @GetMapping("/products/cancel")
     protected String cancelProductForm(
             @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
 
         productPageStateKeeper.setShowForm(false);
+
         return "redirect:/products";
     }
 

@@ -30,8 +30,11 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryService categoryService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository,
-                              CategoryService categoryService) {
+    public ProductServiceImpl(
+            ProductRepository productRepository,
+            CategoryRepository categoryRepository,
+            CategoryService categoryService) {
+
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
@@ -60,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
             }
 
         addNew(newProduct);
-        }
+    }
 
     //This method saves objects in the database.
     @Override

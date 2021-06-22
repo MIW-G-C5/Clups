@@ -64,4 +64,5 @@ public class Category {
     public Integer getCategoryDbId() {
         return categoryDbId;
     }
+
 }

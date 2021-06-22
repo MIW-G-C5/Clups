@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-        <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
 <div>
-    <form class="editCategoriesAndProducts" th:fragment="editCategory" th:action="@{/categories/edit}" method="post" th:object="${category}">
+    <form class="editCategoriesAndProducts"
+          th:fragment="editCategory"
+          th:action="@{/categories/edit}" method="post"
+          th:object="${category}">
+
         <label for="categoryName">Category Name</label>
         <div class="form-group input-group">
             <input type="text" id="categoryName" th:field="*{categoryName}">
@@ -14,11 +18,9 @@
 
         <input type="hidden" th:field="*{categoryCode}">
         <div>
-            <p></p>
             <button type="submit" class="btn btn-primary">Save category</button>
         </div>
     </form>
 </div>
-
 </body>
 </html>
