@@ -35,6 +35,7 @@ public class UserDetailsServiceImpl implements UserService {
 
     @Autowired
     public UserDetailsServiceImpl(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
@@ -63,9 +64,21 @@ public class UserDetailsServiceImpl implements UserService {
         userDto.setPrepaidBalance(makePrepaidBalance(userDto));
 
         User newUser = dtoConverter.toModel(userDto);
+        User oldUser = userRepository.findUserByUserCode(userDto.getUserCode());
+
+        if (oldUser != null) {
+            newUser.setUserId(oldUser.getUserId());
+       }
 
         addUser(newUser);
     }
+
+//   public void saveExistingUser(UserDto userDto){
+//        User existingUser = userRepository.findUserByUserCode(userDto.getUserCode());
+//   }
+//    public void deleteUser(UserDto userDto) {
+//        userService.deleteUser(userRepository.findUserByUserCode(userDto.getUserCode()));
+//    }
 
     private BigDecimal makePrepaidBalance(UserDto userDto) {
         BigDecimal prepaidBalance;
@@ -104,10 +117,13 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     private Integer makeUserCode(UserDto userDto) {
-        int userCode = 0;
+
+        int userCode;
 
         if (userDto.getUserCode() <= 0) {
             userCode = getHighestUserCode() + 1;
+        } else {
+            userCode = userDto.getUserCode();
         }
 
         return userCode;
@@ -145,6 +161,12 @@ public class UserDetailsServiceImpl implements UserService {
         }
 
         return userCode;
+    }
+
+    @Override
+    public UserDto findDtoByUserCode(Integer userCode){
+        User user = userRepository.findUserByUserCode(userCode);
+        return dtoConverter.toDto(user);
     }
 
 

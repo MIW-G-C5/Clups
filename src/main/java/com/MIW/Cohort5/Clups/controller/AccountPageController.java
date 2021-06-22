@@ -39,12 +39,12 @@ public class AccountPageController {
         model.addAttribute("selectedPage", "userPage");
         model.addAttribute("allUsers", userService.getAll());
 
-        if (stateKeeper.getUserDto() == null) {
-            stateKeeper.setUserDto(new UserDto());
+        if (stateKeeper.getCurrentUserDto() == null) {
+            stateKeeper.setCurrentUserDto(new UserDto());
         }
 
-        model.addAttribute("user", stateKeeper.getUserDto());
-        model.addAttribute("formState", stateKeeper.isShowForm());
+        model.addAttribute("user", stateKeeper.getCurrentUserDto());
+        model.addAttribute("formState", stateKeeper.isShowUserForm());
         return "userAccountPage";
     }
 
@@ -52,7 +52,7 @@ public class AccountPageController {
     protected String addNewUser(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        stateKeeper.setShowForm(true);
+        stateKeeper.setShowUserForm(true);
 
         return "redirect:/accounts";
     }
@@ -64,33 +64,76 @@ public class AccountPageController {
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
         if(!result.hasErrors()) {
-            stateKeeper.setUserDto(userDto);
+            stateKeeper.setCurrentUserDto(userDto);
 
             if (userDto.getFullName() == null || userDto.getFullName() == "") {
                 throw new InputMismatchException("The full name must be filled in");
             }
 
-            userService.saveUser(stateKeeper.getUserDto());
+            userService.saveUser(stateKeeper.getCurrentUserDto());
 
             clearForm(stateKeeper);
+            stateKeeper.setShowUserForm(false);
         }
 
         return "redirect:/accounts";
     }
 
+    @GetMapping({"/accounts/{userCode}"})
+    protected String editUser(
+            @PathVariable("userCode") String userCode,
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+
+        accountPageStateKeeper.setCurrentUserDto( userService.findDtoByUserCode(Integer.parseInt(userCode)));
+        showUserForm(accountPageStateKeeper);
+        return "redirect:/accounts";
+    }
+
+    @PostMapping("/accounts/edit")
+    protected String saveExistingUser(@ModelAttribute("user") UserDto userDto,
+                                      BindingResult result,
+                                      @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+        if (!result.hasErrors()){
+            accountPageStateKeeper.setShowUserForm(true);
+            accountPageStateKeeper.setCurrentUserDto(userDto);
+            userService.saveUser(accountPageStateKeeper.getCurrentUserDto());
+
+            clearForm(accountPageStateKeeper);
+            accountPageStateKeeper.setShowUserForm(false);
+        }
+        return "redirect:/accounts";
+    }
+
+//
+//    @GetMapping("/accounts/delete/{userCode}")
+//    protected String deleteUser(@PathVariable("userCode") String userCodeString,
+//            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+//
+//        userService.deleteUser(stateKeeper.getCurrentUserDto(Integer.parseInt(userCodeString)));
+//
+//        clearForm(stateKeeper);
+//
+//        return "redirect:/accounts";
+//    }
+//
+   private void showUserForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+        if (!accountPageStateKeeper.isShowUserForm()){
+            accountPageStateKeeper.setShowUserForm(true);
+        }
+   }
+
     @GetMapping({"/accounts/cancel"})
     protected String cancelForm(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        stateKeeper.setShowForm(false);
+        stateKeeper.setShowUserForm(false);
 
         return "redirect:/accounts";
     }
 
-
     private void clearForm(AccountPageStateKeeper stateKeeper) {
         stateKeeper.clearUser();
-        stateKeeper.setShowForm(false);
+        stateKeeper.setShowUserForm(false);
     }
 
 }

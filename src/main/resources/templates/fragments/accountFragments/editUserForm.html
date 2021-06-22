@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Edit User</title>
+</head>
+<body>
+<div>
+    <form class="editCategoriesAndProducts" th:fragment="editUserForm" th:action="@{/accounts/edit}" method="post" th:object="${user}">
+        <label for="fullName">Fullname </label>
+        <div class="form-group input-group">
+            <input type="text" id="fullName" th:field="*{fullName}">
+        </div>
+        <label for="username">Username</label>
+        <div class="form-group input-group">
+            <input type="text" id="username" th:field="*{username}">
+        </div>
+        <label for="password">Password</label>
+        <div>
+            <input type="password" id="password" th:field="*{password}">
+        </div>
+
+        <input type="hidden" th:field="*{userCode}">
+        <div class="row zeroPadding topBottomMargin">
+            <button type="submit" class="btn btn-primary formButtons">Save changes</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

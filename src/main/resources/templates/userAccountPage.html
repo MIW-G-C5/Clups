@@ -15,10 +15,17 @@
       </div>
     </div>
     <div class="col-7 borderedSection">
-      <div class="container">
-        <th:block th:if="${formState} == true">
+
+      <div class="container" th:if="${formState} == true">
+        <th:block th:if="${user.fullName} == null">
           <div th:replace="fragments/accountFragments/addCustomerForm :: addCustomerForm"></div>
         </th:block>
+        <th:block th:if="${user.fullName} != null">
+          <div th:replace="fragments/accountFragments/editUserForm :: editUserForm"></div>
+        </th:block>
+      </div>
+
+      <div class="container">
         <th:block th:if="${formState} == false">
           <a class="btn btn-primary topBottomMargin" th:href="@{/accounts/addNew}">Add new user</a>
         </th:block>
