@@ -36,6 +36,12 @@ public class MainPageController {
     }
 
     @GetMapping({"/"})
+    protected String showWelcomePage(Model model) {
+        model.addAttribute("welcomePage");
+        return "welcomePage";
+    }
+
+    @GetMapping({"/order"})
     protected String showPage(
             Model model,
             @ModelAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
@@ -61,7 +67,7 @@ public class MainPageController {
             @PathVariable("categoryCode") String categoryCodeString,
             @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         mainPageStateKeeper.setCategoryCode(Integer.parseInt(categoryCodeString));
-        return "redirect:/";
+        return "redirect:/order";
     }
 
     @GetMapping({"/order/{productCode}"})
@@ -69,7 +75,7 @@ public class MainPageController {
                                        @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         ProductDto orderedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
         mainPageStateKeeper.getOrder().addToOrder(orderedProduct);
-        return "redirect:/";
+        return "redirect:/order";
     }
 
     @GetMapping({"/order/remove/{productCode}"})
@@ -79,13 +85,13 @@ public class MainPageController {
 
         ProductDto orderedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
         mainPageStateKeeper.getOrder().removeFromOrder(orderedProduct);
-        return "redirect:/";
+        return "redirect:/order";
     }
 
     @GetMapping({"/order/clear"})
     protected String clearOrder(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         mainPageStateKeeper.getOrder().emptyOrder();
-        return "redirect:/";
+        return "redirect:/order";
     }
 
 }

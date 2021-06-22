@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/products", "/categories").hasAuthority("BARMANAGER")
                     .antMatchers("/accounts").hasAnyAuthority("BARMANAGER", "BARTENDER")
+                    .antMatchers("/order").hasAnyAuthority("BARMANAGER", "BARTENDER")
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html class="welcomegeneral" lang="EN" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+</head>
+<body class="welcomegeneral">
+<div class="welcomebg">
+  <div class="welcome">
+    <h1>Welcome to Clups!</h1>
+    <a class="btn btn-primary loginButton" th:href="@{/order}" role="button">Login</a>
+  </div>
+</div>
+</body>
+</html>

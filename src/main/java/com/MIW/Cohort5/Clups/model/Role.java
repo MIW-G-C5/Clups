@@ -5,6 +5,8 @@ import javax.persistence.*;
 /**
  * Johnnie Meijer
  * j.j.meijer@st.hanze.nl
+ *
+ * A role decides who can do what in the application
  */
 
 @Entity
