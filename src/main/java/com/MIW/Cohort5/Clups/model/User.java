@@ -1,17 +1,7 @@
 package com.MIW.Cohort5.Clups.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Johnnie Meijer
@@ -21,10 +11,12 @@ import java.util.List;
  */
 
 @Entity
-public class User implements UserDetails {
+@Table(name = "users")
+public class User {
 
     @Id
-    @GeneratedValue
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     @Column(unique = true)
@@ -36,7 +28,12 @@ public class User implements UserDetails {
     private String password;
     private String fullName;
     private BigDecimal prepaidBalance;
-    private String role;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable( name = "users_roles",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Role role;
 
     public User(String username, String password, String fullName) {
         this.username = username;
@@ -44,23 +41,19 @@ public class User implements UserDetails {
         this.fullName = fullName;
     }
 
-    public User(){}
+    public User(String username, String password, String fullName, Role role) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.role = role;
+    }
 
     public User(String fullName, BigDecimal prepaidBalance) {
         this.fullName = fullName;
         this.prepaidBalance = prepaidBalance;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return authorityList;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
+    public User(){}
 
     public Integer getUserCode() {
         // this method cannot return null to ensure no nullPointerExceptions in the application
@@ -71,74 +64,45 @@ public class User implements UserDetails {
         }
     }
 
-    public String getFullName() {
-        return fullName;
+    public void setUserCode(Integer userCode) {
+        this.userCode = userCode;
     }
 
-    public BigDecimal getPrepaidBalance() {
-        return prepaidBalance;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getUsername() {
         return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public void setUserCode(Integer customerCode) {
-        this.userCode = customerCode;
+    public String getFullName() {
+        return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
+    public BigDecimal getPrepaidBalance() {
+        return prepaidBalance;
+    }
+
     public void setPrepaidBalance(BigDecimal prepaidBalance) {
         this.prepaidBalance = prepaidBalance;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public Role getRole() {
+        return role;
     }
+
 }
 

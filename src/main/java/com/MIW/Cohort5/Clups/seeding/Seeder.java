@@ -1,24 +1,24 @@
 package com.MIW.Cohort5.Clups.seeding;
 
-import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
+import com.MIW.Cohort5.Clups.model.Role;
 import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
+import com.MIW.Cohort5.Clups.repository.RoleRepository;
+import com.MIW.Cohort5.Clups.repository.UserRepository;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.UserService;
 import com.MIW.Cohort5.Clups.services.ProductService;
-import com.MIW.Cohort5.Clups.services.implementations.UserDetailsServiceImpl;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 
 /**
  * @author S.K.C.Reijntjes
  * <p>
- * This class adds testdata to the database
+ * This class adds testdata to the database.
  */
 
 @Component
@@ -28,12 +28,21 @@ public class Seeder {
     private CategoryService categoryService;
     private CategoryRepository categoryRepository;
     private UserService userService;
+    private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
-    public Seeder(ProductService productService, CategoryService categoryService, CategoryRepository categoryRepository, UserService userService) {
+    public Seeder(ProductService productService,
+                  CategoryService categoryService,
+                  CategoryRepository categoryRepository,
+                  UserService userService,
+                  UserRepository userRepository,
+                  RoleRepository roleRepository) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.categoryRepository = categoryRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     // This generates the test data when launching the program.
@@ -41,17 +50,35 @@ public class Seeder {
     // The event variable is grey because it only exists when running the program.
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        seedUser();
+        seedRoles();
+        seedUsers();
         seedCategory();
         seedProduct();
     }
 
-    private void seedUser() {
-        if (userService.getAll().size() == 0) {
-            userService.saveUser(new UserDto("admin", "admin", "administrator"));
-            userService.saveUser(new UserDto("Pietje", BigDecimal.valueOf(10)));
-            userService.saveUser(new UserDto("Jan", BigDecimal.valueOf(8.50)));
-            userService.saveUser(new UserDto("Marie", BigDecimal.valueOf(0)));
+    private void seedRoles() {
+        if (roleRepository.findAll().size() == 0) {
+            Role barmanager = new Role("BARMANAGER");
+            roleRepository.save(barmanager);
+
+            Role bartender = new Role("BARTENDER");
+            roleRepository.save(bartender);
+
+            Role customer = new Role("CUSTOMER");
+            roleRepository.save(customer);
+        }
+    }
+
+    private void seedUsers() {
+        if (userRepository.findAll().size() == 0) {
+
+            Role bartender = roleRepository.findRoleByRoleName("BARTENDER");
+            Role customer = roleRepository.findRoleByRoleName("CUSTOMER");
+            Role barmanager = roleRepository.findRoleByRoleName("BARMANAGER");
+
+            userService.addUser(new User("admin", "admin", "admin", barmanager));
+            userService.addUser(new User("bartender", "bartender", "bartender", bartender));
+            userService.addUser(new User("customer", "customer", "customer", customer));
         }
     }
 
