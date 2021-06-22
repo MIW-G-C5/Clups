@@ -47,18 +47,9 @@ public class CategoryPageController {
         model.addAttribute("category", categoryPageStateKeeper.getCurrentCategory());
         model.addAttribute("selectedPage", "categoryPage");
 
+        model.addAttribute("allowedToDelete", isAllowedToDelete(categoryPageStateKeeper));
+
         return "categoryEditor";
-    }
-
-    @GetMapping({"/categories/selectCategory/{categoryCode}"})
-    protected String selectCategory(
-            @PathVariable("categoryCode") String categoryCodeString,
-            @SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper categoryPageStateKeeper) {
-
-        categoryPageStateKeeper.setCurrentCategory(categoryService.findDtoByCode(Integer.parseInt(categoryCodeString)));
-        showCatForm(categoryPageStateKeeper);
-
-        return "redirect:/categories";
     }
 
     private void showCatForm(
@@ -140,6 +131,35 @@ public class CategoryPageController {
         }
 
         return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/delete")
+    protected String deleteCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper) {
+        categoryService.deleteCategory(stateKeeper.getCurrentCategory());
+
+        clearCatForm(stateKeeper);
+
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/cancel")
+    protected String cancelCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper){
+
+        stateKeeper.setShowCatForm(false);
+
+        return "redirect:/categories";
+    }
+
+    private boolean isAllowedToDelete(CategoryPageStateKeeper categoryPageStateKeeper) {
+        boolean allowedToDelete = true;
+
+        if (categoryPageStateKeeper.getCurrentCategory().getProducts() != null) {
+            if (!categoryPageStateKeeper.getCurrentCategory().getProducts().isEmpty()) {
+                allowedToDelete = false;
+            }
+        }
+
+        return allowedToDelete;
     }
 
 }
