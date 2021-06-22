@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
 <div class="container" th:fragment="order">
@@ -15,9 +15,9 @@
                 <tr th:each="orderItem : ${orderList}">
                     <td>
                         <a class="order"
-                           th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
+                           th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}"
                            th:text="${orderItem.count +
-                                    '    ' +
+                                    '   ' +
                                     orderItem.orderedProduct.productName +
                                     '   ' +
                                     orderItem.calculateTotalPrice}">
@@ -26,12 +26,14 @@
                 </tr>
             </table>
         </div>
+
         <table>
             <tr class="order">
                 <td class="totalPrice alignTextRight">Total price:</td>
                 <td th:text="${orderTotal}"></td>
             </tr>
         </table>
+
         <a class="btn btn-info payButton" th:text="PAY" th:href="@{/order/clear}"></a>
     </div>
 </div>

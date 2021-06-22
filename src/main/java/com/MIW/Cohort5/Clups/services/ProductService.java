@@ -18,13 +18,12 @@ public interface ProductService {
 
     void saveProduct(ProductDto productDto);
 
-    List<ProductDto> getProductsByCategory(String selectedCategoryName);
-
-    ProductDto findProductByName(String name);
+    List<ProductDto> getProductsByCategory(Integer selectedCategoryCode);
 
     int getHighestProductCode();
 
     ProductDto findDtoByCode(int productCode);
 
+    void deleteProduct(ProductDto productDto);
 
 }

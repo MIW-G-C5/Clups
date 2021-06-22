@@ -33,7 +33,7 @@ public class ProductDtoConverter {
         result.setProductName(model.getProductName());
         result.setProductCode(model.getProductCode());
         result.setProductPrice(model.getProductPrice());
-        result.setCategoryName(model.getProductCategory().getCategoryName());
+        result.setCategoryCode(model.getProductCategory().getCategoryCode());
 
         return result;
     }

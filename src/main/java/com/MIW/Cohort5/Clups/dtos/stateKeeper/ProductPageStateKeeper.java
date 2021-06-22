@@ -1,6 +1,5 @@
 package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 
 /**
@@ -8,31 +7,19 @@ import com.MIW.Cohort5.Clups.dtos.ProductDto;
  *
  * This class helps to keep track of user actions in a session for the products Page.
  */
+
 public class ProductPageStateKeeper {
 
-    private String categoryName;
-
     private ProductDto currentProduct;
-
-    private CategoryDto currentCategory;
-
+    private Integer currentCategoryCode;
     // this should always be false, until changed by user input in the application
     private boolean showForm = false;
-    private boolean showUserForm = false;
 
     public ProductPageStateKeeper() {
     }
 
     public void clearCurrentProduct() {
         this.currentProduct = null;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public ProductDto getCurrentProduct() {
@@ -43,9 +30,13 @@ public class ProductPageStateKeeper {
         this.currentProduct = currentProduct;
     }
 
-    public CategoryDto getCurrentCategory() {return currentCategory;}
+    public Integer getCurrentCategoryCode() {
+        return currentCategoryCode;
+    }
 
-    public void setCurrentCategory(CategoryDto currentCategory) {this.currentCategory = currentCategory;}
+    public void setCurrentCategoryCode(Integer currentCategoryCode) {
+        this.currentCategoryCode = currentCategoryCode;
+    }
 
     public boolean isShowForm() {
         return showForm;
@@ -54,9 +45,5 @@ public class ProductPageStateKeeper {
     public void setShowForm(boolean showForm) {
         this.showForm = showForm;
     }
-
-    public boolean isShowUserForm() { return showUserForm; }
-
-    public void setUserForm(boolean showUserForm) { this.showUserForm = showUserForm; }
 
 }

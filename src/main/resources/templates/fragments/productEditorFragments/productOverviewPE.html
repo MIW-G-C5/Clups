@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="container-fluid zeroPadding" th:fragment="productOverviewPE">
     <div th:each="product : ${allProductsByCategory}">
         <div>
-            <a class="btn btn-primary btn-block buttonBlock productBlock"  th:href="@{/products/{productCode}(productCode=${product.productCode})}">
+            <a class="btn btn-primary btn-block buttonBlock productBlock"
+               th:href="@{/products/{productCode}(productCode=${product.productCode})}">
+
                 <table>
                     <td class="productItem" th:text="${product.productName}"></td>
                     <td class="productItem alignTextRight" th:text="${product.productPrice}"></td>
@@ -16,7 +18,6 @@
             </a>
         </div>
     </div>
-    <a class="btn btn-primary" th:href="@{/products/addNew}">Add new product</a>
 </div>
 </body>
 </html>

@@ -1,9 +1,7 @@
 package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
-import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.model.Category;
-import com.MIW.Cohort5.Clups.model.Product;
 import com.MIW.Cohort5.Clups.repository.CategoryRepository;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.CategoryDtoConverter;
@@ -40,14 +38,25 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void saveCategory(CategoryDto categoryDto) {
-        categoryDto.setCategoryCode(getHighestCategoryCode() +1);
-        Category category = dtoConverter.toModel(categoryDto);
-        addNew(category);
+
+        Category newCategory = dtoConverter.toModel(categoryDto);
+        Category oldCategory = categoryRepository.findCategoryByCategoryCode(categoryDto.getCategoryCode());
+
+        if (oldCategory != null) {
+            newCategory.setCategoryDbId(oldCategory.getCategoryDbId());
+        }
+        addNew(newCategory);
     }
 
     //This method saves objects in the database.
     @Override
     public Category addNew(Category category) {
+
+
+        if (category.getCategoryCode() <= 0){
+            category.setCategoryCode(getHighestCategoryCode() + 1);
+        }
+
         return categoryRepository.save(category);
     }
 
@@ -65,23 +74,15 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryCode;
     }
 
-    public CategoryDto findDtoByCategoryName(String name) {
-       Category model = categoryRepository.findCategoryByCategoryName(name);
-
-        return dtoConverter.toDto(model);
-    }
-
-    @Override
-    public Category findModelByCategoryName(String name) {
-        Category model = categoryRepository.findCategoryByCategoryName(name);
-
-        return model;
-    }
-
     @Override
     public CategoryDto findDtoByCode(Integer categoryCode) {
         Category category = categoryRepository.findCategoryByCategoryCode(categoryCode);
         return dtoConverter.toDto(category);
+    }
+
+    @Override
+    public Category findModelByCode(Integer categoryCode) {
+        return categoryRepository.findCategoryByCategoryCode(categoryCode);
     }
 
 }

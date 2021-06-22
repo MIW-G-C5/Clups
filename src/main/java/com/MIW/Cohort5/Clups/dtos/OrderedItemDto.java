@@ -8,6 +8,7 @@ import java.math.RoundingMode;
  *
  * This is a line of the order, with the ordered product and the amount of times the product has been ordered.
  */
+
 public class OrderedItemDto {
 
     private ProductDto orderedProduct;
@@ -38,15 +39,8 @@ public class OrderedItemDto {
         return orderedProduct;
     }
 
-    public void setOrderedProduct(ProductDto orderedProduct) {
-        this.orderedProduct = orderedProduct;
-    }
-
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
 }

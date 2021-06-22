@@ -15,7 +15,6 @@ public class Category {
     @GeneratedValue
     private Integer categoryDbId;
 
-    @Column(unique = true)
     private String categoryName;
 
     @Column(unique = true)
@@ -56,6 +55,15 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+
+    public void setCategoryDbId(Integer categoryDbId) {
+        this.categoryDbId = categoryDbId;
+    }
+
+    public Integer getCategoryDbId() {
+        return categoryDbId;
     }
 
 }

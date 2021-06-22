@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,6 +24,11 @@ import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserService {
+
+    // these constants are used when making a new user and these attributes are not given.
+    private static final BigDecimal INITIAL_PREPAID_BALANCE = BigDecimal.ZERO;
+    private static final String INITIAL_PASSWORD_ROOT = "pw";
+    private static final String INITIAL_USERNAME_ROOT = "user";
 
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
@@ -54,21 +60,64 @@ public class UserDetailsServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserDto userDto) {
-        int userCode = makeUserCode(userDto);
 
-        userDto.setUserCode(userCode);
+        userDto.setUserCode(makeUserCode(userDto));
 
-        if (userDto.getUsername() == null || userDto.getUsername() == "") {
-            userDto.setUsername("user" + userDto.getUserCode());
-        }
+        userDto.setUsername(makeUserName(userDto));
 
-        if (userDto.getPassword() == null) {
-            userDto.setPassword("pw" + userDto.getUserCode());
-        }
+        userDto.setPassword(makePassword(userDto));
+
+        userDto.setPrepaidBalance(makePrepaidBalance(userDto));
 
         User newUser = dtoConverter.toModel(userDto);
 
         addUser(newUser);
+    }
+
+    private BigDecimal makePrepaidBalance(UserDto userDto) {
+        BigDecimal prepaidBalance;
+
+        if (userDto.getPrepaidBalance() == null) {
+            prepaidBalance = INITIAL_PREPAID_BALANCE;
+        } else {
+            prepaidBalance = userDto.getPrepaidBalance();
+        }
+
+        return prepaidBalance;
+    }
+
+    private String makePassword(UserDto userDto) {
+        String password;
+
+        if (userDto.getPassword() == null || userDto.getPassword() == "") {
+            password = INITIAL_PASSWORD_ROOT + userDto.getUserCode();
+        } else {
+            password = userDto.getPassword();
+        }
+
+        return password;
+    }
+
+    private String makeUserName(UserDto userDto) {
+        String userName;
+
+        if (userDto.getUsername() == null || userDto.getUsername() == "") {
+            userName = INITIAL_USERNAME_ROOT + userDto.getUserCode();
+        } else {
+            userName = userDto.getUsername();
+        }
+
+        return userName;
+    }
+
+    private Integer makeUserCode(UserDto userDto) {
+        int userCode = 0;
+
+        if (userDto.getUserCode() <= 0) {
+            userCode = getHighestUserCode() + 1;
+        }
+
+        return userCode;
     }
 
     @Override
@@ -88,16 +137,6 @@ public class UserDetailsServiceImpl implements UserService {
         return encodedPassword;
     }
 
-    private Integer makeUserCode(UserDto userDto) {
-        int userCode = 0;
-
-        if (userDto.getUserCode() <= 0) {
-            userCode = getHighestUserCode() + 1;
-        }
-
-        return userCode;
-    }
-
     @Override
     public Integer getHighestUserCode() {
         Integer userCode = 0;
@@ -112,7 +151,6 @@ public class UserDetailsServiceImpl implements UserService {
 
         return userCode;
     }
-
 
 }
 
