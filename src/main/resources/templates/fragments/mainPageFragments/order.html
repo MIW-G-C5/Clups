@@ -15,7 +15,7 @@
                 <tr th:each="orderItem : ${orderList}">
                     <td>
                         <a class="order"
-                           th:href="@{/order/remove/{productName}(productName=${orderItem.orderedProduct.productName})}"
+                           th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}"
                            th:text="${orderItem.count +
                                     '   ' +
                                     orderItem.orderedProduct.productName +

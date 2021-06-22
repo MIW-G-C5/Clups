@@ -20,8 +20,6 @@ public interface ProductService {
 
     List<ProductDto> getProductsByCategory(Integer selectedCategoryCode);
 
-    ProductDto findProductByName(String name);
-
     int getHighestProductCode();
 
     ProductDto findDtoByCode(int productCode);

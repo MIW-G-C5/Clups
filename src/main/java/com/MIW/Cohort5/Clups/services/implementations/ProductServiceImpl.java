@@ -89,13 +89,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto findProductByName(String name) {
-        Product product = productRepository.findProductByProductName(name);
-
-        return dtoConverter.toDto(product);
-    }
-
-    @Override
     public ProductDto findDtoByCode(int productCode) {
         Product product = productRepository.findProductByProductCode(productCode);
 
