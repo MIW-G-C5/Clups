@@ -50,12 +50,12 @@ public class CategoryPageController {
         return "categoryEditor";
     }
 
-    @GetMapping({"/categories/selectCategory/{categoryName}"})
+    @GetMapping({"/categories/selectCategory/{categoryCode}"})
     protected String selectCategory(
-            @PathVariable("categoryName") String categoryName,
+            @PathVariable("categoryCode") String categoryCodeString,
             @SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper categoryPageStateKeeper) {
 
-        categoryPageStateKeeper.setCategoryName(categoryName);
+        categoryPageStateKeeper.setCurrentCategory(categoryService.findDtoByCode(Integer.parseInt(categoryCodeString)));
         showCatForm(categoryPageStateKeeper);
 
         return "redirect:/categories";
@@ -102,7 +102,7 @@ public class CategoryPageController {
             categoryService.saveCategory(categoryPageStatekeeper.getCurrentCategory());
 
             // save category of added product to statekeeper, so you get to see the product immediately in its category
-            categoryPageStatekeeper.setCategoryName(categoryDto.getCategoryName());
+            categoryPageStatekeeper.setCurrentCategory(categoryDto);
 
             categoryPageStatekeeper.clearCurrentCategory();
             categoryPageStatekeeper.setShowCatForm(false);

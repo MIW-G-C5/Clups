@@ -43,7 +43,7 @@ public class MainPageController {
         createOrder(mainPageStateKeeper);
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProductsByCategory",
-                              productService.getProductsByCategory(mainPageStateKeeper.getCategoryName()));
+                              productService.getProductsByCategory(mainPageStateKeeper.getCategoryCode()));
         model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
         model.addAttribute("selectedPage", "mainPage");
@@ -56,11 +56,11 @@ public class MainPageController {
         }
     }
 
-    @GetMapping({"/selectCategory/{categoryName}"})
+    @GetMapping({"/selectCategory/{categoryCode}"})
     protected String showProductsByCategory(
-            @PathVariable("categoryName") String categoryName,
+            @PathVariable("categoryCode") String categoryCodeString,
             @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
-        mainPageStateKeeper.setCategoryName(categoryName);
+        mainPageStateKeeper.setCategoryCode(Integer.parseInt(categoryCodeString));
         return "redirect:/";
     }
 

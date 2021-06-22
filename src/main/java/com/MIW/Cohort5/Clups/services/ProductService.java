@@ -18,7 +18,7 @@ public interface ProductService {
 
     void saveProduct(ProductDto productDto);
 
-    List<ProductDto> getProductsByCategory(String selectedCategoryName);
+    List<ProductDto> getProductsByCategory(Integer selectedCategoryCode);
 
     ProductDto findProductByName(String name);
 

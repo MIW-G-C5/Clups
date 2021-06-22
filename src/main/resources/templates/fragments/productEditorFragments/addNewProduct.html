@@ -24,9 +24,9 @@
 
         <label for="categoryDropDown">Category</label>
         <div>
-            <select id="categoryDropDown" th:field="*{categoryName}">
+            <select id="categoryDropDown" th:field="*{categoryCode}">
                 <option th:each="category : ${allCategories}" th:text="${category.categoryName}"
-                        th:value="${category.categoryName}">
+                        th:value="${category.categoryCode}">
                 </option>
             </select>
         </div>

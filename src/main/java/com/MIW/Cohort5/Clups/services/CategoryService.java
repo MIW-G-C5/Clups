@@ -18,12 +18,11 @@ public interface CategoryService {
 
     Category addNew(Category category);
 
-    CategoryDto findDtoByCategoryName(String name);
-
-    Category findModelByCategoryName(String name);
-
     int getHighestCategoryCode();
 
     CategoryDto findDtoByCode(Integer categoryCode);
+
+    Category findModelByCode(Integer categoryCode);
+
 
 }
