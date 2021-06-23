@@ -24,5 +24,7 @@ public interface CategoryService {
 
     Category findModelByCode(Integer categoryCode);
 
+    Category deleteCategory(CategoryDto categoryDto);
+
 
 }

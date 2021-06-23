@@ -85,4 +85,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findCategoryByCategoryCode(categoryCode);
     }
 
+    @Override
+    public Category deleteCategory(CategoryDto categoryDto) {
+        Category model = findModelByCode(categoryDto.getCategoryCode());
+
+        categoryRepository.delete(model);
+
+        return model;
+    }
 }
