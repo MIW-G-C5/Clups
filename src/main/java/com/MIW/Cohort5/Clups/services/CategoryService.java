@@ -1,7 +1,6 @@
 package com.MIW.Cohort5.Clups.services;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
-import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.model.Category;
 
 import java.util.List;
@@ -19,11 +18,13 @@ public interface CategoryService {
 
     Category addNew(Category category);
 
-    CategoryDto findDtoByCategoryName(String name);
-
-    Category findModelByCategoryName(String name);
-
     int getHighestCategoryCode();
 
     CategoryDto findDtoByCode(Integer categoryCode);
+
+    Category findModelByCode(Integer categoryCode);
+
+    Category deleteCategory(CategoryDto categoryDto);
+
+
 }

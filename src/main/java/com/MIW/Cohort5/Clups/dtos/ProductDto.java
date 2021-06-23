@@ -16,7 +16,7 @@ public class ProductDto {
 
     private BigDecimal productPrice;
 
-    private String categoryName;
+    private Integer categoryCode;
 
     public ProductDto() {}
 
@@ -48,11 +48,12 @@ public class ProductDto {
         this.productPrice = productPrice;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public Integer getCategoryCode() {
+        return categoryCode;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryCode(Integer categoryCode) {
+        this.categoryCode = categoryCode;
     }
+
 }

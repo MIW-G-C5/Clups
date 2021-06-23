@@ -85,4 +85,5 @@ public class Product {
     public void setProductDbId(Integer productDbId) {
         this.productDbId = productDbId;
     }
+
 }

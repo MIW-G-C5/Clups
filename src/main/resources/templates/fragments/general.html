@@ -4,7 +4,7 @@
 <head th:fragment="baseHeader(title)">
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Title</title>
+    <title th:replace="${title}">Base title</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" rel="stylesheet">
     <link href="/css/Clups.css" rel="stylesheet" type="text/css">
@@ -13,20 +13,27 @@
 <nav class="navbar navbar-expand-lg navbar-light zeroPadding" th:fragment="navbar">
     <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'mainPage'} ? currentPage : ' '">
-                <a class="nav-link" th:href="@{/}">Order</a>
+            <li class="nav-link topBottomPadding"
+                th:classappend="${selectedPage == 'mainPage'} ? currentPage : ' '">
+                <a class="nav-link" th:href="@{/order}">Order</a>
             </li>
-            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'productPage'} ? currentPage : ' '">
+            <li class="nav-link topBottomPadding"
+                th:classappend="${selectedPage == 'productPage'} ? currentPage : ' '"
+                sec:authorize="hasAuthority('BARMANAGER')">
                 <a class="nav-link" th:href="@{/products}">Products</a>
             </li>
-            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'categoryPage'} ? currentPage : ' '">
+            <li class="nav-link topBottomPadding"
+                th:classappend="${selectedPage == 'categoryPage'} ? currentPage : ' '"
+                sec:authorize="hasAuthority('BARMANAGER')">
                 <a class="nav-link" th:href="@{/categories}">Categories</a>
             </li>
-            <li class="nav-link topBottomPadding" th:classappend="${selectedPage == 'userPage'} ? currentPage : ' '">
+            <li class="nav-link topBottomPadding"
+                th:classappend="${selectedPage == 'userPage'} ? currentPage : ' '"
+                sec:authorize="hasAnyAuthority('BARMANAGER', 'BARTENDER')"> <!-- This is not an actual error //-->
                 <a class="nav-link" th:href="@{/accounts}">Accounts</a>
             </li>
-
         </ul>
+
         <ul class="navbar-nav ml-auto">
             <li class="nav-link" sec:authorize="isAuthenticated()">
                 <a class="nav-link" th:href="@{/logout}">Logout <span sec:authentication="name"></span></a>

@@ -30,8 +30,11 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryService categoryService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository,
-                              CategoryService categoryService) {
+    public ProductServiceImpl(
+            ProductRepository productRepository,
+            CategoryRepository categoryRepository,
+            CategoryService categoryService) {
+
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
@@ -48,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
     //This method saves objects in the database from application input
     @Override
     public void saveProduct(ProductDto productDto) {
-        Category category = categoryService.findModelByCategoryName(productDto.getCategoryName());
+        Category category = categoryService.findModelByCode(productDto.getCategoryCode());
 
         Product newProduct = dtoConverter.toModel(category, productDto);
 
@@ -60,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
             }
 
         addNew(newProduct);
-        }
+    }
 
     //This method saves objects in the database.
     @Override
@@ -74,21 +77,15 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
-    public List<ProductDto> getProductsByCategory(String selectedCategoryName) {
+    @Override
+    public List<ProductDto> getProductsByCategory(Integer selectedCategoryCode) {
         List<ProductDto> productsByCategory = new ArrayList<>();
         CategoryServiceImpl categoryService = new CategoryServiceImpl(categoryRepository);
-        if (selectedCategoryName != null) {
-            productsByCategory = categoryService.findDtoByCategoryName(selectedCategoryName).getProducts();
+        if (selectedCategoryCode != null) {
+            productsByCategory = categoryService.findDtoByCode(selectedCategoryCode).getProducts();
         }
 
         return productsByCategory;
-    }
-
-    @Override
-    public ProductDto findProductByName(String name) {
-        Product product = productRepository.findProductByProductName(name);
-
-        return dtoConverter.toDto(product);
     }
 
     @Override

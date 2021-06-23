@@ -4,6 +4,8 @@ import com.MIW.Cohort5.Clups.dtos.UserDto;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
+ *
+ * This class helps to keep track of user actions in a session for the Account Page.
  */
 public class AccountPageStateKeeper {
 

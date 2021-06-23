@@ -33,7 +33,7 @@ public class AccountPageController {
         return new AccountPageStateKeeper();
     }
 
-    @GetMapping({"/accounts"})
+    @GetMapping("/accounts")
     protected String showPage(Model model,
                               @ModelAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
         model.addAttribute("selectedPage", "userPage");
@@ -48,7 +48,7 @@ public class AccountPageController {
         return "userAccountPage";
     }
 
-    @GetMapping({"/accounts/addNew"})
+    @GetMapping("/accounts/addNew")
     protected String addNewUser(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
@@ -57,7 +57,7 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
-    @PostMapping({"/accounts/addNew"})
+    @PostMapping("/accounts/addNew")
     protected String saveNewUser(
             @ModelAttribute("user") UserDto userDto,
             BindingResult result,
@@ -73,13 +73,12 @@ public class AccountPageController {
             userService.saveUser(stateKeeper.getCurrentUserDto());
 
             clearForm(stateKeeper);
-            stateKeeper.setShowUserForm(false);
         }
 
         return "redirect:/accounts";
     }
 
-    @GetMapping({"/accounts/{userCode}"})
+    @GetMapping("/accounts/{userCode}")
     protected String editUser(
             @PathVariable("userCode") String userCode,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
@@ -104,13 +103,13 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
-   private void showUserForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+    private void showUserForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
         if (!accountPageStateKeeper.isShowUserForm()){
             accountPageStateKeeper.setShowUserForm(true);
         }
-   }
+    }
 
-    @GetMapping({"/accounts/cancel"})
+    @GetMapping("/accounts/cancel")
     protected String cancelForm(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 

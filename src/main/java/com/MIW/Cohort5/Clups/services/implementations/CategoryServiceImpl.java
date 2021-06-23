@@ -60,7 +60,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.save(category);
     }
 
-
     @Override
     public int getHighestCategoryCode() {
         int categoryCode = 0;
@@ -75,23 +74,23 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryCode;
     }
 
-    public CategoryDto findDtoByCategoryName(String name) {
-       Category model = categoryRepository.findCategoryByCategoryName(name);
-
-        return dtoConverter.toDto(model);
-    }
-
-    @Override
-    public Category findModelByCategoryName(String name) {
-        Category model = categoryRepository.findCategoryByCategoryName(name);
-
-        return model;
-    }
-
     @Override
     public CategoryDto findDtoByCode(Integer categoryCode) {
         Category category = categoryRepository.findCategoryByCategoryCode(categoryCode);
         return dtoConverter.toDto(category);
     }
 
+    @Override
+    public Category findModelByCode(Integer categoryCode) {
+        return categoryRepository.findCategoryByCategoryCode(categoryCode);
+    }
+
+    @Override
+    public Category deleteCategory(CategoryDto categoryDto) {
+        Category model = findModelByCode(categoryDto.getCategoryCode());
+
+        categoryRepository.delete(model);
+
+        return model;
+    }
 }

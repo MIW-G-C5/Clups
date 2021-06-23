@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
+import com.MIW.Cohort5.Clups.model.MyUserDetails;
 import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.repository.UserRepository;
 import com.MIW.Cohort5.Clups.services.UserService;
@@ -35,14 +36,19 @@ public class UserDetailsServiceImpl implements UserService {
 
     @Autowired
     public UserDetailsServiceImpl(UserRepository userRepository) {
-
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s).orElseThrow(
-                () -> new UsernameNotFoundException("User " + s + " was not found."));
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        User user = userRepository.getUserByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + username + "was not found");
+        }
+
+        return new MyUserDetails(user);
     }
 
     @Override
@@ -138,8 +144,6 @@ public class UserDetailsServiceImpl implements UserService {
 
         return encodedPassword;
     }
-
-
 
     @Override
     public Integer getHighestUserCode() {
