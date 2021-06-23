@@ -106,11 +106,6 @@ a:focus, a:hover, a:active, a {
     margin-right: 4%;
 }
 
-.deleteButton {
-    border-color: indianred;
-    background-color: indianred;
-}
-
 .welcomegeneral {
     height: 100%;
 }
@@ -141,4 +136,13 @@ a:focus, a:hover, a:active, a {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 30px;
+}
+
+.categoryAlert {
+    width: max-content;
+}
+
+.categoryLink {
+    text-decoration-line: underline;
+    font-weight: bold;
 }
