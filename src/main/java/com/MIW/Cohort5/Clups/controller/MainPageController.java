@@ -36,9 +36,9 @@ public class MainPageController {
     }
 
     @GetMapping({"/"})
-    protected String showWelcomePage(Model model) {
-        model.addAttribute("welcomePage");
-        return "welcomePage";
+    protected String enterApplication() {
+
+        return "redirect:/order";
     }
 
     @GetMapping({"/order"})

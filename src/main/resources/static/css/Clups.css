@@ -106,37 +106,11 @@ a:focus, a:hover, a:active, a {
     margin-right: 4%;
 }
 
-.welcomegeneral {
-    height: 100%;
+.deleteButton {
+    border-color: indianred;
+    background-color: indianred;
 }
 
-.welcomebg {
-    background-color: #5CDB95;
-    height: 100%;
-    background-size: cover;
-    position: relative;
-    color: white;
-}
-
-.loginButton {
-    background-color: #05386B;
-    height: 80px;
-    width: 120px;
-    color: white;
-    text-align: center;
-    font-size: 30px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-}
-
-.welcome {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 30px;
-}
 
 .categoryAlert {
     width: max-content;
