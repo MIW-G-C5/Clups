@@ -134,6 +134,11 @@ public class UserDetailsServiceImpl implements UserService {
             user.setPassword(encodePassword(user.getPassword()));
         }
 
+        // ensure users created in the seeder get a unique usercode
+        if (user.getUserCode() <= 0) {
+            user.setUserCode(getHighestUserCode() + 1);
+        }
+
         userRepository.save(user);
     }
 
