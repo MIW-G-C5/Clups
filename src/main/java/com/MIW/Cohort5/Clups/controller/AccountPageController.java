@@ -123,4 +123,10 @@ public class AccountPageController {
         stateKeeper.setShowUserForm(false);
     }
 
+    @GetMapping("/accounts/addCredit")
+    protected String addCredit() {
+
+        return "redirect:/accounts";
+    }
+
 }
