@@ -2,8 +2,10 @@ package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.model.MyUserDetails;
+import com.MIW.Cohort5.Clups.model.Role;
 import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.repository.UserRepository;
+import com.MIW.Cohort5.Clups.services.RoleService;
 import com.MIW.Cohort5.Clups.services.UserService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.UserDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +35,12 @@ public class UserDetailsServiceImpl implements UserService {
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    public UserDetailsServiceImpl(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
     @Override
@@ -62,16 +66,27 @@ public class UserDetailsServiceImpl implements UserService {
     public void saveUser(UserDto userDto) {
 
         userDto.setUserCode(makeUserCode(userDto));
-
         userDto.setUsername(makeUserName(userDto));
-
         userDto.setPassword(makePassword(userDto));
-
+        userDto.setUserRole(makeRole(userDto));
         userDto.setPrepaidBalance(makePrepaidBalance(userDto));
 
-        User newUser = dtoConverter.toModel(userDto);
+        Role role = roleService.findModelByName(userDto.getUserRole());
+        User newUser = dtoConverter.toModel(role, userDto);
 
         addUser(newUser);
+    }
+
+    private String makeRole(UserDto userDto) {
+        String userRole;
+
+        if (userDto.getUserRole() == null) {
+            userRole = "CUSTOMER";
+        } else {
+            userRole = userDto.getUserRole();
+        }
+
+        return userRole;
     }
 
     private BigDecimal makePrepaidBalance(UserDto userDto) {
