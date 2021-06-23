@@ -45,6 +45,7 @@ public class AccountPageController {
 
         model.addAttribute("user", stateKeeper.getCurrentUserDto());
         model.addAttribute("formState", stateKeeper.isShowUserForm());
+        model.addAttribute("isUserSelected", stateKeeper.isUserSelected());
         return "userAccountPage";
     }
 
@@ -79,12 +80,19 @@ public class AccountPageController {
     }
 
     @GetMapping("/accounts/{userCode}")
-    protected String editUser(
+    protected String selectUser(
             @PathVariable("userCode") String userCode,
-            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper) {
+        accountPageStateKeeper.setCurrentUserDto(userService.findDtoByUserCode(Integer.parseInt(userCode)));
+        accountPageStateKeeper.setUserSelected(true);
 
-        accountPageStateKeeper.setCurrentUserDto( userService.findDtoByUserCode(Integer.parseInt(userCode)));
-        showUserForm(accountPageStateKeeper);
+        return "redirect:/accounts";
+    }
+
+    @GetMapping("/accounts/editUser")
+    protected String editUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+        showUserForm(stateKeeper);
+
         return "redirect:/accounts";
     }
 
@@ -113,7 +121,7 @@ public class AccountPageController {
     protected String cancelForm(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        stateKeeper.setShowUserForm(false);
+        clearForm(stateKeeper);
 
         return "redirect:/accounts";
     }

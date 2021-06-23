@@ -23,6 +23,8 @@
         <input type="hidden" th:field="*{userCode}">
         <div class="row zeroPadding topBottomMargin">
             <button type="submit" class="btn btn-primary formButtons">Save changes</button>
+            <a class="btn btn-primary formButtons " th:href="@{/accounts/cancel}">Cancel</a>
+            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
         </div>
     </form>
 </div>
