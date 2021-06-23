@@ -9,31 +9,41 @@ import com.MIW.Cohort5.Clups.dtos.UserDto;
  */
 public class AccountPageStateKeeper {
 
-    private UserDto userDto;
+    private UserDto currentUserDto;
 
-    //this should always be false, unless changed by user input in the application
-    private boolean showForm = false;
+    //these should always be false, unless changed by user input in the application
+    private boolean showUserForm = false;
+    private boolean userSelected = false;
 
     public AccountPageStateKeeper() {
     }
 
     public void clearUser() {
-        userDto = null;
+        currentUserDto = null;
+        userSelected = false;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public UserDto getCurrentUserDto() {
+        return currentUserDto;
     }
 
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public void setCurrentUserDto(UserDto currentUserDto) {
+        this.currentUserDto = currentUserDto;
     }
 
-    public boolean isShowForm() {
-        return showForm;
+    public boolean isShowUserForm() {
+        return showUserForm;
     }
 
-    public void setShowForm(boolean showForm) {
-        this.showForm = showForm;
+    public void setShowUserForm(boolean showUserForm) {
+        this.showUserForm = showUserForm;
+    }
+
+    public boolean isUserSelected() {
+        return userSelected;
+    }
+
+    public void setUserSelected(boolean userSelected) {
+        this.userSelected = userSelected;
     }
 }

@@ -16,4 +16,6 @@ public interface UserService extends UserDetailsService {
 
     Integer getHighestUserCode();
 
+    UserDto findDtoByUserCode(Integer userCode);
+
 }

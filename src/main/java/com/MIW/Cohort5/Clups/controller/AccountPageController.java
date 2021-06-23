@@ -33,45 +33,45 @@ public class AccountPageController {
         return new AccountPageStateKeeper();
     }
 
-    @GetMapping({"/accounts"})
+    @GetMapping("/accounts")
     protected String showPage(Model model,
                               @ModelAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
         model.addAttribute("selectedPage", "userPage");
         model.addAttribute("allUsers", userService.getAll());
 
-        if (stateKeeper.getUserDto() == null) {
-            stateKeeper.setUserDto(new UserDto());
+        if (stateKeeper.getCurrentUserDto() == null) {
+            stateKeeper.setCurrentUserDto(new UserDto());
         }
 
-        model.addAttribute("user", stateKeeper.getUserDto());
-        model.addAttribute("formState", stateKeeper.isShowForm());
-
+        model.addAttribute("user", stateKeeper.getCurrentUserDto());
+        model.addAttribute("formState", stateKeeper.isShowUserForm());
+        model.addAttribute("isUserSelected", stateKeeper.isUserSelected());
         return "userAccountPage";
     }
 
-    @GetMapping({"/accounts/addNew"})
+    @GetMapping("/accounts/addNew")
     protected String addNewUser(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        stateKeeper.setShowForm(true);
+        stateKeeper.setShowUserForm(true);
 
         return "redirect:/accounts";
     }
 
-    @PostMapping({"/accounts/addNew"})
+    @PostMapping("/accounts/addNew")
     protected String saveNewUser(
             @ModelAttribute("user") UserDto userDto,
             BindingResult result,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
         if(!result.hasErrors()) {
-            stateKeeper.setUserDto(userDto);
+            stateKeeper.setCurrentUserDto(userDto);
 
             if (userDto.getFullName() == null || userDto.getFullName() == "") {
                 throw new InputMismatchException("The full name must be filled in");
             }
 
-            userService.saveUser(stateKeeper.getUserDto());
+            userService.saveUser(stateKeeper.getCurrentUserDto());
 
             clearForm(stateKeeper);
         }
@@ -79,19 +79,62 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
-    @GetMapping("/accounts/cancel")
-    protected String cancelForm(
-            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
-
-        stateKeeper.setShowForm(false);
+    @GetMapping("/accounts/{userCode}")
+    protected String selectUser(
+            @PathVariable("userCode") String userCode,
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper) {
+        accountPageStateKeeper.setCurrentUserDto(userService.findDtoByUserCode(Integer.parseInt(userCode)));
+        accountPageStateKeeper.setUserSelected(true);
 
         return "redirect:/accounts";
     }
 
+    @GetMapping("/accounts/editUser")
+    protected String editUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+        showUserForm(stateKeeper);
+
+        return "redirect:/accounts";
+    }
+
+    @PostMapping("/accounts/edit")
+    protected String saveExistingUser(@ModelAttribute("user") UserDto userDto,
+                                      BindingResult result,
+                                      @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+        if (!result.hasErrors()){
+            accountPageStateKeeper.setShowUserForm(true);
+            accountPageStateKeeper.setCurrentUserDto(userDto);
+            userService.saveUser(accountPageStateKeeper.getCurrentUserDto());
+
+            clearForm(accountPageStateKeeper);
+            accountPageStateKeeper.setShowUserForm(false);
+        }
+        return "redirect:/accounts";
+    }
+
+    private void showUserForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+        if (!accountPageStateKeeper.isShowUserForm()){
+            accountPageStateKeeper.setShowUserForm(true);
+        }
+    }
+
+    @GetMapping("/accounts/cancel")
+    protected String cancelForm(
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+
+        clearForm(stateKeeper);
+
+        return "redirect:/accounts";
+    }
 
     private void clearForm(AccountPageStateKeeper stateKeeper) {
         stateKeeper.clearUser();
-        stateKeeper.setShowForm(false);
+        stateKeeper.setShowUserForm(false);
+    }
+
+    @GetMapping("/accounts/addCredit")
+    protected String addCredit() {
+
+        return "redirect:/accounts";
     }
 
 }

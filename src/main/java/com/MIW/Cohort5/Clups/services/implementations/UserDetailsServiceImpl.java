@@ -74,6 +74,12 @@ public class UserDetailsServiceImpl implements UserService {
         Role role = roleService.findModelByName(userDto.getUserRole());
         User newUser = dtoConverter.toModel(role, userDto);
 
+        User oldUser = userRepository.findUserByUserCode(userDto.getUserCode());
+
+        if (oldUser != null) {
+            newUser.setUserId(oldUser.getUserId());
+        }
+
         addUser(newUser);
     }
 
@@ -126,10 +132,13 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     private Integer makeUserCode(UserDto userDto) {
-        int userCode = 0;
+
+        int userCode;
 
         if (userDto.getUserCode() <= 0) {
             userCode = getHighestUserCode() + 1;
+        } else {
+            userCode = userDto.getUserCode();
         }
 
         return userCode;
@@ -139,6 +148,11 @@ public class UserDetailsServiceImpl implements UserService {
     public void addUser(User user) {
         if (user.getPassword() != null) {
             user.setPassword(encodePassword(user.getPassword()));
+        }
+
+        // ensure users created in the seeder get a unique usercode
+        if (user.getUserCode() <= 0) {
+            user.setUserCode(getHighestUserCode() + 1);
         }
 
         userRepository.save(user);
@@ -166,6 +180,13 @@ public class UserDetailsServiceImpl implements UserService {
 
         return userCode;
     }
+
+    @Override
+    public UserDto findDtoByUserCode(Integer userCode){
+        User user = userRepository.findUserByUserCode(userCode);
+        return dtoConverter.toDto(user);
+    }
+
 
 }
 

@@ -35,11 +35,12 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Role role;
 
-    public User(String username, String password, String fullName, Role role) {
+    public User(String username, String password, String fullName, Role role, BigDecimal prepaidBalance) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.role = role;
+        this.prepaidBalance = prepaidBalance;
     }
 
     public User(){}
@@ -95,6 +96,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
 

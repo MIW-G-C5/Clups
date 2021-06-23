@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form class="editProduct" th:fragment="addCreditForm" th:action="@{accounts/addCredit}"
+      method="post" th:object="${user}">
+  <label for="credit">Add to account balance:</label>
+  <div class="form-group input-group">
+    <input type="number" id="credit" th:field="*{prepaidBalance}">
+  </div>
+  <input type="hidden" th:field="*{userCode}">
+</form>
+</body>
+</html>
