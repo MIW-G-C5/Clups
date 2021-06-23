@@ -120,3 +120,7 @@ a:focus, a:hover, a:active, a {
     text-decoration-line: underline;
     font-weight: bold;
 }
+
+.boldText {
+    font-weight: bold;
+}

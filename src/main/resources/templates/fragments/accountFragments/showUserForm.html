@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:fragment="showUserForm">
+  <form class="editCategoriesAndProducts" th:object="${user}">
+    <h3>User details</h3>
+    </br>
+      <label class="col-sm-2 col-form-label boldText" for="fullName">Name</label>
+      <input type="text" id="fullName" th:field="*{fullName}" readonly class="form-control-plaintext">
+    <label class="boldText" for="username">Username</label>
+    <div class="form-group input-group">
+      <input type="text" id="username" th:field="*{username}" readonly class="form-control-plaintext">
+    </div>
+    <label class="boldText" for="password">Password</label>
+    <div>
+      <input type="password" id="password" th:field="*{password}" readonly class="form-control-plaintext">
+    </div>
+    <label class="boldText" for="prepaidBalance">Prepaid Balance</label>
+    <div>
+      <input type="password" id="prepaidBalance" th:field="*{prepaidBalance}" readonly class="form-control-plaintext">
+    </div>
+    <input type="hidden" th:field="*{userCode}">
+  </form>
+</div>
+
+
+</body>
+</html>
