@@ -16,14 +16,6 @@ public class AccountPageStateKeeper {
     public AccountPageStateKeeper() {
     }
 
-    public String getFullUserName() {
-        return fullUserName;
-    }
-
-    public void setFullUserName(String fullUserName) {
-        this.fullUserName = fullUserName;
-    }
-
     public void clearUser() {
         currentUserDto = null;
     }

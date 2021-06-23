@@ -104,18 +104,6 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
-//
-//    @GetMapping("/accounts/delete/{userCode}")
-//    protected String deleteUser(@PathVariable("userCode") String userCodeString,
-//            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
-//
-//        userService.deleteUser(stateKeeper.getCurrentUserDto(Integer.parseInt(userCodeString)));
-//
-//        clearForm(stateKeeper);
-//
-//        return "redirect:/accounts";
-//    }
-//
    private void showUserForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
         if (!accountPageStateKeeper.isShowUserForm()){
             accountPageStateKeeper.setShowUserForm(true);

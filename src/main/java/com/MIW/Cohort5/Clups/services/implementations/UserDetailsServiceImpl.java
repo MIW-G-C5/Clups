@@ -73,13 +73,6 @@ public class UserDetailsServiceImpl implements UserService {
         addUser(newUser);
     }
 
-//   public void saveExistingUser(UserDto userDto){
-//        User existingUser = userRepository.findUserByUserCode(userDto.getUserCode());
-//   }
-//    public void deleteUser(UserDto userDto) {
-//        userService.deleteUser(userRepository.findUserByUserCode(userDto.getUserCode()));
-//    }
-
     private BigDecimal makePrepaidBalance(UserDto userDto) {
         BigDecimal prepaidBalance;
 
