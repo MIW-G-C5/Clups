@@ -1,6 +1,7 @@
 package com.MIW.Cohort5.Clups.services.dtoConverters;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
+import com.MIW.Cohort5.Clups.model.Role;
 import com.MIW.Cohort5.Clups.model.User;
 
 import java.util.ArrayList;
@@ -33,11 +34,12 @@ public class UserDtoConverter {
         result.setUserCode(model.getUserCode());
         result.setFullName(model.getFullName());
         result.setPrepaidBalance(model.getPrepaidBalance());
+        result.setUserRole(model.getRole().getRoleName());
 
         return result;
     }
 
-    public User toModel(UserDto dto) {
+    public User toModel(Role role, UserDto dto) {
         User model = new User();
 
         model.setUsername(dto.getUsername());
@@ -45,6 +47,7 @@ public class UserDtoConverter {
         model.setUserCode(dto.getUserCode());
         model.setFullName(dto.getFullName());
         model.setPrepaidBalance(dto.getPrepaidBalance());
+        model.setRole(role);
 
         return model;
     }

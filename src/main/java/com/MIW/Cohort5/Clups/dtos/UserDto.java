@@ -18,6 +18,7 @@ public class UserDto {
     private String password;
     private String fullName;
     private BigDecimal prepaidBalance;
+    private String userRole;
 
     public UserDto() {}
 
@@ -65,6 +66,10 @@ public class UserDto {
         return password;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -85,4 +90,7 @@ public class UserDto {
         this.prepaidBalance = prepaidBalance;
     }
 
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 }
