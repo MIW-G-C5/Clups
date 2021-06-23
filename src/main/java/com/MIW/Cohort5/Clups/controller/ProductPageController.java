@@ -66,6 +66,16 @@ public class ProductPageController {
         return "redirect:/products";
     }
 
+    @GetMapping({"/products/selectCategoryToClear/{categoryCode}"})
+    protected String showProductsByCategoryToClear(
+            @PathVariable("categoryCode") String categoryCodeString,
+            @ModelAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
+        productPageStateKeeper.setCurrentCategoryCode(Integer.parseInt(categoryCodeString));
+
+        return "redirect:/products";
+    }
+
     @GetMapping({"/products/addNew"})
     protected String addNewProduct(
             Model model,

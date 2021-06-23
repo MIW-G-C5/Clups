@@ -110,3 +110,13 @@ a:focus, a:hover, a:active, a {
     border-color: indianred;
     background-color: indianred;
 }
+
+
+.categoryAlert {
+    width: max-content;
+}
+
+.categoryLink {
+    text-decoration-line: underline;
+    font-weight: bold;
+}
