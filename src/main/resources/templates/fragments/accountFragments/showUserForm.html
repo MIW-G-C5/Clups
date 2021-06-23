@@ -9,19 +9,17 @@
   <form class="editCategoriesAndProducts" th:object="${user}">
     <h3>User details</h3>
     </br>
-      <label class="col-sm-2 col-form-label boldText" for="fullName">Name</label>
-      <input type="text" id="fullName" th:field="*{fullName}" readonly class="form-control-plaintext">
-    <label class="boldText" for="username">Username</label>
-    <div class="form-group input-group">
-      <input type="text" id="username" th:field="*{username}" readonly class="form-control-plaintext">
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label boldText" for="fullName">Name</label>
+      <div class="col-sm-9">
+        <input type="text" id="fullName" th:field="*{fullName}" readonly class="form-control-plaintext">
+      </div>
     </div>
-    <label class="boldText" for="password">Password</label>
-    <div>
-      <input type="password" id="password" th:field="*{password}" readonly class="form-control-plaintext">
-    </div>
-    <label class="boldText" for="prepaidBalance">Prepaid Balance</label>
-    <div>
-      <input type="password" id="prepaidBalance" th:field="*{prepaidBalance}" readonly class="form-control-plaintext">
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label boldText" for="prepaidBalance">Prepaid balance</label>
+      <div class="col-sm-9">
+        <input type="number" id="prepaidBalance" th:field="*{prepaidBalance}" readonly class="form-control-plaintext">
+      </div>
     </div>
     <input type="hidden" th:field="*{userCode}">
   </form>
