@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<div class="container-fluid zeroPadding" th:fragment="productOverview">
+<div class="container-fluid zeroPadding scrollableBtnBlock" th:fragment="productOverview">
     <div th:each="product : ${allProductsByCategory}">
         <div>
             <a class="btn btn-primary btn-block buttonBlock productBlock" th:href="@{/order/{productName}(productName=${product.productName})}">

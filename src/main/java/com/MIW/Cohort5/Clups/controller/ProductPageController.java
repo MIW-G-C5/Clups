@@ -62,6 +62,7 @@ public class ProductPageController {
             @PathVariable("categoryName") String categoryName,
             @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
 
+        clearForm(productPageStateKeeper);
         productPageStateKeeper.setCategoryName(categoryName);
 
         return "redirect:/products";

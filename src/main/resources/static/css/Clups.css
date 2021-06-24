@@ -1,8 +1,22 @@
-.navbar {
-    font-family: sans-serif;
-    background-color: dodgerblue;
-    text-transform: uppercase;
-    font-weight: bold;
+a:focus, a:hover, a:active, a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.addNewButton {
+    background-color: cadetblue;
+}
+
+.alignTextRight{
+    text-align: right;
+}
+
+.borderedRow{
+    border: solid 3px white;
+}
+
+.borderedSection {
+    border: solid 3px black;
 }
 
 .buttonBlock {
@@ -18,17 +32,38 @@
     padding: 30px;
 }
 
-.productBlock {
-    background-color: lightslategray;
-    padding: 20px;
+.currentPage {
+    background-color: white;
 }
 
-.orderTable {
-    display: inline-block;
-    overflow: auto;
-    height: 475px;
-    width: 485px;
-    text-align: left;
+.customerAccountBlock {
+    width: 300px;
+}
+
+.deleteButton {
+    border-color: indianred;
+    background-color: indianred;
+}
+
+.editCategoriesAndProducts{
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+.fitHeight {
+    height: 100%;
+}
+
+.formButtons {
+    width: 18%;
+    margin-right: 4%;
+}
+
+.navbar {
+    font-family: sans-serif;
+    background-color: dodgerblue;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .order {
@@ -37,23 +72,43 @@
     padding: 10px;
 }
 
-.editCategoriesAndProducts{
-    padding: 10px;
-    font-family: sans-serif;
+.orderTable {
+    display: inline-block;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    text-align: left;
 }
 
-.zeroPadding {
-    padding: 0;
-    margin-left: 0;
-    margin-right: 0;
+.payButton {
+    height: 50px;
+    width: 200px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
-.borderedSection {
-    border: solid 3px black;
+.productBlock {
+    background-color: lightslategray;
+    padding: 20px;
 }
 
-.borderedRow{
-    border: solid 3px white;
+.productItem {
+    width: 250px;
+}
+
+.scrollableBtnBlock {
+    max-height: 100%;
+    overflow: auto;
+}
+
+.setMaxScreenSize {
+    display: inline-block;
+    height: calc(100vh - 120px);
+}
+
+.setMaxScreenSizeEditor {
+    display: inline-block;
+    height: calc(100vh - 200px);
 }
 
 .topBottomMargin {
@@ -66,47 +121,13 @@
     padding-bottom: 15px;
 }
 
-.alignTextRight{
-    text-align: right;
-}
-
-.payButton {
-    height: 50px;
-    width: 200px;
-}
-
-a:focus, a:hover, a:active, a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.productItem {
-    width: 250px;
-}
-
 .totalPrice {
     width: 420px;
     font-weight: bold;
 }
 
-.currentPage {
-    background-color: white;
-}
-
-.addNewButton {
-    background-color: cadetblue;
-}
-
-.customerAccountBlock {
-    width: 300px;
-}
-
-.formButtons {
-    width: 18%;
-    margin-right: 4%;
-}
-
-.deleteButton {
-    border-color: indianred;
-    background-color: indianred;
+.zeroPadding {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
 }

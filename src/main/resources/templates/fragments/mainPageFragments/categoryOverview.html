@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<div class="container-fluid zeroPadding btn-block" th:fragment="categoryOverview">
+<div class="container-fluid zeroPadding btn-block scrollableBtnBlock" th:fragment="categoryOverview">
     <div th:each="category : ${allCategories}">
         <a class="btn btn-primary btn-lg btn-block buttonBlock categoriesBlock"
            th:href="@{/selectCategory/{categoryName}(categoryName=${category.categoryName})}"

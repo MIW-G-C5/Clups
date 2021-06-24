@@ -6,13 +6,13 @@
 </head>
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
-<div class="container-fluid zeroPadding">
-    <div class="row topBottomMargin no-gutters justify-content-between">
-        <div class="col-4 borderedSection">
-            <div class="d-flex align-items-start flex-column">
+<div class="container-fluid zeroPadding setMaxScreenSize">
+    <div class="row topBottomMargin no-gutters justify-content-between fitHeight">
+        <div class="col-4 borderedSection scrollableBtnBlock">
+<!--            <div class="d-flex align-items-start flex-column">-->
                 <div class="customerOverviewTable"
                      th:replace="fragments/accountFragments/userAccountOverview :: customerAccountList"></div>
-            </div>
+<!--            </div>-->
         </div>
 
         <div class="col-7 borderedSection">
