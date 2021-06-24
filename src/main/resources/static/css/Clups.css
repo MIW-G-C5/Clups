@@ -93,10 +93,6 @@ a:focus, a:hover, a:active, a {
     background-color: white;
 }
 
-.addNewButton {
-    background-color: cadetblue;
-}
-
 .customerAccountBlock {
     width: 300px;
 }
@@ -105,12 +101,6 @@ admin
     width: 18%;
     margin-right: 4%;
 }
-
-.deleteButton {
-    border-color: indianred;
-    background-color: indianred;
-}
-
 
 .categoryAlert {
     width: max-content;
