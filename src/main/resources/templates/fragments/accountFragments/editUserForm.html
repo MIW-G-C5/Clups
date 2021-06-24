@@ -25,7 +25,6 @@
 
         <!-- hidden fields to keep values that should not change -->
         <input type="hidden" th:field="*{prepaidBalance}">
-        <input type="hidden" th:field="*{userRole}">
         <input type="hidden" th:field="*{userCode}">
 
         <div sec:authorize="hasAuthority('BARMANAGER')">
@@ -39,7 +38,6 @@
                 <p></p>
             </div>
         </div>
-
         <div class="row zeroPadding topBottomMargin">
             <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
             <a class="btn btn-primary formButtons" th:href="@{/accounts/close}">Cancel</a>

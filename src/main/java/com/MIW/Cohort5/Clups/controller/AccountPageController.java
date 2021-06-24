@@ -156,10 +156,12 @@ public class AccountPageController {
                                @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
 
         if (!result.hasErrors()) {
-//            userDto.addToBalance(credit);
             UserDto existingUser = userService.findDtoByUserCode(userDto.getUserCode());
+
             existingUser.addToBalance(credit);
+
             accountPageStateKeeper.setCurrentUserDto(userDto);
+
             userService.editUser(accountPageStateKeeper.getCurrentUserDto());
 
             clearForm(accountPageStateKeeper);
