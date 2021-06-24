@@ -9,18 +9,49 @@ import com.MIW.Cohort5.Clups.dtos.UserDto;
  */
 public class AccountPageStateKeeper {
 
-    private UserDto currentUserDto;
+    //these constants show where in the add/editUser-process the active user is
+    private final static int START_USER_PROCESS = 0;
+    private final static int ADD_USER = 1;
+    private final static int USER_SELECTED = 2;
+    private final static int EDIT_USER = 3;
+    private final static int ADD_CREDIT = 4;
 
-    //these should always be false, unless changed by user input in the application
-    private boolean showUserForm = false;
-    private boolean userSelected = false;
+    // this keeps track of where in the add/editUser-process the active user is, using the constants above.
+    // it always starts with START_USER_PROCESS. User actions can change it to a different status.
+    private int processStep = START_USER_PROCESS;
+
+    private UserDto currentUserDto;
 
     public AccountPageStateKeeper() {
     }
 
     public void clearUser() {
         currentUserDto = null;
-        userSelected = false;
+        processStart();
+    }
+
+    public void processStart() {
+        processStep = START_USER_PROCESS;
+    }
+
+    public void processAdduser() {
+        processStep = ADD_USER;
+    }
+
+    public void processUserSelected() {
+        processStep = USER_SELECTED;
+    }
+
+    public void processEditUser() {
+        processStep = EDIT_USER;
+    }
+
+    public void processAddCredit() {
+        processStep = ADD_CREDIT;
+    }
+
+    public int getProcessStep() {
+        return processStep;
     }
 
     public UserDto getCurrentUserDto() {
@@ -30,20 +61,5 @@ public class AccountPageStateKeeper {
     public void setCurrentUserDto(UserDto currentUserDto) {
         this.currentUserDto = currentUserDto;
     }
-
-    public boolean isShowUserForm() {
-        return showUserForm;
-    }
-
-    public void setShowUserForm(boolean showUserForm) {
-        this.showUserForm = showUserForm;
-    }
-
-    public boolean isUserSelected() {
-        return userSelected;
-    }
-
-    public void setUserSelected(boolean userSelected) {
-        this.userSelected = userSelected;
-    }
+    
 }
