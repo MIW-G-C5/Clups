@@ -23,8 +23,6 @@
             <a class="btn btn-primary formButtons " th:href="@{/accounts/editUser}">Edit User</a>
             <a class="btn btn-primary formButtons " th:href="@{/accounts/cancel}">Close</a>
             <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
-
-            </table>
           </th:block>
           <th:block th:if="${formState} == true">
             <div th:replace="fragments/accountFragments/editUserForm :: editUserForm"></div>
