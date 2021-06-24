@@ -16,7 +16,7 @@
     </div>
     <div class="col-7 borderedSection">
       <div class="container">
-        <div th:switch="${processStep}">
+        <th:block th:switch="${processStep}">
           <th:block th:case="0">
             <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addNew}">Add new user</a>
           </th:block>
@@ -25,10 +25,10 @@
           </th:block>
           <th:block th:case="2">
             <div th:replace="fragments/accountFragments/showUserForm :: showUserForm"></div>
-            <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addCredit}">Add credit</a>
-            <a class="btn btn-primary formButtons " th:href="@{/accounts/editUser}">Edit User</a>
-            <a class="btn btn-primary formButtons " th:href="@{/accounts/cancel}">Close</a>
             <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
+            <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addCredit}">Add credit</a>
+            <a class="btn btn-primary formButtons" th:href="@{/accounts/editUser}">Edit User</a>
+            <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Close</a>
           </th:block>
           <th:block th:case="3">
             <div th:replace="fragments/accountFragments/editUserForm :: editUserForm"></div>
@@ -36,7 +36,7 @@
           <th:block th:case="4">
             <div th:replace="fragments/accountFragments/addCreditForm :: addCreditForm"></div>
           </th:block>
-        </div>
+        </th:block>
       </div>
     </div>
   </div>

@@ -22,4 +22,8 @@ public interface UserService extends UserDetailsService {
 
     UserDto findDtoByUserCode(Integer userCode);
 
+    User deleteUser(UserDto userDto);
+
+    User findModelByUserCode (Integer userCode);
+
 }

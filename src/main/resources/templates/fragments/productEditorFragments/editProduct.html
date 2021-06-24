@@ -32,8 +32,8 @@
         <input type="hidden" th:field="*{productCode}">
 
         <div class="row zeroPadding topBottomMargin">
-            <a class="btn btn-primary formButtons deleteButton" th:href="@{/products/delete}">Delete</a>
-            <a class="btn btn-primary formButtons " th:href="@{/products/cancel}">Cancel</a>
+            <a class="formButtons btn btn-danger" th:href="@{/products/delete}">Delete</a>
+            <a class="btn btn-primary formButtons" th:href="@{/products/cancel}">Cancel</a>
             <button type="submit" class="btn btn-primary formButtons">Save</button>
         </div>
     </form>

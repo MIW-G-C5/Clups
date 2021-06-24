@@ -41,6 +41,14 @@ public class UserDto {
         this.prepaidBalance = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
     }
 
+    public void addToBalance(Integer amount) {
+        if (prepaidBalance == null){
+            prepaidBalance = BigDecimal.valueOf(amount);
+        } else {
+            prepaidBalance.add(BigDecimal.valueOf(amount));
+        }
+    }
+
     public Integer getUserCode() {
         // this method cannot return null to ensure no nullPointerExceptions in the application
         if (userCode == null) {
