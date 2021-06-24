@@ -44,8 +44,7 @@ public class AccountPageController {
         }
 
         model.addAttribute("user", stateKeeper.getCurrentUserDto());
-        model.addAttribute("formState", stateKeeper.isShowUserForm());
-        model.addAttribute("isUserSelected", stateKeeper.isUserSelected());
+        model.addAttribute("processStep", stateKeeper.getProcessStep());
         return "userAccountPage";
     }
 
@@ -53,7 +52,7 @@ public class AccountPageController {
     protected String addNewUser(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        stateKeeper.setShowUserForm(true);
+        stateKeeper.processAdduser();
 
         return "redirect:/accounts";
     }
@@ -84,14 +83,14 @@ public class AccountPageController {
             @PathVariable("userCode") String userCode,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper) {
         accountPageStateKeeper.setCurrentUserDto(userService.findDtoByUserCode(Integer.parseInt(userCode)));
-        accountPageStateKeeper.setUserSelected(true);
+        accountPageStateKeeper.processUserSelected();
 
         return "redirect:/accounts";
     }
 
     @GetMapping("/accounts/editUser")
     protected String editUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
-        showUserForm(stateKeeper);
+        stateKeeper.processEditUser();
 
         return "redirect:/accounts";
     }
@@ -101,20 +100,12 @@ public class AccountPageController {
                                       BindingResult result,
                                       @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
         if (!result.hasErrors()){
-            accountPageStateKeeper.setShowUserForm(true);
             accountPageStateKeeper.setCurrentUserDto(userDto);
             userService.saveUser(accountPageStateKeeper.getCurrentUserDto());
 
             clearForm(accountPageStateKeeper);
-            accountPageStateKeeper.setShowUserForm(false);
         }
         return "redirect:/accounts";
-    }
-
-    private void showUserForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
-        if (!accountPageStateKeeper.isShowUserForm()){
-            accountPageStateKeeper.setShowUserForm(true);
-        }
     }
 
     @GetMapping("/accounts/cancel")
@@ -128,7 +119,6 @@ public class AccountPageController {
 
     private void clearForm(AccountPageStateKeeper stateKeeper) {
         stateKeeper.clearUser();
-        stateKeeper.setShowUserForm(false);
     }
 
     @GetMapping("/accounts/addCredit")
@@ -139,7 +129,7 @@ public class AccountPageController {
 
     @GetMapping("/accounts/close")
     protected String closeEditUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
-        stateKeeper.setShowUserForm(false);
+        stateKeeper.processUserSelected();
 
         return "redirect:/accounts";
     }
