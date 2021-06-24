@@ -26,6 +26,6 @@ public interface UserService extends UserDetailsService {
 
     User findModelByUserCode (Integer userCode);
 
-    public void addCredit(Integer userCode, Integer amount);
+    void addCredit(Integer userCode, Integer amount);
 
 }

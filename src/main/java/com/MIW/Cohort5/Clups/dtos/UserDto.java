@@ -1,7 +1,6 @@
 package com.MIW.Cohort5.Clups.dtos;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Johnnie Meijer
@@ -21,25 +20,6 @@ public class UserDto {
     private String userRole;
 
     public UserDto() {}
-
-    public UserDto(String fullName, BigDecimal prepaidBalance) {
-        this.fullName = fullName;
-        this.prepaidBalance = prepaidBalance;
-    }
-
-    public UserDto(String username, String password, String fullName, BigDecimal prepaidBalance) {
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.prepaidBalance = prepaidBalance;
-    }
-
-    public UserDto(String username, String password, String fullName) {
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.prepaidBalance = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
-    }
 
     public Integer getUserCode() {
         // this method cannot return null to ensure no nullPointerExceptions in the application
