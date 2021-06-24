@@ -10,7 +10,7 @@
        th:href="@{/accounts/{userCode}(userCode=${user.getUserCode()})}">
         <table>
           <td class="customerAccountBlock" th:text="${user.getFullName}"></td>
-          <td class="customerAccountBlock alignTextRight" th:text="${user.prepaidBalance}"></td>
+          <td class="customerAccountBlock alignTextRight" th:text="'&#x20AC' + ' ' + ${user.prepaidBalance}"></td>
         </table>
     </a>
 </div>
