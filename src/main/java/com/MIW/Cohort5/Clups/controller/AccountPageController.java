@@ -2,7 +2,6 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.AccountPageStateKeeper;
-import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
