@@ -160,11 +160,14 @@ public class AccountPageController {
 
             existingUser.addToBalance(credit);
 
-            accountPageStateKeeper.setCurrentUserDto(userDto);
+            // this prevents addCredit from resetting a password
+            existingUser.setPassword(null);
+
+            accountPageStateKeeper.setCurrentUserDto(existingUser);
 
             userService.editUser(accountPageStateKeeper.getCurrentUserDto());
 
-            clearForm(accountPageStateKeeper);
+            accountPageStateKeeper.processUserSelected();
         }
 
         return "redirect:/accounts";
