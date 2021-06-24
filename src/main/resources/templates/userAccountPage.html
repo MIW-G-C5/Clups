@@ -18,9 +18,10 @@
       <div class="container">
         <th:block th:if="${isUserSelected} == true">
           <th:block th:unless="${formState} == true">
+            <div th:replace="fragments/accountFragments/showUserForm :: showUserForm"></div>
             <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addCredit}">Add credit</a>
             <a class="btn btn-primary formButtons " th:href="@{/accounts/editUser}">Edit User</a>
-            <a class="btn btn-primary formButtons " th:href="@{/accounts/cancel}">Cancel</a>
+            <a class="btn btn-primary formButtons " th:href="@{/accounts/cancel}">Close</a>
             <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
           </th:block>
           <th:block th:if="${formState} == true">

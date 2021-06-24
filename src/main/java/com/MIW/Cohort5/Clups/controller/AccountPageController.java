@@ -146,4 +146,12 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
+    @GetMapping("/accounts/close")
+    protected String closeEditUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+        stateKeeper.setShowUserForm(false);
+
+        return "redirect:/accounts";
+    }
+
+
 }
