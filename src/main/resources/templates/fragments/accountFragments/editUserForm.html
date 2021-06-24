@@ -6,11 +6,14 @@
 </head>
 <body>
 <div>
-    <form class="editCategoriesAndProducts" th:fragment="editUserForm" th:action="@{/accounts/edit}" method="post" th:object="${user}">
+    <form class="editCategoriesAndProducts" th:fragment="editUserForm"
+          th:action="@{/accounts/edit}" method="post"
+          th:object="${user}">
         <label for="fullName">Fullname </label>
         <div class="form-group input-group">
             <input type="text" id="fullName" th:field="*{fullName}">
         </div>
+
         <label for="username">Username</label>
         <div class="form-group input-group">
             <input type="text" id="username" th:field="*{username}">
@@ -20,7 +23,23 @@
             <input type="password" id="password" th:field="*{password}">
         </div>
 
+        <!-- hidden fields to keep values that should not change -->
+        <input type="hidden" th:field="*{prepaidBalance}">
+        <input type="hidden" th:field="*{userRole}">
         <input type="hidden" th:field="*{userCode}">
+
+        <div sec:authorize="hasAuthority('BARMANAGER')">
+            <label for="userRole">Role</label>
+            <div>
+                <select id="userRole" th:field="*{userRole}">
+                    <option value="CUSTOMER">Customer</option>
+                    <option value="BARTENDER">Bartender</option>
+                    <option value="BARMANAGER">Barmanager</option>
+                </select>
+                <p></p>
+            </div>
+        </div>
+
         <div class="row zeroPadding topBottomMargin">
             <button type="submit" class="btn btn-primary formButtons">Save changes</button>
             <a class="btn btn-primary formButtons " th:href="@{/accounts/cancel}">Cancel</a>
