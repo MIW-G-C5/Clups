@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<div>
+<>
     <form class="editProduct" th:fragment="addCustomerForm"
           th:action="@{/accounts/addNew}" method="post"
           th:object="${user}">
@@ -14,14 +14,16 @@
             <input type="text" id="fullName" th:field="*{fullName}">
         </div>
 
-        <label for="userRole">Role</label>
-        <div>
-            <select id="userRole" th:field="*{userRole}">
-                <option value="CUSTOMER">Customer</option>
-                <option value="BARTENDER">Bartender</option>
-                <option value="BARMANAGER">Barmanager</option>
-            </select>
-            <p></p>
+        <div sec:authorize="hasAuthority('BARMANAGER')">
+            <label for="userRole">Role</label>
+            <div>
+                <select id="userRole" th:field="*{userRole}">
+                    <option value="CUSTOMER">Customer</option>
+                    <option value="BARTENDER">Bartender</option>
+                    <option value="BARMANAGER">Barmanager</option>
+                </select>
+                <p></p>
+            </div>
         </div>
 
         <label for="username">Username</label>
