@@ -215,5 +215,17 @@ public class UserDetailsServiceImpl implements UserService {
         return dtoConverter.toDto(user);
     }
 
+    @Override
+    public User findModelByUserCode(Integer userCode){
+        return userRepository.findUserByUserCode(userCode);
+    }
+
+    @Override
+    public User deleteUser(UserDto userDto){
+        User model = findModelByUserCode(userDto.getUserCode());
+        userRepository.delete(model);
+        return model;
+    }
+
 }
 
