@@ -118,6 +118,17 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
+    @GetMapping("accounts/delete")
+    protected String deleteUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+
+        userService.deleteUser(accountPageStateKeeper.getCurrentUserDto());
+        clearForm(accountPageStateKeeper);
+        accountPageStateKeeper.clearUser();
+
+        return "redirect:/accounts";
+    }
+
+
     @GetMapping("/accounts/cancel")
     protected String cancelForm(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
