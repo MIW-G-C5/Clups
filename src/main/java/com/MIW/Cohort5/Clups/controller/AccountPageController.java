@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.AccountPageStateKeeper;
+import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -131,7 +132,27 @@ public class AccountPageController {
     }
 
     @GetMapping("/accounts/addCredit")
-    protected String addCredit() {
+    protected String showAddCreditForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+        stateKeeper.processAddCredit();
+
+        return "redirect:/accounts";
+    }
+
+    @PostMapping("/accounts/addCredit")
+    protected String addCredit(@ModelAttribute("user") UserDto userDto,
+                               BindingResult result,
+                               @RequestParam("credit") Integer credit,
+                               @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+
+        if (!result.hasErrors()) {
+//            userDto.addToBalance(credit);
+            UserDto existingUser = userService.findDtoByUserCode(userDto.getUserCode());
+            existingUser.addToBalance(credit);
+            accountPageStateKeeper.setCurrentUserDto(userDto);
+            userService.editUser(accountPageStateKeeper.getCurrentUserDto());
+
+            clearForm(accountPageStateKeeper);
+        }
 
         return "redirect:/accounts";
     }
