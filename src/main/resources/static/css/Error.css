@@ -1,11 +1,11 @@
 body, html {
     height: 100%;
-    background-color: black;
+    background-color: dodgerblue;
 }
 
 .Error {
     position: relative;
-    color: #FFE81F;
+    color: white;
     font-family: Consolas;
     text-align: center;
     top: 25%;
@@ -23,6 +23,6 @@ body, html {
 }
 
 .linky {
-    color: lightgrey;
+    color: white;
 }
 

@@ -52,7 +52,6 @@ public class ProductPageController {
 
         model.addAttribute("product", productPageStateKeeper.getCurrentProduct());
         model.addAttribute("selectedPage", "productPage");
-
         return "productEditor";
     }
 
