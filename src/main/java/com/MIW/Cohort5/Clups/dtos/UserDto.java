@@ -25,7 +25,7 @@ public class UserDto {
         if (prepaidBalance == null){
             prepaidBalance = BigDecimal.valueOf(amount);
         } else {
-            prepaidBalance.add(BigDecimal.valueOf(amount));
+            prepaidBalance = prepaidBalance.add(BigDecimal.valueOf(amount));
         }
     }
 

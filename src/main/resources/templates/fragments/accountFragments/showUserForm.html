@@ -18,7 +18,7 @@
     <div class="form-group row">
       <label class="col-sm-3 col-form-label boldText" for="prepaidBalance">Prepaid balance</label>
       <div class="col-sm-9">
-        <input type="number" id="prepaidBalance" th:field="*{prepaidBalance}" readonly class="form-control-plaintext">
+        <input type="number" id="prepaidBalance" th:text="*{'&#x20AC' + prepaidBalance}" readonly class="form-control-plaintext">
       </div>
     </div>
     <input type="hidden" th:field="*{userCode}">
