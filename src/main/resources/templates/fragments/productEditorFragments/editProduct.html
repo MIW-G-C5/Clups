@@ -23,8 +23,8 @@
 
         <label for="categoryDropDown">Category</label>
         <div>
-            <select th:field="*{categoryName}" id="categoryDropDown">
-                <option th:each="category : ${allCategories}" th:text="${category.categoryName}" th:value="${category.categoryName}">
+            <select th:field="*{categoryCode}" id="categoryDropDown">
+                <option th:each="category : ${allCategories}" th:text="${category.categoryName}" th:value="${category.categoryCode}">
                 </option>
             </select>
         </div>
@@ -32,8 +32,8 @@
         <input type="hidden" th:field="*{productCode}">
 
         <div class="row zeroPadding topBottomMargin">
-            <a class="btn btn-primary formButtons deleteButton" th:href="@{/products/delete}">Delete</a>
-            <a class="btn btn-primary formButtons " th:href="@{/products/cancel}">Cancel</a>
+            <a class="formButtons btn btn-danger" th:href="@{/products/delete}">Delete</a>
+            <a class="btn btn-primary formButtons" th:href="@{/products/cancel}">Cancel</a>
             <button type="submit" class="btn btn-primary formButtons">Save</button>
         </div>
     </form>

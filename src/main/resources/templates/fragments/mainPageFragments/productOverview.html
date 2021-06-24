@@ -8,7 +8,7 @@
 <div class="container-fluid zeroPadding scrollableBtnBlock" th:fragment="productOverview">
     <div th:each="product : ${allProductsByCategory}">
         <div>
-            <a class="btn btn-primary btn-block buttonBlock productBlock" th:href="@{/order/{productName}(productName=${product.productName})}">
+            <a class="btn btn-primary btn-block buttonBlock productBlock" th:href="@{/order/{productCode}(productCode=${product.productCode})}">
                 <table>
                         <td class="productItem" th:text="${product.productName}"></td>
                         <td class="productItem alignTextRight" th:text="${product.productPrice}"></td>

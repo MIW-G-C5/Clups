@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="EN" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{::title})">
-    <meta charset="UTF-8">
-    <title>Accounts</title>
+  <meta charset="UTF-8">
+  <title>Accounts</title>
 </head>
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
 <div class="container-fluid zeroPadding setMaxScreenSize">
-    <div class="row topBottomMargin no-gutters justify-content-between fitHeight">
-        <div class="col-4 borderedSection scrollableBtnBlock">
-<!--            <div class="d-flex align-items-start flex-column">-->
-                <div class="customerOverviewTable"
-                     th:replace="fragments/accountFragments/userAccountOverview :: customerAccountList"></div>
-<!--            </div>-->
-        </div>
-
-        <div class="col-7 borderedSection">
-            <div class="container">
-                <th:block th:if="${formState} == true">
-                    <div th:replace="fragments/accountFragments/addCustomerForm :: addCustomerForm"></div>
-                </th:block>
-                <th:block th:if="${formState} == false">
-                    <a class="btn btn-primary topBottomMargin" th:href="@{/accounts/addNew}">Add new user</a>
-                </th:block>
-            </div>
-        </div>
+  <div class="row topBottomMargin no-gutters justify-content-between fitHeight">
+    <div class="col-4 borderedSection scrollableBtnBlock">
+        <div th:replace="fragments/accountFragments/userAccountOverview :: customerAccountList"
+             class="customerOverviewTable"></div>
     </div>
-
-    <div th:replace="fragments/general :: bottomScripts"></div>
+    <div class="col-7 borderedSection">
+      <div class="container">
+        <th:block th:switch="${processStep}">
+          <th:block th:case="0">
+            <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addNew}">Add new user</a>
+          </th:block>
+          <th:block th:case="1">
+            <div th:replace="fragments/accountFragments/addCustomerForm :: addCustomerForm"></div>
+          </th:block>
+          <th:block th:case="2">
+            <div th:replace="fragments/accountFragments/showUserForm :: showUserForm"></div>
+            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
+            <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addCredit}">Add credit</a>
+            <a class="btn btn-primary formButtons" th:href="@{/accounts/editUser}">Edit User</a>
+            <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Close</a>
+          </th:block>
+          <th:block th:case="3">
+            <div th:replace="fragments/accountFragments/editUserForm :: editUserForm"></div>
+          </th:block>
+          <th:block th:case="4">
+            <div th:replace="fragments/accountFragments/addCreditForm :: addCreditForm"></div>
+          </th:block>
+        </th:block>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
 </div>
 </body>
 </html>

@@ -10,18 +10,17 @@ import com.MIW.Cohort5.Clups.dtos.OrderDto;
 
 public class MainPageStateKeeper {
 
-    private String categoryName;
-
+    private Integer categoryCode;
     private OrderDto order;
 
     public MainPageStateKeeper() { }
 
-    public String getCategoryName() {
-        return categoryName;
+    public Integer getCategoryCode() {
+        return categoryCode;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryCode(Integer categoryCode) {
+        this.categoryCode = categoryCode;
     }
 
     public OrderDto getOrder() {

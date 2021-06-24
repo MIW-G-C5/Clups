@@ -36,6 +36,12 @@ public class MainPageController {
     }
 
     @GetMapping({"/"})
+    protected String enterApplication() {
+
+        return "redirect:/order";
+    }
+
+    @GetMapping({"/order"})
     protected String showPage(
             Model model,
             @ModelAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
@@ -43,7 +49,7 @@ public class MainPageController {
         createOrder(mainPageStateKeeper);
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProductsByCategory",
-                              productService.getProductsByCategory(mainPageStateKeeper.getCategoryName()));
+                              productService.getProductsByCategory(mainPageStateKeeper.getCategoryCode()));
         model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
         model.addAttribute("selectedPage", "mainPage");
@@ -56,36 +62,41 @@ public class MainPageController {
         }
     }
 
-    @GetMapping({"/selectCategory/{categoryName}"})
+    @GetMapping({"/selectCategory/{categoryCode}"})
     protected String showProductsByCategory(
-            @PathVariable("categoryName") String categoryName,
+            @PathVariable("categoryCode") String categoryCodeString,
             @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
-        mainPageStateKeeper.setCategoryName(categoryName);
-        return "redirect:/";
+        mainPageStateKeeper.setCategoryCode(Integer.parseInt(categoryCodeString));
+        return "redirect:/order";
     }
 
-    @GetMapping({"/order/{productName}"})
-    protected String addProductToOrder(@PathVariable("productName") String productName,
+    @GetMapping({"/order/{productCode}"})
+    protected String addProductToOrder(@PathVariable("productCode") String productCodeString,
                                        @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
-        ProductDto orderedProduct = productService.findProductByName(productName);
+        ProductDto orderedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
         mainPageStateKeeper.getOrder().addToOrder(orderedProduct);
-        return "redirect:/";
+        return "redirect:/order";
     }
 
-    @GetMapping({"/order/remove/{productName}"})
+    @GetMapping({"/order/remove/{productCode}"})
     protected String removeProductFromOrder(
-            @PathVariable("productName") String productName,
+            @PathVariable("productCode") String productCodeString,
             @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
 
-        ProductDto orderedProduct = productService.findProductByName(productName);
+        ProductDto orderedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString));
         mainPageStateKeeper.getOrder().removeFromOrder(orderedProduct);
-        return "redirect:/";
+        return "redirect:/order";
     }
 
     @GetMapping({"/order/clear"})
     protected String clearOrder(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         mainPageStateKeeper.getOrder().emptyOrder();
-        return "redirect:/";
+        return "redirect:/order";
+    }
+
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "errors/403";
     }
 
 }

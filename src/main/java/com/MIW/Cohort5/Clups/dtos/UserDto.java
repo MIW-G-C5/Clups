@@ -18,11 +18,18 @@ public class UserDto {
     private String password;
     private String fullName;
     private BigDecimal prepaidBalance;
-    private String role;
+    private String userRole;
 
     public UserDto() {}
 
     public UserDto(String fullName, BigDecimal prepaidBalance) {
+        this.fullName = fullName;
+        this.prepaidBalance = prepaidBalance;
+    }
+
+    public UserDto(String username, String password, String fullName, BigDecimal prepaidBalance) {
+        this.username = username;
+        this.password = password;
         this.fullName = fullName;
         this.prepaidBalance = prepaidBalance;
     }
@@ -32,6 +39,14 @@ public class UserDto {
         this.password = password;
         this.fullName = fullName;
         this.prepaidBalance = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    public void addToBalance(Integer amount) {
+        if (prepaidBalance == null){
+            prepaidBalance = BigDecimal.valueOf(amount);
+        } else {
+            prepaidBalance.add(BigDecimal.valueOf(amount));
+        }
     }
 
     public Integer getUserCode() {
@@ -59,6 +74,10 @@ public class UserDto {
         return password;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -79,4 +98,7 @@ public class UserDto {
         this.prepaidBalance = prepaidBalance;
     }
 
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
 }

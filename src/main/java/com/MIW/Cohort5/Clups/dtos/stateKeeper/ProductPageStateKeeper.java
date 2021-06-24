@@ -1,6 +1,5 @@
 package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 
 /**
@@ -11,28 +10,16 @@ import com.MIW.Cohort5.Clups.dtos.ProductDto;
 
 public class ProductPageStateKeeper {
 
-    private String categoryName;
-
     private ProductDto currentProduct;
-
-    private CategoryDto currentCategory;
-
+    private Integer currentCategoryCode;
     // this should always be false, until changed by user input in the application
     private boolean showForm = false;
 
     public ProductPageStateKeeper() {
     }
-
+    public void clearCurrentCategory(){ this.currentCategoryCode = null; }
     public void clearCurrentProduct() {
         this.currentProduct = null;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public ProductDto getCurrentProduct() {
@@ -43,7 +30,13 @@ public class ProductPageStateKeeper {
         this.currentProduct = currentProduct;
     }
 
-    public CategoryDto getCurrentCategory() {return currentCategory;}
+    public Integer getCurrentCategoryCode() {
+        return currentCategoryCode;
+    }
+
+    public void setCurrentCategoryCode(Integer currentCategoryCode) {
+        this.currentCategoryCode = currentCategoryCode;
+    }
 
     public boolean isShowForm() {
         return showForm;

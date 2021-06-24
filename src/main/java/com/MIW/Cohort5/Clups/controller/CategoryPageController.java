@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.CategoryPageStateKeeper;
+import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,18 +48,9 @@ public class CategoryPageController {
         model.addAttribute("category", categoryPageStateKeeper.getCurrentCategory());
         model.addAttribute("selectedPage", "categoryPage");
 
+        model.addAttribute("clearedToDelete", isClearToDelete(categoryPageStateKeeper));
+
         return "categoryEditor";
-    }
-
-    @GetMapping({"/categories/selectCategory/{categoryName}"})
-    protected String selectCategory(
-            @PathVariable("categoryName") String categoryName,
-            @SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper categoryPageStateKeeper) {
-
-        categoryPageStateKeeper.setCategoryName(categoryName);
-        showCatForm(categoryPageStateKeeper);
-
-        return "redirect:/categories";
     }
 
     private void showCatForm(
@@ -102,7 +94,7 @@ public class CategoryPageController {
             categoryService.saveCategory(categoryPageStatekeeper.getCurrentCategory());
 
             // save category of added product to statekeeper, so you get to see the product immediately in its category
-            categoryPageStatekeeper.setCategoryName(categoryDto.getCategoryName());
+            categoryPageStatekeeper.setCurrentCategory(categoryDto);
 
             categoryPageStatekeeper.clearCurrentCategory();
             categoryPageStatekeeper.setShowCatForm(false);
@@ -140,6 +132,37 @@ public class CategoryPageController {
         }
 
         return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/delete")
+    protected String deleteCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper,
+                                @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+        categoryService.deleteCategory(stateKeeper.getCurrentCategory());
+
+        clearCatForm(stateKeeper);
+        productPageStateKeeper.clearCurrentCategory();
+
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/cancel")
+    protected String cancelCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper){
+
+        stateKeeper.setShowCatForm(false);
+
+        return "redirect:/categories";
+    }
+
+    private boolean isClearToDelete(CategoryPageStateKeeper categoryPageStateKeeper) {
+        boolean clearedToDelete = true;
+
+        if (categoryPageStateKeeper.getCurrentCategory().getProducts() != null) {
+            if (!categoryPageStateKeeper.getCurrentCategory().getProducts().isEmpty()) {
+                clearedToDelete = false;
+            }
+        }
+
+        return clearedToDelete;
     }
 
 }

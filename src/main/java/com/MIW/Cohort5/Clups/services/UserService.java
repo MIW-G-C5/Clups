@@ -10,10 +10,20 @@ public interface UserService extends UserDetailsService {
 
     List<UserDto> getAll();
 
-    void saveUser(UserDto userDto);
+    void newUser(UserDto userDto);
 
     void addUser(User user);
 
+    void editUser(UserDto userDto);
+
+    void saveUser(UserDto userDto);
+
     Integer getHighestUserCode();
+
+    UserDto findDtoByUserCode(Integer userCode);
+
+    User deleteUser(UserDto userDto);
+
+    User findModelByUserCode (Integer userCode);
 
 }

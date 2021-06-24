@@ -11,6 +11,10 @@ a:focus, a:hover, a:active, a {
     text-align: right;
 }
 
+.boldText {
+    font-weight: bold;
+}
+
 .borderedRow{
     border: solid 3px white;
 }
@@ -25,6 +29,15 @@ a:focus, a:hover, a:active, a {
     border: solid white medium;
     color: white;
     text-align: left;
+}
+
+.categoryAlert {
+    width: max-content;
+}
+
+.categoryLink {
+    text-decoration-line: underline;
+    font-weight: bold;
 }
 
 .categoriesBlock {

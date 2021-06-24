@@ -1,8 +1,11 @@
 package com.MIW.Cohort5.Clups.services.implementations;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
+import com.MIW.Cohort5.Clups.model.MyUserDetails;
+import com.MIW.Cohort5.Clups.model.Role;
 import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.repository.UserRepository;
+import com.MIW.Cohort5.Clups.services.RoleService;
 import com.MIW.Cohort5.Clups.services.UserService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.UserDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +31,29 @@ public class UserDetailsServiceImpl implements UserService {
     private static final BigDecimal INITIAL_PREPAID_BALANCE = BigDecimal.ZERO;
     private static final String INITIAL_PASSWORD_ROOT = "pw";
     private static final String INITIAL_USERNAME_ROOT = "user";
+    private static final String STANDARD_ROLE = "CUSTOMER";
 
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    public UserDetailsServiceImpl(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s).orElseThrow(
-                () -> new UsernameNotFoundException("User " + s + " was not found."));
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        User user = userRepository.getUserByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + username + "was not found");
+        }
+
+        return new MyUserDetails(user);
     }
 
     @Override
@@ -52,19 +64,61 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
+    public void newUser(UserDto userDto) {
 
         userDto.setUserCode(makeUserCode(userDto));
-
         userDto.setUsername(makeUserName(userDto));
-
         userDto.setPassword(makePassword(userDto));
-
+        userDto.setUserRole(makeRole(userDto));
         userDto.setPrepaidBalance(makePrepaidBalance(userDto));
 
-        User newUser = dtoConverter.toModel(userDto);
+        saveUser(userDto);
+    }
+
+    @Override
+    public void editUser(UserDto userDto) {
+
+        userDto.setUserCode(makeUserCode(userDto));
+        userDto.setUsername(makeUserName(userDto));
+        editRole(userDto);
+
+        saveUser(userDto);
+    }
+
+    @Override
+    public void saveUser(UserDto userDto) {
+
+        Role role = roleService.findModelByName(userDto.getUserRole());
+
+        User newUser = dtoConverter.toModel(role, userDto);
+        User oldUser = userRepository.findUserByUserCode(userDto.getUserCode());
+
+        if (oldUser != null) {
+            newUser.setUserId(oldUser.getUserId());
+        }
 
         addUser(newUser);
+    }
+
+    private UserDto editRole(UserDto userDto) {
+
+        if (userDto.getUserRole() == null) {
+            userDto.setUserRole(userRepository.findUserByUserCode(userDto.getUserCode()).getRole().getRoleName());
+        }
+
+        return userDto;
+    }
+
+    private String makeRole(UserDto userDto) {
+        String userRole;
+
+        if (userDto.getUserRole() == null) {
+            userRole = STANDARD_ROLE;
+        } else {
+            userRole = userDto.getUserRole();
+        }
+
+        return userRole;
     }
 
     private BigDecimal makePrepaidBalance(UserDto userDto) {
@@ -104,10 +158,13 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     private Integer makeUserCode(UserDto userDto) {
-        int userCode = 0;
+
+        int userCode;
 
         if (userDto.getUserCode() <= 0) {
             userCode = getHighestUserCode() + 1;
+        } else {
+            userCode = userDto.getUserCode();
         }
 
         return userCode;
@@ -117,6 +174,13 @@ public class UserDetailsServiceImpl implements UserService {
     public void addUser(User user) {
         if (user.getPassword() != null) {
             user.setPassword(encodePassword(user.getPassword()));
+        } else {
+            user.setPassword(userRepository.findUserByUserCode(user.getUserCode()).getPassword());
+        }
+
+        // ensure users created in the seeder get a unique usercode
+        if (user.getUserCode() <= 0) {
+            user.setUserCode(getHighestUserCode() + 1);
         }
 
         userRepository.save(user);
@@ -143,6 +207,24 @@ public class UserDetailsServiceImpl implements UserService {
         }
 
         return userCode;
+    }
+
+    @Override
+    public UserDto findDtoByUserCode(Integer userCode){
+        User user = userRepository.findUserByUserCode(userCode);
+        return dtoConverter.toDto(user);
+    }
+
+    @Override
+    public User findModelByUserCode(Integer userCode){
+        return userRepository.findUserByUserCode(userCode);
+    }
+
+    @Override
+    public User deleteUser(UserDto userDto){
+        User model = findModelByUserCode(userDto.getUserCode());
+        userRepository.delete(model);
+        return model;
     }
 
 }

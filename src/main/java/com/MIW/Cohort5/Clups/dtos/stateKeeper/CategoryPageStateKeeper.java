@@ -9,23 +9,13 @@ import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 
 public class CategoryPageStateKeeper {
 
-    private String categoryName;
     private CategoryDto currentCategory;
-
     private boolean showCatForm = false;
 
     public CategoryPageStateKeeper() { }
 
     public void clearCurrentCategory() {
         this.currentCategory = null;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public CategoryDto getCurrentCategory() {
