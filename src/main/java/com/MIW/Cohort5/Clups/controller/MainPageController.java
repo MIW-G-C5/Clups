@@ -94,4 +94,9 @@ public class MainPageController {
         return "redirect:/order";
     }
 
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "errors/403";
+    }
+
 }

@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    background-color: black;
+}
+
+.Error {
+    position: relative;
+    color: #FFE81F;
+    font-family: Consolas;
+    text-align: center;
+    top: 25%;
+    bottom: 25%
+}
+
+.FourOhThree {
+    font-size: 100px;
+    font-weight: bold;
+}
+
+.Errormsg {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.linky {
+    color: lightgrey;
+}
+
