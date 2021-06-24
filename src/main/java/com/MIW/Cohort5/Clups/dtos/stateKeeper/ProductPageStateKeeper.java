@@ -17,7 +17,7 @@ public class ProductPageStateKeeper {
 
     public ProductPageStateKeeper() {
     }
-
+    public void clearCurrentCategory(){ this.currentCategoryCode = null; }
     public void clearCurrentProduct() {
         this.currentProduct = null;
     }

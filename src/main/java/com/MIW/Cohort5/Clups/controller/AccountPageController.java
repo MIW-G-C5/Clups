@@ -4,9 +4,11 @@ import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.AccountPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.InputMismatchException;
@@ -20,6 +22,13 @@ import java.util.InputMismatchException;
 @Controller
 @SessionAttributes("accountPageStateKeeper")
 public class AccountPageController {
+
+    // Empty String fields will be considered NULL instead of an empty String
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
+        binder.registerCustomEditor(String.class, stringTrimmer);
+    }
 
     private final UserService userService;
 
@@ -70,7 +79,7 @@ public class AccountPageController {
                 throw new InputMismatchException("The full name must be filled in");
             }
 
-            userService.saveUser(stateKeeper.getCurrentUserDto());
+            userService.newUser(stateKeeper.getCurrentUserDto());
 
             clearForm(stateKeeper);
         }
@@ -101,7 +110,7 @@ public class AccountPageController {
                                       @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
         if (!result.hasErrors()){
             accountPageStateKeeper.setCurrentUserDto(userDto);
-            userService.saveUser(accountPageStateKeeper.getCurrentUserDto());
+            userService.editUser(accountPageStateKeeper.getCurrentUserDto());
 
             clearForm(accountPageStateKeeper);
         }

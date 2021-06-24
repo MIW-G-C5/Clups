@@ -31,6 +31,7 @@ public class UserDetailsServiceImpl implements UserService {
     private static final BigDecimal INITIAL_PREPAID_BALANCE = BigDecimal.ZERO;
     private static final String INITIAL_PASSWORD_ROOT = "pw";
     private static final String INITIAL_USERNAME_ROOT = "user";
+    private static final String STANDARD_ROLE = "CUSTOMER";
 
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
@@ -63,7 +64,7 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
+    public void newUser(UserDto userDto) {
 
         userDto.setUserCode(makeUserCode(userDto));
         userDto.setUsername(makeUserName(userDto));
@@ -71,9 +72,25 @@ public class UserDetailsServiceImpl implements UserService {
         userDto.setUserRole(makeRole(userDto));
         userDto.setPrepaidBalance(makePrepaidBalance(userDto));
 
-        Role role = roleService.findModelByName(userDto.getUserRole());
-        User newUser = dtoConverter.toModel(role, userDto);
+        saveUser(userDto);
+    }
 
+    @Override
+    public void editUser(UserDto userDto) {
+
+        userDto.setUserCode(makeUserCode(userDto));
+        userDto.setUsername(makeUserName(userDto));
+        editRole(userDto);
+
+        saveUser(userDto);
+    }
+
+    @Override
+    public void saveUser(UserDto userDto) {
+
+        Role role = roleService.findModelByName(userDto.getUserRole());
+
+        User newUser = dtoConverter.toModel(role, userDto);
         User oldUser = userRepository.findUserByUserCode(userDto.getUserCode());
 
         if (oldUser != null) {
@@ -83,11 +100,20 @@ public class UserDetailsServiceImpl implements UserService {
         addUser(newUser);
     }
 
+    private UserDto editRole(UserDto userDto) {
+
+        if (userDto.getUserRole() == null) {
+            userDto.setUserRole(userRepository.findUserByUserCode(userDto.getUserCode()).getRole().getRoleName());
+        }
+
+        return userDto;
+    }
+
     private String makeRole(UserDto userDto) {
         String userRole;
 
         if (userDto.getUserRole() == null) {
-            userRole = "CUSTOMER";
+            userRole = STANDARD_ROLE;
         } else {
             userRole = userDto.getUserRole();
         }
@@ -148,6 +174,8 @@ public class UserDetailsServiceImpl implements UserService {
     public void addUser(User user) {
         if (user.getPassword() != null) {
             user.setPassword(encodePassword(user.getPassword()));
+        } else {
+            user.setPassword(userRepository.findUserByUserCode(user.getUserCode()).getPassword());
         }
 
         // ensure users created in the seeder get a unique usercode
@@ -186,7 +214,6 @@ public class UserDetailsServiceImpl implements UserService {
         User user = userRepository.findUserByUserCode(userCode);
         return dtoConverter.toDto(user);
     }
-
 
 }
 

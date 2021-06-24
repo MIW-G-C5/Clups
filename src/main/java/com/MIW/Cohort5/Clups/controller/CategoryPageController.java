@@ -2,6 +2,7 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.CategoryPageStateKeeper;
+import com.MIW.Cohort5.Clups.dtos.stateKeeper.ProductPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -134,10 +135,12 @@ public class CategoryPageController {
     }
 
     @GetMapping("/categories/delete")
-    protected String deleteCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper) {
+    protected String deleteCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper,
+                                @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
         categoryService.deleteCategory(stateKeeper.getCurrentCategory());
 
         clearCatForm(stateKeeper);
+        productPageStateKeeper.clearCurrentCategory();
 
         return "redirect:/categories";
     }
