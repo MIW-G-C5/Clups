@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="https://www.thymeleaf.org" xmlns:th="https://www.thymeleaf.org">
 
+<head th:fragment="errorHeader(title)">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title th:replace="${title}">Base title</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" rel="stylesheet">
+    <link href="/css/Error.css" rel="stylesheet" type="text/css">
+</head>
+
 <head th:fragment="baseHeader(title)">
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">

@@ -24,5 +24,6 @@ body, html {
 
 .linky {
     color: white;
+    text-decoration-line: underline;
 }
 
