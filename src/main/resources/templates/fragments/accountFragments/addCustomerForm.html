@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-    <form class="editProduct" th:fragment="addCustomerForm"
-          th:action="@{/accounts/addNew}" method="post"
-          th:object="${user}">
-        <label for="fullName">Full name (required)</label>
-        <div class="form-group input-group">
-            <input type="text" id="fullName" th:field="*{fullName}">
-        </div>
+<form class="editProduct" th:fragment="addCustomerForm"
+      th:action="@{/accounts/addNew}" method="post"
+      th:object="${user}">
+    <label for="fullName">Full name (required)</label>
+    <div class="form-group input-group">
+        <input type="text" id="fullName" th:field="*{fullName}">
+    </div>
 
-        <div sec:authorize="hasAuthority('BARMANAGER')">
-            <label for="userRole">Role</label>
-            <div>
-                <select id="userRole" th:field="*{userRole}">
-                    <option value="CUSTOMER">Customer</option>
-                    <option value="BARTENDER">Bartender</option>
-                    <option value="BARMANAGER">Barmanager</option>
-                </select>
-                <p></p>
-            </div>
+    <div sec:authorize="hasAuthority('BARMANAGER')">
+        <label for="userRole">Role</label>
+        <div>
+            <select id="userRole" th:field="*{userRole}">
+                <option value="CUSTOMER">Customer</option>
+                <option value="BARTENDER">Bartender</option>
+                <option value="BARMANAGER">Barmanager</option>
+            </select>
+            <p></p>
         </div>
+    </div>
 
+    <div sec:authorize="hasAuthority('BARMANAGER')">
         <label for="username">Username</label>
         <div class="form-group input-group">
             <input type="text" id="username" th:field="*{username}">
@@ -35,12 +36,13 @@
         <div>
             <input type="password" id="password" th:field="*{password}">
         </div>
+    </div>
 
-        <div class="row zeroPadding topBottomMargin">
-            <button type="submit" class="btn btn-primary formButtons">Save</button>
-            <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Cancel</a>
-        </div>
-    </form>
+    <div class="row zeroPadding topBottomMargin">
+        <button type="submit" class="btn btn-primary formButtons">Save</button>
+        <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Cancel</a>
+    </div>
+</form>
 </div>
 </body>
 </html>
