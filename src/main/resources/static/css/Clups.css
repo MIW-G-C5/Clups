@@ -136,6 +136,12 @@ a:focus, a:hover, a:active, a {
     font-weight: bold;
 }
 
+.totalPriceTag {
+    width: 70px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .zeroPadding {
     padding: 0;
     margin-left: 0;
