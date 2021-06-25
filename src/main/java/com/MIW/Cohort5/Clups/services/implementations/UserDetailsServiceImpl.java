@@ -235,5 +235,9 @@ public class UserDetailsServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    public List<Integer> getUserByPartialString(String request) {
+        return userRepository.findUserByPartialString(request);
+    }
+
 }
 

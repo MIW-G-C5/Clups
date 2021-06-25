@@ -28,4 +28,6 @@ public interface UserService extends UserDetailsService {
 
     void addCredit(Integer userCode, Integer amount);
 
+    List<Integer> getUserByPartialString(String request);
+
 }

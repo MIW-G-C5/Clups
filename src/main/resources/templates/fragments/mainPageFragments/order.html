@@ -7,6 +7,18 @@
 <body>
 <div class="container fitHeight" th:fragment="order">
     <div class="d-flex align-items-start flex-column fitHeight" >
+
+        <form th:action="@{/users/search}">
+            <input type="text" class="form-control" name="request"/>
+            <input type="submit" class="btn btn-primary" value="Search"/>
+        </form>
+
+        <table>
+            <tr th:each="user : ${userList}">
+                <td><a th:text="${user.username}"></a></td>
+            </tr>
+        </table>
+
         <div class="orderTable">
             <table>
                 <tr>

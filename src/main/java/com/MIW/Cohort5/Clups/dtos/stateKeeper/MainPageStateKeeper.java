@@ -1,6 +1,9 @@
 package com.MIW.Cohort5.Clups.dtos.stateKeeper;
 
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
+import com.MIW.Cohort5.Clups.dtos.UserDto;
+
+import java.util.List;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
@@ -12,6 +15,7 @@ public class MainPageStateKeeper {
 
     private Integer categoryCode;
     private OrderDto order;
+    private List<UserDto> sortedUsers;
 
     public MainPageStateKeeper() { }
 
@@ -31,4 +35,11 @@ public class MainPageStateKeeper {
         this.order = order;
     }
 
+    public List<UserDto> getSortedUsers() {
+        return sortedUsers;
+    }
+
+    public void setSortedUsers(List<UserDto> sortedUsers) {
+        this.sortedUsers = sortedUsers;
+    }
 }

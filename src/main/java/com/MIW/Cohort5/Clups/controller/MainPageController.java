@@ -2,13 +2,18 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.OrderDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
+import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.MainPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
+import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Johnnie Meijer
@@ -23,11 +28,13 @@ public class MainPageController {
 
     public final ProductService productService;
     public final CategoryService categoryService;
+    public final UserService userService;
 
     @Autowired
-    public MainPageController(ProductService products, CategoryService categories) {
+    public MainPageController(ProductService products, CategoryService categories, UserService users) {
         this.productService = products;
         this.categoryService = categories;
+        this.userService = users;
     }
 
     @ModelAttribute("mainPageStateKeeper")
@@ -53,6 +60,8 @@ public class MainPageController {
         model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
         model.addAttribute("selectedPage", "mainPage");
+
+        model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
         return "mainPage";
     }
 
@@ -98,5 +107,24 @@ public class MainPageController {
     public String accessDenied() {
         return "error/403";
     }
+
+    @GetMapping({"/users/search"})
+    protected String searchUser(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper,
+                                Model model,
+                                @RequestParam String request) {
+        List<Integer> searchResults = userService.getUserByPartialString(request);
+        List<UserDto> sortedUsers = new ArrayList<>();
+
+        for (Integer searchResult : searchResults) {
+            sortedUsers.add(userService.findDtoByUserCode(searchResult));
+        }
+
+        mainPageStateKeeper.setSortedUsers(sortedUsers);
+
+        model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
+
+        return "redirect:/order";
+    }
+
 
 }
