@@ -39,7 +39,10 @@
     </div>
 
     <div class="row zeroPadding topBottomMargin">
-        <button type="submit" class="btn btn-primary formButtons">Save</button>
+        <button sec:authorize="hasAuthority('BARMANAGER')" type="submit" class="btn btn-primary formButtons"
+                th:formaction="@{/accounts/addNew/BM}">Save</button>
+        <button sec:authorize="hasAuthority('BARTENDER')"type="submit" class="btn btn-primary formButtons"
+                th:formaction="@{/accounts/addNew/BT}">Save</button>
         <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Cancel</a>
     </div>
 </form>

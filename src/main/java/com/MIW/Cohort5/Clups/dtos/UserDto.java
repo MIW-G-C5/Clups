@@ -21,6 +21,14 @@ public class UserDto {
 
     public UserDto() {}
 
+    public UserDto(String username, String password, String fullName, BigDecimal prepaidBalance, String userRole) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.prepaidBalance = prepaidBalance;
+        this.userRole = userRole;
+    }
+
     public Integer getUserCode() {
         // this method cannot return null to ensure no nullPointerExceptions in the application
         if (userCode == null) {

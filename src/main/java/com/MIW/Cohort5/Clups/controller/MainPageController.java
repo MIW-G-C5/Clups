@@ -62,6 +62,7 @@ public class MainPageController {
         model.addAttribute("selectedPage", "mainPage");
 
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
+
         return "mainPage";
     }
 

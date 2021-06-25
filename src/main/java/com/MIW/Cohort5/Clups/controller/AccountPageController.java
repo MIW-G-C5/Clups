@@ -5,6 +5,8 @@ import com.MIW.Cohort5.Clups.dtos.stateKeeper.AccountPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,6 +59,7 @@ public class AccountPageController {
         return "userAccountPage";
     }
 
+    @PreAuthorize("hasAnyAuthority({'BARTENDER', 'BARMANAGER'})")
     @GetMapping("/accounts/addNew")
     protected String addNewUser(
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
@@ -66,26 +69,47 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
-    @PostMapping("/accounts/addNew")
-    protected String saveNewUser(
+    @PreAuthorize("hasAuthority('BARTENDER')")
+    @PostMapping("/accounts/addNew/BT")
+    protected String saveNewUserBartender(
             @ModelAttribute("user") UserDto userDto,
             BindingResult result,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
         if(!result.hasErrors()) {
-            stateKeeper.setCurrentUserDto(userDto);
-
-            if (userDto.getFullName() == null || userDto.getFullName() == "") {
-                throw new InputMismatchException("The full name must be filled in");
-            }
-
-            userService.newUser(stateKeeper.getCurrentUserDto());
-
-            clearForm(stateKeeper);
+            doSave(userDto, stateKeeper);
         }
 
         return "redirect:/accounts";
     }
+
+    @PreAuthorize("hasAuthority('BARMANAGER')")
+    @PostMapping("/accounts/addNew/BM")
+    protected String saveNewUserBarmanager(
+            @ModelAttribute("user") UserDto userDto,
+            BindingResult result,
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+
+        if(!result.hasErrors()) {
+            doSave(userDto, stateKeeper);
+        }
+
+        return "redirect:/accounts";
+    }
+
+    private void doSave(UserDto userDto,
+                        @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+        stateKeeper.setCurrentUserDto(userDto);
+
+        if (userDto.getFullName() == null || userDto.getFullName() == "") {
+            throw new InputMismatchException("The full name must be filled in");
+        }
+
+        userService.newUser(stateKeeper.getCurrentUserDto());
+
+        clearForm(stateKeeper);
+    }
+
 
     @GetMapping("/accounts/{userCode}")
     protected String selectUser(
@@ -97,6 +121,7 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
+    @PreAuthorize("hasAuthority('BARMANAGER')")
     @GetMapping("/accounts/editUser")
     protected String editUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
         stateKeeper.processEditUser();
@@ -104,6 +129,7 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
+    @PreAuthorize("hasAuthority('BARMANAGER')")
     @PostMapping("/accounts/edit")
     protected String saveExistingUser(@ModelAttribute("user") UserDto userDto,
                                       BindingResult result,
@@ -117,6 +143,7 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
+    @PreAuthorize("hasAuthority('BARMANAGER')")
     @GetMapping("accounts/delete")
     protected String deleteUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
 
@@ -141,6 +168,7 @@ public class AccountPageController {
         stateKeeper.clearUser();
     }
 
+    @PreAuthorize("hasAnyAuthority({'BARTENDER', 'BARMANAGER'})")
     @GetMapping("/accounts/addCredit")
     protected String showAddCreditForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper,
                                        Model model) {
@@ -150,6 +178,7 @@ public class AccountPageController {
         return "redirect:/accounts";
     }
 
+    @PreAuthorize("hasAnyAuthority({'BARTENDER', 'BARMANAGER'})")
     @PostMapping("/accounts/addCredit")
     protected String addCredit(@ModelAttribute("user") UserDto userDto, // needed to make the method work
                                @RequestParam("credit") Integer credit,

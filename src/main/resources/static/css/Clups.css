@@ -91,10 +91,8 @@ a:focus, a:hover, a:active, a {
 }
 
 .payButton {
-    height: 50px;
-    width: 200px;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    width: 40%;
+    margin-bottom: 5%;
 }
 
 .productBlock {
@@ -134,6 +132,12 @@ a:focus, a:hover, a:active, a {
 .totalPrice {
     width: 420px;
     font-weight: bold;
+}
+
+.totalPriceTag {
+    width: 70px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .zeroPadding {
