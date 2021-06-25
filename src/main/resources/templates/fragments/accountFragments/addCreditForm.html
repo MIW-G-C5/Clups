@@ -5,16 +5,17 @@
   <title>Title</title>
 </head>
 <body>
-<form class="editProduct" th:fragment="addCreditForm" th:action="@{accounts/addCredit}"
-      method="post" th:object="${user}">
+<form class="editProduct" th:fragment="addCreditForm" th:action="@{accounts/addCredit}" method="post">
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label boldText" for="prepaidBalance">Current balance:</label>
+    <div class="col-sm-9">
+      <input type="number" id="prepaidBalance" th:text="${prepaidBalance}" readonly class="form-control-plaintext">
+    </div>
+  </div>
   <label for="credit">Add to account balance:</label>
   <div class="form-group input-group">
     <input type="number" id="credit" th:name="credit">
   </div>
-  <input type="hidden" th:field="*{userCode}">
-<!--  <input type="hidden" th:field="*{fullName}">-->
-<!--  <input type="hidden" th:field="*{username}">-->
-<!--  <input type="hidden" th:field="*{password}">-->
   <div class="row zeroPadding topBottomMargin">
     <button type="submit" class="btn btn-primary formButtons">Save</button>
     <a class="btn btn-primary formButtons" th:href="@{/accounts/close}">Cancel</a>

@@ -2,7 +2,6 @@ package com.MIW.Cohort5.Clups.controller;
 
 import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.AccountPageStateKeeper;
-import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -143,30 +142,26 @@ public class AccountPageController {
     }
 
     @GetMapping("/accounts/addCredit")
-    protected String showAddCreditForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+    protected String showAddCreditForm(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper,
+                                       Model model) {
         stateKeeper.processAddCredit();
+        model.addAttribute("prepaidBalance", stateKeeper.getCurrentUserDto().getPrepaidBalance());
 
         return "redirect:/accounts";
     }
 
     @PostMapping("/accounts/addCredit")
-    protected String addCredit(@ModelAttribute("user") UserDto userDto,
-                               BindingResult result,
+    protected String addCredit(@ModelAttribute("user") UserDto userDto, // needed to make the method work
                                @RequestParam("credit") Integer credit,
-                               @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
-
+                               BindingResult result,
+                               @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper){
         if (!result.hasErrors()) {
-            UserDto existingUser = userService.findDtoByUserCode(userDto.getUserCode());
+            userService.addCredit(stateKeeper.getCurrentUserDto().getUserCode(), credit);
 
-            existingUser.addToBalance(credit);
+            stateKeeper.setCurrentUserDto(userService.findDtoByUserCode(stateKeeper.getCurrentUserDto().getUserCode()));
 
-            accountPageStateKeeper.setCurrentUserDto(userDto);
-
-            userService.editUser(accountPageStateKeeper.getCurrentUserDto());
-
-            clearForm(accountPageStateKeeper);
+            stateKeeper.processUserSelected();
         }
-
         return "redirect:/accounts";
     }
 

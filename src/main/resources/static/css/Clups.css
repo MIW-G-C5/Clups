@@ -13,6 +13,8 @@ a:focus, a:hover, a:active, a {
 
 .boldText {
     font-weight: bold;
+    padding-bottom: 0;
+    padding-top: 0;
 }
 
 .borderedRow{
@@ -51,11 +53,6 @@ a:focus, a:hover, a:active, a {
 
 .customerAccountBlock {
     width: 300px;
-}
-
-.deleteButton {
-    border-color: indianred;
-    background-color: indianred;
 }
 
 .editCategoriesAndProducts{
