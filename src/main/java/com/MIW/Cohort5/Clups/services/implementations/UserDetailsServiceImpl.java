@@ -227,5 +227,13 @@ public class UserDetailsServiceImpl implements UserService {
         return model;
     }
 
+    public void addCredit(Integer userCode, Integer amount) {
+        User user = userRepository.findUserByUserCode(userCode);
+
+        user.addToBalance(amount);
+
+        userRepository.save(user);
+    }
+
 }
 

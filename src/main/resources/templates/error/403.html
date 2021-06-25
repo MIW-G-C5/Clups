@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="fragments/general :: errorHeader(~{:: title})">
+  <meta charset="UTF-8">
+  <title>403 Forbidden</title>
+</head>
+
+<body>
+<div class="Error">
+  <span class="ErrorCode">403</span>
+  <p></p>
+  <span class="Errormsg">Unfortunately, you are not allowed here</span>
+  <p></p>
+  <span>These are not the bytes you're looking for<br></span>
+  <p></p>
+  <a class="linky" href="/order">Back to Orders</a>
+</div>
+
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
+</html>

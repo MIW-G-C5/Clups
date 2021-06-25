@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="EN" xmlns:th="https://www.thymeleaf.org">
+<html lang="EN" xmlns:sec="https://www.thymeleaf.org" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{::title})">
   <meta charset="UTF-8">
   <title>Accounts</title>
@@ -23,9 +23,9 @@
           </th:block>
           <th:block th:case="2">
             <div th:replace="fragments/accountFragments/showUserForm :: showUserForm"></div>
-            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
+            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}" sec:authorize="hasAuthority('BARMANAGER')">Delete</a>
             <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addCredit}">Add credit</a>
-            <a class="btn btn-primary formButtons" th:href="@{/accounts/editUser}">Edit User</a>
+            <a class="btn btn-primary formButtons" th:href="@{/accounts/editUser}" sec:authorize="hasAuthority('BARMANAGER')">Edit User</a>
             <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Close</a>
           </th:block>
           <th:block th:case="3">

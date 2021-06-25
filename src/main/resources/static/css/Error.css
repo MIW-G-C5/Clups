@@ -12,7 +12,7 @@ body, html {
     bottom: 25%
 }
 
-.FourOhThree {
+.ErrorCode {
     font-size: 100px;
     font-weight: bold;
 }
@@ -24,5 +24,6 @@ body, html {
 
 .linky {
     color: white;
+    text-decoration-line: underline;
 }
 

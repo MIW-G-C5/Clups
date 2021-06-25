@@ -20,6 +20,7 @@
                                     '   ' +
                                     orderItem.orderedProduct.productName +
                                     '   ' +
+                                    '&#x20AC' + ' ' +
                                     orderItem.calculateTotalPrice}">
                         </a>
                     </td>
@@ -30,7 +31,7 @@
         <table>
             <tr class="order">
                 <td class="totalPrice alignTextRight">Total price:</td>
-                <td th:text="${orderTotal}"></td>
+                <td th:text="'&#x20AC' + ' ' + ${orderTotal}"></td>
             </tr>
         </table>
 

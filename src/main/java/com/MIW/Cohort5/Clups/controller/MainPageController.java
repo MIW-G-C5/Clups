@@ -96,7 +96,7 @@ public class MainPageController {
 
     @RequestMapping("/403")
     public String accessDenied() {
-        return "errors/403";
+        return "error/403";
     }
 
 }
