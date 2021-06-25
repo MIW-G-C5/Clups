@@ -34,9 +34,12 @@
                 <td th:text="'&#x20AC' + ' ' + ${orderTotal}"></td>
             </tr>
         </table>
-
-        <a class="btn btn-info payButton" th:text="PAY" th:href="@{/order/clear}"></a>
+        <div class="row zeroPadding container-fluid justify-content-between">
+            <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
+            <button type="button" class="btn btn-info payButton" onclick='openModal()'>PAY PREPAID</button>
+        </div>
     </div>
+
 </div>
 </body>
 </html>

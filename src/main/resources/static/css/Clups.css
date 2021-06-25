@@ -91,10 +91,8 @@ a:focus, a:hover, a:active, a {
 }
 
 .payButton {
-    height: 50px;
-    width: 200px;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    width: 40%;
+    margin-bottom: 5%;
 }
 
 .productBlock {

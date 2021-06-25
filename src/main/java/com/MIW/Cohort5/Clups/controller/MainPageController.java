@@ -5,6 +5,7 @@ import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.dtos.stateKeeper.MainPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.CategoryService;
 import com.MIW.Cohort5.Clups.services.ProductService;
+import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,13 @@ public class MainPageController {
 
     public final ProductService productService;
     public final CategoryService categoryService;
+    public final UserService userService;
 
     @Autowired
-    public MainPageController(ProductService products, CategoryService categories) {
+    public MainPageController(ProductService products, CategoryService categories, UserService userService) {
         this.productService = products;
         this.categoryService = categories;
+        this.userService = userService;
     }
 
     @ModelAttribute("mainPageStateKeeper")
@@ -50,6 +53,9 @@ public class MainPageController {
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProductsByCategory",
                               productService.getProductsByCategory(mainPageStateKeeper.getCategoryCode()));
+
+        model.addAttribute("allUsers", userService.getAll());
+
         model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
         model.addAttribute("selectedPage", "mainPage");
