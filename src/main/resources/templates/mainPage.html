@@ -9,7 +9,7 @@
 <div class="container-fluid zeroPadding">
     <div class="row topBottomMargin no-gutters justify-content-between">
         <div class="col-7 borderedSection setMaxScreenSize">
-            <div class="row no-gutters fitHeight">
+            <div class="row no-gutters fitHeight" th:unless="${showModal == true}">
                 <div class="col-5 zeroPadding fitHeight">
                     <div th:replace="fragments/mainPageFragments/categoryOverview :: categoryOverview"></div>
                 </div>
@@ -17,66 +17,16 @@
                     <div th:replace="fragments/mainPageFragments/productOverview :: productOverview"></div>
                 </div>
             </div>
-        </div>
-            <div class="col-4 borderedSection setMaxScreenSize">
-                <div th:replace="fragments/mainPageFragments/order :: order"></div>
-            </div>
-    </div>
-
-    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel"
-         aria-modal="true" role="dialog" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderModalLabel">Select Customer</h5>
-                    <button type="button" class="close" aria-label="Close" onclick="closeModal()">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form th:action="@{/users/search}" id="searchForm">
-                        <input type="text" class="form-control" name="request"/>
-                        <input type="submit" class="btn btn-primary" value="Search"/>
-                    </form>
-
-                    <table>
-                        <tr th:each="user : ${userList}">
-                            <td><a th:text="${user.username}"></a></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
-                    <button type="button" class="btn btn-primary">Pay</button>
+            <div class="row no-gutters fitHeight" th:if="${showModal == true}">
+                <div class="col-6 zeroPadding fitHeight">
+                    <div th:replace="fragments/mainPageFragments/searchCustomer :: searchCustomer"></div>
                 </div>
             </div>
         </div>
+        <div class="col-4 borderedSection setMaxScreenSize">
+            <div th:replace="fragments/mainPageFragments/order :: order"></div>
+        </div>
     </div>
-    <div class="modal-backdrop fade show" id="backdrop" style="display: none;" data-backdrop="static"></div>
-
-    <script>
-        function openModal() {
-            document.getElementById("backdrop").style.display = "block"
-            document.getElementById("orderModal").style.display = "block"
-            document.getElementById("orderModal").classList.add("show")
-        }
-        function closeModal() {
-            document.getElementById("backdrop").style.display = "none"
-            document.getElementById("orderModal").style.display = "none"
-            document.getElementById("orderModal").classList.remove("show")
-        }
-        // Get the modal
-        var modal = document.getElementById('orderModal');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal()
-            }
-        }
-    </script>
-
-
     <div th:replace="fragments/general :: bottomScripts"></div>
 </div>
 </body>

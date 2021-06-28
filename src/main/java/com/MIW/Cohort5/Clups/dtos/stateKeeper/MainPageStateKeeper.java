@@ -17,6 +17,11 @@ public class MainPageStateKeeper {
     private OrderDto order;
     private List<UserDto> sortedUsers;
 
+    // this should always be false, unless changed by user actions in the application
+    private boolean showModal = false;
+
+    private UserDto selectedCustomer;
+
     public MainPageStateKeeper() { }
 
     public Integer getCategoryCode() {
@@ -41,5 +46,21 @@ public class MainPageStateKeeper {
 
     public void setSortedUsers(List<UserDto> sortedUsers) {
         this.sortedUsers = sortedUsers;
+    }
+
+    public boolean isShowModal() {
+        return showModal;
+    }
+
+    public void setShowModal(boolean showModal) {
+        this.showModal = showModal;
+    }
+
+    public UserDto getSelectedCustomer() {
+        return selectedCustomer;
+    }
+
+    public void setSelectedCustomer(UserDto selectedCustomer) {
+        this.selectedCustomer = selectedCustomer;
     }
 }

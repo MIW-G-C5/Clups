@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findUserByUserCode(Integer userCode);
 
-    @Query("SELECT userCode FROM User WHERE username LIKE :request%")
+    @Query("SELECT userCode FROM User WHERE fullName LIKE :request%")
     List<Integer> findUserByPartialString(@Param("request") String request);
 
     @Query("SELECT u FROM User u WHERE u.username = :username")

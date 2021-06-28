@@ -95,6 +95,25 @@ a:focus, a:hover, a:active, a {
     margin-bottom: 5%;
 }
 
+.prepaidBlock {
+    padding: 10px;
+    width: 100%;
+}
+
+.prepaidText {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.prepaidHeight {
+    height: calc(100% - 175px);
+}
+
+.prepaidSearchButton {
+    width: 100px;
+    margin-bottom: 25px;
+}
+
 .productBlock {
     background-color: lightslategray;
     padding: 20px;

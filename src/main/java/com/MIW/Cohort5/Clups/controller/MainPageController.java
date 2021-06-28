@@ -61,6 +61,8 @@ public class MainPageController {
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
         model.addAttribute("selectedPage", "mainPage");
 
+        model.addAttribute("showModal", mainPageStateKeeper.isShowModal());
+
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
 
         return "mainPage";
@@ -101,6 +103,7 @@ public class MainPageController {
     @GetMapping({"/order/clear"})
     protected String clearOrder(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         mainPageStateKeeper.getOrder().emptyOrder();
+        mainPageStateKeeper.setShowModal(false);
         return "redirect:/order";
     }
 
@@ -123,6 +126,24 @@ public class MainPageController {
         mainPageStateKeeper.setSortedUsers(sortedUsers);
 
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
+
+        return "redirect:/order";
+    }
+
+    @GetMapping("/order/prepaid")
+    protected String showModal(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
+        mainPageStateKeeper.setShowModal(true);
+
+        return "redirect:/order";
+    }
+
+    @GetMapping("/order/customer{userCode}")
+    protected String selectCustomer(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper,
+                                    @PathVariable("userCode") String userCodeString) {
+        Integer userCode = Integer.parseInt(userCodeString);
+
+        UserDto selectedUser = userService.findDtoByUserCode(userCode);
+        mainPageStateKeeper.setSelectedCustomer(selectedUser);
 
         return "redirect:/order";
     }
