@@ -4,6 +4,7 @@ import com.MIW.Cohort5.Clups.dtos.UserDto;
 import com.MIW.Cohort5.Clups.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -26,7 +27,7 @@ public interface UserService extends UserDetailsService {
 
     User findModelByUserCode (Integer userCode);
 
-    void addCredit(Integer userCode, Integer amount);
+    void addCredit(Integer userCode, BigDecimal amount);
 
     List<Integer> getUserByPartialString(String request);
 

@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.InputMismatchException;
 
 /**
@@ -181,11 +183,12 @@ public class AccountPageController {
     @PreAuthorize("hasAnyAuthority({'BARTENDER', 'BARMANAGER'})")
     @PostMapping("/accounts/addCredit")
     protected String addCredit(@ModelAttribute("user") UserDto userDto, // needed to make the method work
-                               @RequestParam("credit") Integer credit,
+                               @RequestParam("credit") Float credit,
                                BindingResult result,
                                @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper){
         if (!result.hasErrors()) {
-            userService.addCredit(stateKeeper.getCurrentUserDto().getUserCode(), credit);
+            BigDecimal amount = BigDecimal.valueOf(credit).setScale(2, RoundingMode.HALF_EVEN);
+            userService.addCredit(stateKeeper.getCurrentUserDto().getUserCode(), amount);
 
             stateKeeper.setCurrentUserDto(userService.findDtoByUserCode(stateKeeper.getCurrentUserDto().getUserCode()));
 
