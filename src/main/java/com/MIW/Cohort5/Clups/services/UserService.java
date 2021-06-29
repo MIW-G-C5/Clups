@@ -33,4 +33,6 @@ public interface UserService extends UserDetailsService {
 
     void payWithCredit(Integer userCode, BigDecimal orderTotal);
 
+    boolean loggedInUser(UserDto userDto);
+
 }
