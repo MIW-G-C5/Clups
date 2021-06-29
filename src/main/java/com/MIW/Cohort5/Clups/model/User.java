@@ -45,7 +45,7 @@ public class User {
 
     public User(){}
 
-    public void addToBalance(Integer amount) {
+    public void addToBalance (Integer amount) {
         if (prepaidBalance == null){
             prepaidBalance = BigDecimal.valueOf(amount);
         } else {

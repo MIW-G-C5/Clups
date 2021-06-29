@@ -5,7 +5,6 @@ import com.MIW.Cohort5.Clups.dtos.stateKeeper.AccountPageStateKeeper;
 import com.MIW.Cohort5.Clups.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,7 @@ import java.util.InputMismatchException;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
- *
+ * <p>
  * This controller handles all actions for customer accounts in the application
  */
 
@@ -40,7 +39,7 @@ public class AccountPageController {
     }
 
     @ModelAttribute("accountPageStateKeeper")
-    public AccountPageStateKeeper accountPageStateKeeper(){
+    public AccountPageStateKeeper accountPageStateKeeper() {
         return new AccountPageStateKeeper();
     }
 
@@ -56,6 +55,8 @@ public class AccountPageController {
 
         model.addAttribute("user", stateKeeper.getCurrentUserDto());
         model.addAttribute("processStep", stateKeeper.getProcessStep());
+        model.addAttribute("isLoggedInUser", userService.loggedInUser(stateKeeper.getCurrentUserDto()));
+        
         return "userAccountPage";
     }
 
@@ -76,7 +77,7 @@ public class AccountPageController {
             BindingResult result,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        if(!result.hasErrors()) {
+        if (!result.hasErrors()) {
             doSave(userDto, stateKeeper);
         }
 
@@ -90,7 +91,7 @@ public class AccountPageController {
             BindingResult result,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
 
-        if(!result.hasErrors()) {
+        if (!result.hasErrors()) {
             doSave(userDto, stateKeeper);
         }
 
@@ -99,6 +100,7 @@ public class AccountPageController {
 
     private void doSave(UserDto userDto,
                         @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+
         stateKeeper.setCurrentUserDto(userDto);
 
         if (userDto.getFullName() == null || userDto.getFullName() == "") {
@@ -115,6 +117,7 @@ public class AccountPageController {
     protected String selectUser(
             @PathVariable("userCode") String userCode,
             @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper) {
+
         accountPageStateKeeper.setCurrentUserDto(userService.findDtoByUserCode(Integer.parseInt(userCode)));
         accountPageStateKeeper.processUserSelected();
 
@@ -124,6 +127,7 @@ public class AccountPageController {
     @PreAuthorize("hasAuthority('BARMANAGER')")
     @GetMapping("/accounts/editUser")
     protected String editUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
+
         stateKeeper.processEditUser();
 
         return "redirect:/accounts";
@@ -131,10 +135,11 @@ public class AccountPageController {
 
     @PreAuthorize("hasAuthority('BARMANAGER')")
     @PostMapping("/accounts/edit")
-    protected String saveExistingUser(@ModelAttribute("user") UserDto userDto,
-                                      BindingResult result,
-                                      @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
-        if (!result.hasErrors()){
+    protected String saveExistingUser(
+            @ModelAttribute("user") UserDto userDto, BindingResult result,
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper) {
+
+        if (!result.hasErrors()) {
             accountPageStateKeeper.setCurrentUserDto(userDto);
             userService.editUser(accountPageStateKeeper.getCurrentUserDto());
 
@@ -145,15 +150,16 @@ public class AccountPageController {
 
     @PreAuthorize("hasAuthority('BARMANAGER')")
     @GetMapping("accounts/delete")
-    protected String deleteUser(@SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper){
+    protected String deleteUser(
+            @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper accountPageStateKeeper) {
 
         userService.deleteUser(accountPageStateKeeper.getCurrentUserDto());
         clearForm(accountPageStateKeeper);
         accountPageStateKeeper.clearUser();
 
         return "redirect:/accounts";
-    }
 
+    }
 
     @GetMapping("/accounts/cancel")
     protected String cancelForm(
@@ -183,7 +189,7 @@ public class AccountPageController {
     protected String addCredit(@ModelAttribute("user") UserDto userDto, // needed to make the method work
                                @RequestParam("credit") Integer credit,
                                BindingResult result,
-                               @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper){
+                               @SessionAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
         if (!result.hasErrors()) {
             userService.addCredit(stateKeeper.getCurrentUserDto().getUserCode(), credit);
 
@@ -200,6 +206,4 @@ public class AccountPageController {
 
         return "redirect:/accounts";
     }
-
-
 }

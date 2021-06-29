@@ -30,4 +30,5 @@ public interface UserService extends UserDetailsService {
 
     List<Integer> getUserByPartialString(String request);
 
+    boolean loggedInUser(UserDto userDto);
 }
