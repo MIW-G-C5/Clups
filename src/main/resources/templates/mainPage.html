@@ -9,7 +9,7 @@
 <div class="container-fluid zeroPadding">
     <div class="row topBottomMargin no-gutters justify-content-between">
         <div class="col-7 borderedSection setMaxScreenSize">
-            <div class="row no-gutters fitHeight" th:unless="${showModal == true}">
+            <div class="row no-gutters fitHeight" th:unless="${showUserSearch == true}">
                 <div class="col-5 zeroPadding fitHeight">
                     <div th:replace="fragments/mainPageFragments/categoryOverview :: categoryOverview"></div>
                 </div>
@@ -17,7 +17,7 @@
                     <div th:replace="fragments/mainPageFragments/productOverview :: productOverview"></div>
                 </div>
             </div>
-            <div class="row no-gutters fitHeight" th:if="${showModal == true}">
+            <div class="row no-gutters fitHeight" th:if="${showUserSearch == true}">
                 <div class="col-6 zeroPadding fitHeight">
                     <div th:replace="fragments/mainPageFragments/searchCustomer :: searchCustomer"></div>
                 </div>

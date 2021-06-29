@@ -18,7 +18,7 @@ public class MainPageStateKeeper {
     private List<UserDto> sortedUsers;
 
     // this should always be false, unless changed by user actions in the application
-    private boolean showModal = false;
+    private boolean showUserSearch = false;
 
     private UserDto selectedCustomer;
 
@@ -48,12 +48,12 @@ public class MainPageStateKeeper {
         this.sortedUsers = sortedUsers;
     }
 
-    public boolean isShowModal() {
-        return showModal;
+    public boolean isShowUserSearch() {
+        return showUserSearch;
     }
 
-    public void setShowModal(boolean showModal) {
-        this.showModal = showModal;
+    public void setShowUserSearch(boolean showUserSearch) {
+        this.showUserSearch = showUserSearch;
     }
 
     public UserDto getSelectedCustomer() {
