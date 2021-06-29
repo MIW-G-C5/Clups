@@ -45,14 +45,6 @@ public class User {
 
     public User(){}
 
-    public void addToBalance(BigDecimal amount) {
-        if (prepaidBalance == null){
-            prepaidBalance = amount;
-        } else {
-            prepaidBalance = prepaidBalance.add(amount);
-        }
-    }
-
     public Integer getUserCode() {
         // this method cannot return null to ensure no nullPointerExceptions in the application
         if (userCode == null) {

@@ -47,7 +47,6 @@ public class CategoryPageController {
 
         model.addAttribute("category", categoryPageStateKeeper.getCurrentCategory());
         model.addAttribute("selectedPage", "categoryPage");
-
         model.addAttribute("clearedToDelete", isClearToDelete(categoryPageStateKeeper));
 
         return "categoryEditor";
@@ -135,8 +134,10 @@ public class CategoryPageController {
     }
 
     @GetMapping("/categories/delete")
-    protected String deleteCategory(@SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper,
-                                @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+    protected String deleteCategory(
+            @SessionAttribute("categoryPageStateKeeper") CategoryPageStateKeeper stateKeeper,
+            @SessionAttribute("productPageStateKeeper") ProductPageStateKeeper productPageStateKeeper) {
+
         categoryService.deleteCategory(stateKeeper.getCurrentCategory());
 
         clearCatForm(stateKeeper);

@@ -9,6 +9,10 @@ import com.MIW.Cohort5.Clups.services.RoleService;
 import com.MIW.Cohort5.Clups.services.UserService;
 import com.MIW.Cohort5.Clups.services.dtoConverters.UserDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,6 +36,7 @@ public class UserDetailsServiceImpl implements UserService {
     private static final String INITIAL_PASSWORD_ROOT = "pw";
     private static final String INITIAL_USERNAME_ROOT = "user";
     private static final String STANDARD_ROLE = "CUSTOMER";
+    private static final String MANAGER_ROLE = "BARMANAGER";
 
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
@@ -101,6 +106,10 @@ public class UserDetailsServiceImpl implements UserService {
     }
 
     private UserDto editRole(UserDto userDto) {
+
+        if (loggedInUser(userDto)) {
+            throw new IllegalArgumentException("You are not allowed to change your own role");
+        }
 
         if (userDto.getUserRole() == null) {
             userDto.setUserRole(userRepository.findUserByUserCode(userDto.getUserCode()).getRole().getRoleName());
@@ -222,21 +231,55 @@ public class UserDetailsServiceImpl implements UserService {
 
     @Override
     public User deleteUser(UserDto userDto){
-        User model = findModelByUserCode(userDto.getUserCode());
-        userRepository.delete(model);
-        return model;
+
+        if (loggedInUser(userDto)) {
+            throw new IllegalArgumentException("You are not allowed to remove your own account");
+        } else {
+            User model = findModelByUserCode(userDto.getUserCode());
+            userRepository.delete(model);
+            return model;
+        }
     }
 
+    @Override
     public void addCredit(Integer userCode, BigDecimal amount) {
         User user = userRepository.findUserByUserCode(userCode);
 
-        user.addToBalance(amount);
+        if (user.getPrepaidBalance() == null) {
+            user.setPrepaidBalance(amount);
+        } else {
+            user.setPrepaidBalance(user.getPrepaidBalance().add(amount));
+        }
 
         userRepository.save(user);
     }
 
+    @Override
     public List<Integer> getUserByPartialString(String request) {
         return userRepository.findUserByPartialString(request);
+    }
+
+    @Override
+    public void payWithCredit(Integer userCode, BigDecimal orderTotal) {
+        User user = userRepository.findUserByUserCode(userCode);
+
+        if (user.getPrepaidBalance().compareTo(orderTotal) >= 0) {
+            user.setPrepaidBalance(user.getPrepaidBalance().subtract(orderTotal));
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("The balance is not sufficient for this order");
+        }
+    }
+
+    @Override
+    public boolean loggedInUser(UserDto userDto) {
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+
+        if (userDto != null) {
+            return loggedInUser.getName().equals(userDto.getUsername());
+        } else {
+            return false;
+        }
     }
 
 }

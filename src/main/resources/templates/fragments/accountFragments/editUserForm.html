@@ -27,7 +27,7 @@
         <input type="hidden" th:field="*{prepaidBalance}">
         <input type="hidden" th:field="*{userCode}">
 
-        <div sec:authorize="hasAuthority('BARMANAGER')">
+        <div sec:authorize="hasAuthority('BARMANAGER')" th:if="${isLoggedInUser == false}">
             <label for="userRole">Role</label>
             <div>
                 <select id="userRole" th:field="*{userRole}">
@@ -39,9 +39,13 @@
             </div>
         </div>
         <div class="row zeroPadding topBottomMargin">
-            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}">Delete</a>
+            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}"
+               th:classappend="${isLoggedInUser == false} ? ' ' : disabled" >Delete</a>
             <a class="btn btn-primary formButtons" th:href="@{/accounts/close}">Cancel</a>
             <button type="submit" class="btn btn-primary formButtons">Save</button>
+        </div>
+        <div>
+            <p th:if="${isLoggedInUser == true}" class="alert alert-danger categoryAlert" role="alert">You can not delete your own account or change your own role.</p>
         </div>
     </form>
 </div>
