@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,10 +164,29 @@ public class MainPageController {
                                     @PathVariable("userCode") String userCodeString) {
         Integer userCode = Integer.parseInt(userCodeString);
 
-        UserDto selectedUser = userService.findDtoByUserCode(userCode);
-        mainPageStateKeeper.setSelectedCustomer(selectedUser);
+        updateUser(mainPageStateKeeper, userCode);
 
         return "redirect:/order";
     }
+
+    private void updateUser(MainPageStateKeeper mainPageStateKeeper, Integer userCode) {
+        UserDto selectedUser = userService.findDtoByUserCode(userCode);
+        mainPageStateKeeper.setSelectedCustomer(selectedUser);
+    }
+
+    @GetMapping("/order/payPrepaid")
+    protected String payForCustomer(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
+        Integer userCode = mainPageStateKeeper.getSelectedCustomer().getUserCode();
+        BigDecimal orderTotal = mainPageStateKeeper.getOrder().calculateTotalCostOrder();
+
+        userService.payWithCredit(userCode, orderTotal);
+
+        updateUser(mainPageStateKeeper, userCode);
+
+        clearOrder(mainPageStateKeeper);
+
+        return "redirect:/order";
+    }
+
 
 }

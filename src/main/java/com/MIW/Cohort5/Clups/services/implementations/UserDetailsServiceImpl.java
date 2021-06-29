@@ -227,6 +227,7 @@ public class UserDetailsServiceImpl implements UserService {
         return model;
     }
 
+    @Override
     public void addCredit(Integer userCode, BigDecimal amount) {
         User user = userRepository.findUserByUserCode(userCode);
 
@@ -239,8 +240,21 @@ public class UserDetailsServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
     public List<Integer> getUserByPartialString(String request) {
         return userRepository.findUserByPartialString(request);
+    }
+
+    @Override
+    public void payWithCredit(Integer userCode, BigDecimal orderTotal) {
+        User user = userRepository.findUserByUserCode(userCode);
+
+        if (user.getPrepaidBalance().compareTo(orderTotal) >= 0) {
+            user.setPrepaidBalance(user.getPrepaidBalance().subtract(orderTotal));
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("The balance is not sufficient for this order");
+        }
     }
 
 }
