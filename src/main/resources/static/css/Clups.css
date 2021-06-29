@@ -113,11 +113,6 @@ a:focus, a:hover, a:active, a {
     height: calc(100% - 175px);
 }
 
-.prepaidSearchButton {
-    width: 100px;
-    margin-bottom: 25px;
-}
-
 .productBlock {
     background-color: lightslategray;
     padding: 20px;
@@ -130,6 +125,14 @@ a:focus, a:hover, a:active, a {
 .scrollableBtnBlock {
     max-height: 100%;
     overflow: auto;
+}
+
+.searchFormInput {
+    width: 60%;
+}
+
+.searchFormButton {
+    width: 30%;
 }
 
 .setMaxScreenSize {
