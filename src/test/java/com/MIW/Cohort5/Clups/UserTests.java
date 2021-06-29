@@ -61,18 +61,5 @@ public class UserTests {
                 () -> Assertions.assertEquals(testUserDto.getUserRole(), testUser.getRole().getRoleName())
                 );
     }
-
-    @Test
-    void testAddBalance() {
-        User testUser1 = new User();
-        User testUser2 = new User();
-
-        testUser2.setPrepaidBalance(BigDecimal.TEN);
-
-        testUser1.addToBalance(BigDecimal.TEN);
-        testUser2.addToBalance(BigDecimal.TEN);
-
-        Assertions.assertEquals(BigDecimal.valueOf(10), testUser1.getPrepaidBalance());
-        Assertions.assertEquals(BigDecimal.valueOf(20), testUser2.getPrepaidBalance());
-    }
+    
 }
