@@ -76,9 +76,15 @@ public class Seeder {
             Role customer = roleRepository.findRoleByRoleName("CUSTOMER");
             Role barmanager = roleRepository.findRoleByRoleName("BARMANAGER");
 
-            userService.addUser(new User("admin", "admin", "admin", barmanager, BigDecimal.valueOf(0)));
-            userService.addUser(new User("bartender", "bartender", "bartender", bartender, BigDecimal.valueOf(2.5)));
-            userService.addUser(new User("customer", "customer", "customer", customer, BigDecimal.valueOf(20)));
+            userService.addUser(new User("admin",
+                                         "admin",
+                                         "Mark Hoofdman", barmanager, BigDecimal.valueOf(0)));
+            userService.addUser(new User("bartender",
+                                         "bartender",
+                                         "Anna Tapper", bartender, BigDecimal.valueOf(2.5)));
+            userService.addUser(new User("customer",
+                                         "customer",
+                                         "Sjors Geldschieter", customer, BigDecimal.valueOf(20)));
         }
     }
 
@@ -96,8 +102,8 @@ public class Seeder {
     private void seedProduct() {
         if (productService.getAll().size() == 0) {
             productService.addNew(new Product("Nuts", BigDecimal.valueOf(1), findCategory(1)));
-            productService.addNew(new Product("Bitterballllls", BigDecimal.valueOf(2.50), findCategory(1)));
-            productService.addNew(new Product("Chips", BigDecimal.valueOf(2), findCategory(1)));
+            productService.addNew(new Product("Bitterballen", BigDecimal.valueOf(2.50), findCategory(1)));
+            productService.addNew(new Product("Potato chips", BigDecimal.valueOf(2), findCategory(1)));
             productService.addNew(new Product("Heineken", BigDecimal.valueOf(2.00), findCategory(2)));
             productService.addNew(new Product("Grolsch", BigDecimal.valueOf(2.00), findCategory(2)));
             productService.addNew(new Product("Amstel", BigDecimal.valueOf(1.60), findCategory(2)));
