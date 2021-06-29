@@ -54,6 +54,11 @@ a:focus, a:hover, a:active, a {
     width: 300px;
 }
 
+.customerText {
+    font-weight: bold;
+    font-size: larger;
+}
+
 .editCategoriesAndProducts{
     padding: 10px;
     font-family: sans-serif;
@@ -112,6 +117,10 @@ a:focus, a:hover, a:active, a {
     width: 100%;
 }
 
+.prepaidButtonBlockHeight {
+    height: 15%;
+}
+
 .prepaidText {
     overflow: hidden;
     white-space: nowrap;
@@ -119,11 +128,6 @@ a:focus, a:hover, a:active, a {
 
 .prepaidHeight {
     height: calc(100% - 175px);
-}
-
-.prepaidSearchButton {
-    width: 100px;
-    margin-bottom: 25px;
 }
 
 .productBlock {
@@ -154,6 +158,14 @@ a:focus, a:hover, a:active, a {
 .scrollableBtnBlock {
     max-height: 100%;
     overflow: auto;
+}
+
+.searchFormInput {
+    width: 60%;
+}
+
+.searchFormButton {
+    width: 30%;
 }
 
 .setMaxScreenSize {

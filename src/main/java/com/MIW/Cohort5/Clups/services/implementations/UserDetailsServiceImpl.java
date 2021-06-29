@@ -11,6 +11,8 @@ import com.MIW.Cohort5.Clups.services.dtoConverters.UserDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -239,6 +241,7 @@ public class UserDetailsServiceImpl implements UserService {
         }
     }
 
+    @Override
     public void addCredit(Integer userCode, BigDecimal amount) {
         User user = userRepository.findUserByUserCode(userCode);
 
@@ -251,8 +254,21 @@ public class UserDetailsServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
     public List<Integer> getUserByPartialString(String request) {
         return userRepository.findUserByPartialString(request);
+    }
+
+    @Override
+    public void payWithCredit(Integer userCode, BigDecimal orderTotal) {
+        User user = userRepository.findUserByUserCode(userCode);
+
+        if (isBalanceSufficient(userCode, orderTotal)) {
+            user.setPrepaidBalance(user.getPrepaidBalance().subtract(orderTotal));
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("The balance is not sufficient for this order");
+        }
     }
 
     @Override
@@ -266,5 +282,15 @@ public class UserDetailsServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean isBalanceSufficient(Integer userCode, BigDecimal orderTotal) {
+        User user = userRepository.findUserByUserCode(userCode);
+
+        if (user.getPrepaidBalance().compareTo(orderTotal) >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
