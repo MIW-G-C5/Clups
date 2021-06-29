@@ -22,14 +22,13 @@ a:focus, a:hover, a:active, a {
 }
 
 .borderedSection {
-    border: solid 3px black;
+
 }
 
 .buttonBlock {
     border-radius: 10px;
+    border-color: white;
     font-family: sans-serif;
-    border: solid white medium;
-    color: white;
     text-align: left;
 }
 
@@ -64,6 +63,10 @@ a:focus, a:hover, a:active, a {
     height: 100%;
 }
 
+.fitReceiptHeight {
+    height: 95%
+}
+
 .formButtons {
     width: 18%;
     margin-right: 4%;
@@ -75,9 +78,14 @@ a:focus, a:hover, a:active, a {
 
 .navbar {
     font-family: sans-serif;
-    background-color: dodgerblue;
+    color: forestgreen;
+    background-color: #3582c4;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.navbarcolor {
+    color: forestgreen;
 }
 
 .order {
@@ -127,6 +135,22 @@ a:focus, a:hover, a:active, a {
     width: 250px;
 }
 
+.receipt {
+    background-color: white;
+}
+
+.receiptcss {
+    width: 360px;
+    background-color: white;
+    border-radius: 30px;
+    position: relative;
+    margin-right: 5%;
+    box-shadow: 14px 14px 22px -18px;
+    padding: 20px;
+    border: solid 1px black;
+
+}
+
 .scrollableBtnBlock {
     max-height: 100%;
     overflow: auto;
@@ -140,6 +164,10 @@ a:focus, a:hover, a:active, a {
 .setMaxScreenSizeEditor {
     display: inline-block;
     height: calc(100vh - 200px);
+}
+
+.totalBackground {
+    background-color: white;
 }
 
 .topBottomMargin {

@@ -5,14 +5,15 @@
     <title></title>
 </head>
 <body>
-<div class="container fitHeight" th:fragment="order">
-    <div class="d-flex align-items-start flex-column fitHeight" >
+<div class="container fitReceiptHeight" th:fragment="order">
+    <div class="d-flex align-items-start flex-column fitHeight receiptcss" >
 
         <div class="orderTable">
             <table>
                 <tr>
                     <th>RECEIPT</th>
                 </tr>
+
                 <tr th:each="orderItem : ${orderList}">
                     <td>
                         <a class="order"
@@ -28,7 +29,7 @@
                 </tr>
             </table>
         </div>
-
+        <hr>
         <table>
             <tr class="order">
                 <td class="totalPrice alignTextRight">Total price:</td>
@@ -36,11 +37,6 @@
             </tr>
         </table>
         </br>
-
-        <div class="row zeroPadding container-fluid justify-content-between" th:if="${showUserSearch == false}">
-            <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
-            <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PAY PREPAID</a>
-        </div>
 
         <th:block th:if="${showUserSearch == true}">
             <div class="row zeroPadding container-fluid fullWidth">
@@ -61,6 +57,12 @@
                 </div>
             </div>
         </th:block>
+    </div>
+
+    <p></p>
+    <div class="row zeroPadding container-fluid justify-content-between" th:if="${showUserSearch == false}">
+        <a class="btn btn-info payButton" th:href="@{/order/clear}">CASH</a>
+        <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PREPAID</a>
     </div>
 
 </div>
