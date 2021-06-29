@@ -239,10 +239,14 @@ public class UserDetailsServiceImpl implements UserService {
         }
     }
 
-    public void addCredit(Integer userCode, Integer amount) {
+    public void addCredit(Integer userCode, BigDecimal amount) {
         User user = userRepository.findUserByUserCode(userCode);
 
-        user.addToBalance(amount);
+        if (user.getPrepaidBalance() == null) {
+            user.setPrepaidBalance(amount);
+        } else {
+            user.setPrepaidBalance(user.getPrepaidBalance().add(amount));
+        }
 
         userRepository.save(user);
     }

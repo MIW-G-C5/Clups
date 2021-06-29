@@ -9,8 +9,8 @@
     <a class="btn btn-lg btn-block buttonBlock categoriesBlock"
        th:href="@{/accounts/{userCode}(userCode=${user.getUserCode()})}">
         <table>
-          <td class="customerAccountBlock" th:text="${user.getFullName}"></td>
-          <td class="customerAccountBlock alignTextRight" th:text="'&#x20AC' + ' ' + ${user.prepaidBalance}"></td>
+          <td class="productItem" th:text="${user.getFullName}"></td>
+          <td class="productItem alignTextRight" th:text="'&#x20AC' + ' ' + ${user.prepaidBalance}"></td>
         </table>
     </a>
 </div>
