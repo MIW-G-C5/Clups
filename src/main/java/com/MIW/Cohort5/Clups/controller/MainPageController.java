@@ -131,8 +131,13 @@ public class MainPageController {
     }
 
     @GetMapping("/order/prepaid")
-    protected String showModal(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
+    protected String showModal(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper,
+                               Model model) {
         mainPageStateKeeper.setShowModal(true);
+
+        List<UserDto> sortedUsers = userService.getAll();
+        mainPageStateKeeper.setSortedUsers(sortedUsers);
+        model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
 
         return "redirect:/order";
     }
@@ -147,6 +152,5 @@ public class MainPageController {
 
         return "redirect:/order";
     }
-
 
 }
