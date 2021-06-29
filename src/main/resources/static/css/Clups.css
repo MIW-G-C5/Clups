@@ -104,6 +104,10 @@ a:focus, a:hover, a:active, a {
     width: 100%;
 }
 
+.prepaidButtonBlockHeight {
+    height: calc(100% - 750px);
+}
+
 .prepaidText {
     overflow: hidden;
     white-space: nowrap;

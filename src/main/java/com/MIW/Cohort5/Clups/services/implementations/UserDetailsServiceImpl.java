@@ -263,7 +263,7 @@ public class UserDetailsServiceImpl implements UserService {
     public void payWithCredit(Integer userCode, BigDecimal orderTotal) {
         User user = userRepository.findUserByUserCode(userCode);
 
-        if (user.getPrepaidBalance().compareTo(orderTotal) >= 0) {
+        if (isBalanceSufficient(userCode, orderTotal)) {
             user.setPrepaidBalance(user.getPrepaidBalance().subtract(orderTotal));
             userRepository.save(user);
         } else {
@@ -282,5 +282,15 @@ public class UserDetailsServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean isBalanceSufficient(Integer userCode, BigDecimal orderTotal) {
+        User user = userRepository.findUserByUserCode(userCode);
+
+        if (user.getPrepaidBalance().compareTo(orderTotal) >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 

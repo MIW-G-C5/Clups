@@ -35,4 +35,6 @@ public interface UserService extends UserDetailsService {
 
     boolean loggedInUser(UserDto userDto);
 
+    boolean isBalanceSufficient(Integer userCode, BigDecimal orderTotal);
+
 }
