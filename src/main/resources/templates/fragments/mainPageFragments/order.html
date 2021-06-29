@@ -48,7 +48,7 @@
                     <div class="col-4">
                         <div class="form-group row"  th:object="${selectedCustomer}">
                             <div class="col-sm-7">
-                                <span id="fullName" th:text="*{fullName}"></span>
+                                <span id="fullName" th:text="*{fullName}" class="customerText"></span>
                             </div>
                             <div class="col-sm-7">
                                 <th:block th:if="${selectedCustomer.prepaidBalance != null}">

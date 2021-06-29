@@ -55,6 +55,11 @@ a:focus, a:hover, a:active, a {
     width: 300px;
 }
 
+.customerText {
+    font-weight: bold;
+    font-size: larger;
+}
+
 .editCategoriesAndProducts{
     padding: 10px;
     font-family: sans-serif;
@@ -105,7 +110,7 @@ a:focus, a:hover, a:active, a {
 }
 
 .prepaidButtonBlockHeight {
-    height: calc(100% - 750px);
+    height: 15%;
 }
 
 .prepaidText {
