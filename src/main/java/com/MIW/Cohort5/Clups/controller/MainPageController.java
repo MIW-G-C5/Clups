@@ -52,18 +52,22 @@ public class MainPageController {
     protected String showPage(
             Model model,
             @ModelAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
-
         createOrder(mainPageStateKeeper);
+
         model.addAttribute("allCategories", categoryService.getAll());
         model.addAttribute("allProductsByCategory",
                               productService.getProductsByCategory(mainPageStateKeeper.getCategoryCode()));
+
         model.addAttribute("orderList", mainPageStateKeeper.getOrder().getOrderedItems());
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
+
         model.addAttribute("selectedPage", "mainPage");
 
-        model.addAttribute("showModal", mainPageStateKeeper.isShowModal());
-
+        model.addAttribute("showUserSearch", mainPageStateKeeper.isShowUserSearch());
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
+
+        setupCustomer(mainPageStateKeeper);
+        model.addAttribute("selectedCustomer", mainPageStateKeeper.getSelectedCustomer());
 
         return "mainPage";
     }
@@ -71,6 +75,17 @@ public class MainPageController {
     private void createOrder(MainPageStateKeeper mainPageStateKeeper) {
         if (mainPageStateKeeper.getOrder() == null) {
             mainPageStateKeeper.setOrder(new OrderDto());
+        }
+    }
+
+    // this method ensures there is always a UserDto in the Statekeeper, so the view never has a
+    // nullpointer exception when trying to evaluate the selectedCustomer in the statekeeper.
+    private void setupCustomer(MainPageStateKeeper mainPageStateKeeper) {
+        if (mainPageStateKeeper.getSelectedCustomer() == null) {
+            UserDto customer = new UserDto();
+            customer.setFullName("");
+
+            mainPageStateKeeper.setSelectedCustomer(customer);
         }
     }
 
@@ -103,7 +118,8 @@ public class MainPageController {
     @GetMapping({"/order/clear"})
     protected String clearOrder(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
         mainPageStateKeeper.getOrder().emptyOrder();
-        mainPageStateKeeper.setShowModal(false);
+        mainPageStateKeeper.setShowUserSearch(false);
+        mainPageStateKeeper.setSelectedCustomer(null);
         return "redirect:/order";
     }
 
@@ -131,9 +147,9 @@ public class MainPageController {
     }
 
     @GetMapping("/order/prepaid")
-    protected String showModal(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper,
+    protected String showSearchUser(@SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper,
                                Model model) {
-        mainPageStateKeeper.setShowModal(true);
+        mainPageStateKeeper.setShowUserSearch(true);
 
         List<UserDto> sortedUsers = userService.getAll();
         mainPageStateKeeper.setSortedUsers(sortedUsers);

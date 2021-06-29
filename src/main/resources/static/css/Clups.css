@@ -69,6 +69,10 @@ a:focus, a:hover, a:active, a {
     margin-right: 4%;
 }
 
+.fullWidth {
+    width: 100%;
+}
+
 .navbar {
     font-family: sans-serif;
     background-color: dodgerblue;
