@@ -31,6 +31,7 @@ a:focus, a:hover, a:active, a {
     border: solid white medium;
     color: white;
     text-align: left;
+
 }
 
 .categoryAlert {
@@ -132,6 +133,10 @@ a:focus, a:hover, a:active, a {
     overflow: auto;
 }
 
+.selectedButton{
+    background-color: blue;
+}
+
 .setMaxScreenSize {
     display: inline-block;
     height: calc(100vh - 120px);
@@ -168,3 +173,4 @@ a:focus, a:hover, a:active, a {
     margin-left: 0;
     margin-right: 0;
 }
+
