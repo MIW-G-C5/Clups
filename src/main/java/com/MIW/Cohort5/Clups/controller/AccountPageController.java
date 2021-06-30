@@ -61,6 +61,7 @@ public class AccountPageController {
         }
 
         model.addAttribute("user", stateKeeper.getCurrentUserDto());
+        model.addAttribute("selectedUser", stateKeeper.getCurrentUserDto().getUserCode());
         model.addAttribute("processStep", stateKeeper.getProcessStep());
         model.addAttribute("isLoggedInUser", userService.loggedInUser(stateKeeper.getCurrentUserDto()));
         

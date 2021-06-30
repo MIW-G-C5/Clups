@@ -8,11 +8,13 @@
 <div class="container-fluid zeroPadding scrollableBtnBlock" th:fragment="productOverview">
     <div th:each="product : ${allProductsByCategory}">
         <div>
-            <a class="btn btn-primary btn-block buttonBlock productBlock" th:href="@{/order/{productCode}(productCode=${product.productCode})}">
+            <a class="btn btn-primary btn-block buttonBlock productBlock" th:href="@{/order/{productCode}(productCode=${product.productCode})}"
+               th:classappend="${selectedProduct == product.productName} ? selectedButton : ' ' ">
                 <table>
                         <td class="productItem" th:text="${product.productName}"></td>
                         <td class="productItem alignTextRight" th:text="'&#x20AC' + ' ' + ${product.productPrice}"></td>
                 </table>
+
             </a>
         </div>
     </div>
