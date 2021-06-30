@@ -36,7 +36,6 @@ public class UserDetailsServiceImpl implements UserService {
     private static final String INITIAL_PASSWORD_ROOT = "pw";
     private static final String INITIAL_USERNAME_ROOT = "user";
     private static final String STANDARD_ROLE = "CUSTOMER";
-    private static final String MANAGER_ROLE = "BARMANAGER";
 
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
@@ -107,11 +106,7 @@ public class UserDetailsServiceImpl implements UserService {
 
     private UserDto editRole(UserDto userDto) {
 
-        if (loggedInUser(userDto)) {
-            throw new IllegalArgumentException("You are not allowed to change your own role");
-        }
-
-        if (userDto.getUserRole() == null) {
+        if (userDto.getUserRole() == null || loggedInUser(userDto)) {
             userDto.setUserRole(userRepository.findUserByUserCode(userDto.getUserCode()).getRole().getRoleName());
         }
 

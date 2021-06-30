@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * This class describes users without exposing unnecessary details to the View.
  */
 
-public class UserDto {
+public class UserDto implements Comparable<UserDto> {
 
     private Integer userCode;
 
@@ -36,6 +36,11 @@ public class UserDto {
         } else {
             return userCode;
         }
+    }
+
+    @Override
+    public int compareTo(UserDto other) {
+        return this.getFullName().compareTo(other.getFullName());
     }
 
     public String getFullName() {
@@ -81,4 +86,5 @@ public class UserDto {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+
 }
