@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.InputMismatchException;
+import java.util.List;
 
 /**
  * @author Kimberley Hommes - k.hommes@st.hanze.nl
@@ -49,7 +51,10 @@ public class AccountPageController {
     protected String showPage(Model model,
                               @ModelAttribute("accountPageStateKeeper") AccountPageStateKeeper stateKeeper) {
         model.addAttribute("selectedPage", "userPage");
-        model.addAttribute("allUsers", userService.getAll());
+
+        List<UserDto> allUsers = userService.getAll();
+        Collections.sort(allUsers);
+        model.addAttribute("allUsers", allUsers);
 
         if (stateKeeper.getCurrentUserDto() == null) {
             stateKeeper.setCurrentUserDto(new UserDto());
