@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -152,13 +153,14 @@ public class MainPageController {
                                 Model model,
                                 @RequestParam String request) {
         List<Integer> searchResults = userService.getUserByPartialString(request);
-        List<UserDto> sortedUsers = new ArrayList<>();
+        List<UserDto> filteredUsers = new ArrayList<>();
 
         for (Integer searchResult : searchResults) {
-            sortedUsers.add(userService.findDtoByUserCode(searchResult));
+            filteredUsers.add(userService.findDtoByUserCode(searchResult));
         }
 
-        mainPageStateKeeper.setSortedUsers(sortedUsers);
+        Collections.sort(filteredUsers);
+        mainPageStateKeeper.setSortedUsers(filteredUsers);
 
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
 
@@ -170,8 +172,9 @@ public class MainPageController {
                                Model model) {
         mainPageStateKeeper.setShowUserSearch(true);
 
-        List<UserDto> sortedUsers = userService.getAll();
-        mainPageStateKeeper.setSortedUsers(sortedUsers);
+        List<UserDto> allUsers = userService.getAll();
+        Collections.sort(allUsers);
+        mainPageStateKeeper.setSortedUsers(allUsers);
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
 
         return "redirect:/order";
