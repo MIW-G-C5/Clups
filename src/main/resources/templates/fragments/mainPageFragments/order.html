@@ -26,6 +26,7 @@
                 </tr>
             </table>
         </div>
+        <div class="receiptLine2"></div>
 
         <table>
             <tr class="order">
@@ -39,13 +40,13 @@
     </br>
     <div class="container-fluid fullWidth prepaidButtonBlock">
         <div class="row container-fluid justify-content-between" th:if="${showUserSearch == false}">
-            <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
-            <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PAY PREPAID</a>
+            <a class="btn btn-info payButton" th:href="@{/order/clear}">CASH</a>
+            <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PREPAID</a>
         </div>
 
         <th:block th:if="${showUserSearch == true}">
             <div class="row container-fluid fullWidth">
-                <div class="col-4">
+                <div class="col-5">
                     <div class="form-group row"  th:object="${selectedCustomer}">
                         <div class="col-sm-7">
                             <span id="fullName" th:text="*{fullName}" class="customerText"></span>
@@ -58,19 +59,28 @@
                     </div>
                 </div>
 
-                <div class="col-8 " >
-                    <th:block th:if="${balanceSufficient == true}">
-                        <a class="btn btn-info payButton" th:href="@{/order/payPrepaid}">PAY PREPAID</a>
-                        <a class="btn btn-info payButton" th:href="@{/order/cancel}">CANCEL</a>
-                    </th:block>
-                    <th:block th:if="${balanceSufficient == false}">
-                        <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert"
-                           role="alert">The balance is not sufficient</p>
-                        <a class="btn btn-info payButton" th:href="@{/order/cancel}">CANCEL</a>
-                    </th:block>
+                <div class="col-7">
+
+                    <div class="row container justify-content-between">
+                        <th:block th:if="${balanceSufficient == true}">
+                            <a class="btn btn-info payButton prepaidButton" th:href="@{/order/payPrepaid}">PAY</a>
+                            <a class="btn btn-info payButton prepaidButton" th:href="@{/order/cancel}">CANCEL</a>
+                        </th:block>
+                        <th:block th:if="${balanceSufficient == false}">
+
+                            <a class="btn btn-info payButton prepaidButton" th:href="@{/order/cancel}">CANCEL</a>
+                        </th:block>
+                    </div>
+
                 </div>
             </div>
+
+            <div class="row" th:if="${balanceSufficient == false}">
+                <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert fullWidth"
+                   role="alert">The balance is not sufficient</p>
+            </div>
         </th:block>
+
     </div>
 </div>
 </body>

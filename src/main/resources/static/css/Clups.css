@@ -27,7 +27,6 @@ a:focus, a:hover, a:active, a {
     font-family: sans-serif;
     color: white;
     text-align: left;
-
 }
 
 .categoryAlert {
@@ -67,8 +66,7 @@ a:focus, a:hover, a:active, a {
 }
 
 .fitReceiptHeight {
-    height: calc(100% - 160px);
-
+    height: calc(100% - 200px);
 }
 
 .formButtons {
@@ -106,16 +104,13 @@ a:focus, a:hover, a:active, a {
     margin-bottom: 5%;
 }
 
-.prepaidBlock {
-    padding: 10px;
-    width: 100%;
+.prepaidButton {
+    width: 90px;
 }
 
 .prepaidButtonBlock {
     height: 15%;
-    margin-right: 0;
-    padding: 0;
-    margin-left: 0;
+    margin-top: 20px;
 }
 
 .prepaidText {
