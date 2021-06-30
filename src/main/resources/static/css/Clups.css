@@ -25,7 +25,9 @@ a:focus, a:hover, a:active, a {
     border-radius: 10px;
     border-color: white;
     font-family: sans-serif;
+    color: white;
     text-align: left;
+
 }
 
 .categoryAlert {
@@ -80,14 +82,9 @@ a:focus, a:hover, a:active, a {
 
 .navbar {
     font-family: sans-serif;
-    color: forestgreen;
-    background-color: #3582c4;
+    background-color: dodgerblue;
     text-transform: uppercase;
     font-weight: bold;
-}
-
-.navbarcolor {
-    color: forestgreen;
 }
 
 .order {
@@ -128,6 +125,11 @@ a:focus, a:hover, a:active, a {
 
 .prepaidHeight {
     height: calc(100% - 175px);
+}
+
+.prepaidSearchButton {
+    width: 100px;
+    margin-bottom: 25px;
 }
 
 .productBlock {
@@ -174,6 +176,10 @@ a:focus, a:hover, a:active, a {
 .scrollableBtnBlock {
     max-height: 100%;
     overflow: auto;
+}
+
+.selectedButton{
+    background-color: blue;
 }
 
 .searchFormInput {

@@ -46,6 +46,7 @@ public class CategoryPageController {
         }
 
         model.addAttribute("category", categoryPageStateKeeper.getCurrentCategory());
+        model.addAttribute("selectedCategory", categoryPageStateKeeper.getCurrentCategory().getCategoryName());
         model.addAttribute("selectedPage", "categoryPage");
         model.addAttribute("clearedToDelete", isClearToDelete(categoryPageStateKeeper));
 
