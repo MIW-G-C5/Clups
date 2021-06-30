@@ -13,9 +13,9 @@
             <a class="order"
                th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}">
                 <table class="fullWidth">
-                    <td class="productItem" th:text="${orderItem.count}"></td>
-                    <td class="productItem" th:text="${orderItem.orderedProduct.productName}"></td>
-                    <td class="productItem alignTextRight" th:text="'&#x20AC' + ' ' + ${orderItem.calculateTotalPrice}"></td>
+                    <td class="receiptText receiptProductCount" th:text="${orderItem.count}"></td>
+                    <td class="receiptText receiptProduct" th:text="${orderItem.orderedProduct.productName}"></td>
+                    <td class="receiptText receiptProductPrice" th:text="'&#x20AC' + ' ' + ${orderItem.calculateTotalPrice}"></td>
                 </table>
             </a>
         </div>

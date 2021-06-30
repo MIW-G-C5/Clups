@@ -182,6 +182,23 @@ prepaidButtonCancel {
     margin-bottom: 10px;
 }
 
+.receiptText {
+    color: dimgray;
+}
+
+.receiptProduct {
+    width: 250px;
+}
+
+.receiptProductCount {
+    width: 35px;
+}
+
+.receiptProductPrice {
+    position: absolute;
+    right: 25px;
+}
+
 .rightMargin {
     margin-right: 15px;
 }
@@ -230,12 +247,14 @@ prepaidButtonCancel {
 .totalPrice {
     width: 420px;
     font-weight: bold;
+    color: dimgray;
 }
 
 .totalPriceTag {
     width: 70px;
     overflow: hidden;
     white-space: nowrap;
+    
 }
 
 .zeroPadding {
