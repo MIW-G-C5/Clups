@@ -6,38 +6,32 @@
 </head>
 <body>
 <div class="container fitReceiptHeight" th:fragment="order">
-    <div class="d-flex align-items-start flex-column fitHeight receipt" >
+    <div class="d-flex align-items-start flex-column receipt fitHeight orderTable" >
         <h2 class="receiptHeader">RECEIPT</h2>
         <div class="receiptLine"></div>
-        <div class="orderTable">
+        <div th:each="orderItem : ${orderList}">
+            <a class="order"
+               th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}">
+                <table class="fullWidth">
+                    <td class="productItem" th:text="${orderItem.count}"></td>
+                    <td class="productItem" th:text="${orderItem.orderedProduct.productName}"></td>
+                    <td class="productItem alignTextRight" th:text="'&#x20AC' + ' ' + ${orderItem.calculateTotalPrice}"></td>
+                </table>
+            </a>
+        </div>
+        <div class="receiptBottom">
+            <div class="receiptLine2"></div>
+
             <table>
-                <tr th:each="orderItem : ${orderList}">
-                    <td>
-                        <a class="order"
-                           th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}"
-                           th:text="${orderItem.count +
-                                    '   ' +
-                                    orderItem.orderedProduct.productName +
-                                    '   ' +
-                                    '&#x20AC' + ' ' +
-                                    orderItem.calculateTotalPrice}">
-                        </a>
-                    </td>
-                </tr>
+                <td class="totalPrice order alignTextRight">Total price:</td>
+                <td class="totalPriceTag order alignTextRight" th:text="' ' + '&#x20AC' + ' ' + ${orderTotal}"></td>
             </table>
         </div>
-        <div class="receiptLine2"></div>
-
-        <table>
-            <tr class="order">
-                <td class="totalPrice alignTextRight">Total price:</td>
-                <td class="totalPriceTag alignTextRight" th:text="' ' + '&#x20AC' + ' ' + ${orderTotal}"></td>
-            </tr>
-        </table>
         </br>
 
     </div>
     </br>
+
     <div class="container-fluid fullWidth prepaidButtonBlock">
         <div class="row container-fluid justify-content-between" th:if="${showUserSearch == false}">
             <a class="btn btn-info payButton" th:href="@{/order/clear}">CASH</a>
@@ -75,7 +69,6 @@
                    role="alert">The balance is not sufficient</p>
             </div>
         </th:block>
-
     </div>
 </div>
 </body>

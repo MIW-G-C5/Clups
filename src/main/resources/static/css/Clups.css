@@ -90,9 +90,7 @@ a:focus, a:hover, a:active, a {
 }
 
 .order {
-    border-radius: 0;
     font-family: Courier;
-    padding: 10px;
 }
 
 .orderTable {
@@ -155,6 +153,11 @@ prepaidButtonCancel {
     box-shadow: 14px 14px 22px -18px;
     padding: 20px;
     border: solid 1px black;
+}
+
+.receiptBottom {
+    position: absolute;
+    bottom: 15px;
 }
 
 .receiptHeader {
