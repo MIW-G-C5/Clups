@@ -1,6 +1,6 @@
 a:focus, a:hover, a:active, a {
     text-decoration: none;
-    color: inherit;
+    color: mediumpurple;
 }
 
 .addNewButton {
@@ -189,7 +189,7 @@ prepaidButtonCancel {
 }
 
 .selectedButton{
-    background-color: blue;
+    background-color: darkslateblue;
 }
 
 .searchFormInput {
