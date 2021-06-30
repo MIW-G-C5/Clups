@@ -31,4 +31,10 @@ public interface UserService extends UserDetailsService {
 
     List<Integer> getUserByPartialString(String request);
 
+    void payWithCredit(Integer userCode, BigDecimal orderTotal);
+
+    boolean loggedInUser(UserDto userDto);
+
+    boolean isBalanceSufficient(Integer userCode, BigDecimal orderTotal);
+
 }

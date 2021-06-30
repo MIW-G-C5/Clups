@@ -5,14 +5,15 @@
     <title></title>
 </head>
 <body>
-<div class="container fitHeight" th:fragment="order">
-    <div class="d-flex align-items-start flex-column fitHeight" >
+<div class="container fitReceiptHeight" th:fragment="order">
+    <div class="d-flex align-items-start flex-column fitHeight receiptcss" >
 
         <div class="orderTable">
             <table>
                 <tr>
                     <th>RECEIPT</th>
                 </tr>
+
                 <tr th:each="orderItem : ${orderList}">
                     <td>
                         <a class="order"
@@ -37,32 +38,43 @@
         </table>
         </br>
 
-        <div class="row zeroPadding container-fluid justify-content-between" th:if="${showUserSearch == false}">
-            <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
-            <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PAY PREPAID</a>
-        </div>
-
-        <th:block th:if="${showUserSearch == true}">
-            <div class="row zeroPadding container-fluid fullWidth">
-                <div class="col-6">
-                    <div class="form-group row"  th:object="${selectedCustomer}">
-                        <div class="col-sm-7">
-                            <span id="fullName" th:text="*{fullName}"></span>
-                        </div>
-                        <div class="col-sm-7">
-                            <th:block th:if="${selectedCustomer.prepaidBalance != null}">
-                                <span id="prepaidBalance" th:text="' ' + '&#x20AC' + ' ' + *{prepaidBalance}"></span>
-                            </th:block>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <a class="btn btn-info prepaidSearchButton" th:href="@{/order/prepaid}">PAY PREPAID</a>
-                </div>
-            </div>
-        </th:block>
     </div>
 
+        <div class="zeroPadding container-fluid fullWidth prepaidButtonBlockHeight">
+            <div class="row zeroPadding container-fluid justify-content-between" th:if="${showUserSearch == false}">
+                <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
+                <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PAY PREPAID</a>
+            </div>
+
+            <th:block th:if="${showUserSearch == true}">
+                <div class="row zeroPadding container-fluid fullWidth">
+                    <div class="col-4">
+                        <div class="form-group row"  th:object="${selectedCustomer}">
+                            <div class="col-sm-7">
+                                <span id="fullName" th:text="*{fullName}" class="customerText"></span>
+                            </div>
+                            <div class="col-sm-7">
+                                <th:block th:if="${selectedCustomer.prepaidBalance != null}">
+                                    <span id="prepaidBalance" th:text="' ' + '&#x20AC' + ' ' + *{prepaidBalance}"></span>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-8 " >
+                        <th:block th:if="${balanceSufficient == true}">
+                            <a class="btn btn-info payButton" th:href="@{/order/payPrepaid}">PAY PREPAID</a>
+                            <a class="btn btn-info payButton" th:href="@{/order/cancel}">CANCEL</a>
+                        </th:block>
+                        <th:block th:if="${balanceSufficient == false}">
+                            <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert"
+                               role="alert">The balance is not sufficient</p>
+                            <a class="btn btn-info payButton" th:href="@{/order/cancel}">CANCEL</a>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </div>
 </div>
 </body>
 </html>

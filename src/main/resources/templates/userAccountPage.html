@@ -23,10 +23,17 @@
           </th:block>
           <th:block th:case="2">
             <div th:replace="fragments/accountFragments/showUserForm :: showUserForm"></div>
-            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}" sec:authorize="hasAuthority('BARMANAGER')">Delete</a>
+            <a class="btn btn-danger formButtons" th:href="@{/accounts/delete}" sec:authorize="hasAuthority('BARMANAGER')"
+               th:classappend="${isLoggedInUser == false} ? ' ' : disabled">Delete</a>
             <a class="btn btn-primary topBottomMargin formButtons" th:href="@{/accounts/addCredit}">Add credit</a>
             <a class="btn btn-primary formButtons" th:href="@{/accounts/editUser}" sec:authorize="hasAuthority('BARMANAGER')">Edit User</a>
             <a class="btn btn-primary formButtons" th:href="@{/accounts/cancel}">Close</a>
+            <p></p>
+
+            <div>
+              <p th:if="${isLoggedInUser == true}" class="alert alert-danger categoryAlert" role="alert">You can not delete your own account.</p>
+            </div>
+
           </th:block>
           <th:block th:case="3">
             <div th:replace="fragments/accountFragments/editUserForm :: editUserForm"></div>
@@ -35,6 +42,7 @@
             <div th:replace="fragments/accountFragments/addCreditForm :: addCreditForm"></div>
           </th:block>
         </th:block>
+
       </div>
     </div>
   </div>

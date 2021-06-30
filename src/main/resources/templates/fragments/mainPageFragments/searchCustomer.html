@@ -7,11 +7,13 @@
 <body>
 <div class="container fitHeight" th:fragment="searchCustomer">
     <form th:action="@{/users/search}" id="searchForm">
-        <div>
-            <input type="text" class="form-control topBottomMargin" name="request"/>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-primary prepaidSearchButton" value="Search"/>
+        <div class="row zeroPadding justify-content-between">
+            <div class="searchFormInput">
+                <input type="text" class="form-control topBottomMargin" name="request" placeholder="Leave blank to show all names"/>
+            </div>
+            <div class="searchFormButton">
+                <input type="submit" class="btn btn-primary topBottomMargin fullWidth" value="Filter"/>
+            </div>
         </div>
     </form>
     <div class="prepaidHeight">
