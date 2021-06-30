@@ -36,7 +36,6 @@ public class UserDetailsServiceImpl implements UserService {
     private static final String INITIAL_PASSWORD_ROOT = "pw";
     private static final String INITIAL_USERNAME_ROOT = "user";
     private static final String STANDARD_ROLE = "CUSTOMER";
-    private static final String MANAGER_ROLE = "BARMANAGER";
 
     private UserDtoConverter dtoConverter = new UserDtoConverter();
 
