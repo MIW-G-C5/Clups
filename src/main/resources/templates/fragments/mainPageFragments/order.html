@@ -5,7 +5,7 @@
     <title></title>
 </head>
 <body>
-<div class="container fitReceiptHeight" th:fragment="order">
+<div class="container fitReceiptHeight rightMargin" th:fragment="order">
     <div class="d-flex align-items-start flex-column fitHeight receipt" >
         <h2 class="receiptHeader">RECEIPT</h2>
         <div class="receiptLine"></div>
@@ -45,8 +45,8 @@
         </div>
 
         <th:block th:if="${showUserSearch == true}">
-            <div class="row container-fluid fullWidth">
-                <div class="col-5">
+            <div class="row container-fluid justify-content-end fullWidth">
+                <div class="col-4">
                     <div class="form-group row"  th:object="${selectedCustomer}">
                         <div class="col-sm-7">
                             <span id="fullName" th:text="*{fullName}" class="customerText"></span>
@@ -59,24 +59,19 @@
                     </div>
                 </div>
 
-                <div class="col-7">
+                <div class="col-8">
 
-                    <div class="row container justify-content-between">
+                    <div class="row container justify-content-end">
                         <th:block th:if="${balanceSufficient == true}">
-                            <a class="btn btn-info payButton prepaidButton" th:href="@{/order/payPrepaid}">PAY</a>
-                            <a class="btn btn-info payButton prepaidButton" th:href="@{/order/cancel}">CANCEL</a>
+                            <a class="btn btn-info prepaidButton" th:href="@{/order/payPrepaid}">PAY</a>
                         </th:block>
-                        <th:block th:if="${balanceSufficient == false}">
-
-                            <a class="btn btn-info payButton prepaidButton" th:href="@{/order/cancel}">CANCEL</a>
-                        </th:block>
+                        <a class="btn btn-info prepaidButton prepaidButtonCancel" th:href="@{/order/cancel}">CANCEL</a>
                     </div>
-
                 </div>
             </div>
 
             <div class="row" th:if="${balanceSufficient == false}">
-                <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert fullWidth"
+                <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert"
                    role="alert">The balance is not sufficient</p>
             </div>
         </th:block>

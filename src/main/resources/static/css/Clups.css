@@ -78,6 +78,10 @@ a:focus, a:hover, a:active, a {
     width: 100%;
 }
 
+.leftMargin {
+    margin-left: 15px;
+}
+
 .navbar {
     font-family: sans-serif;
     background-color: dodgerblue;
@@ -106,11 +110,19 @@ a:focus, a:hover, a:active, a {
 
 .prepaidButton {
     width: 90px;
+    margin-left: 8%;
+
 }
 
 .prepaidButtonBlock {
     height: 15%;
     margin-top: 20px;
+    margin-right: -5%;
+}
+
+prepaidButtonCancel {
+    margin-right: -20px;
+    padding-right: 0;
 }
 
 .prepaidText {
@@ -140,7 +152,6 @@ a:focus, a:hover, a:active, a {
     background-color: white;
     border-radius: 30px;
     position: relative;
-    margin-right: calc(5% + 2px);
     box-shadow: 14px 14px 22px -18px;
     padding: 20px;
     border: solid 1px black;
@@ -166,6 +177,10 @@ a:focus, a:hover, a:active, a {
     background: dimgray;
     overflow: hidden;
     margin-bottom: 10px;
+}
+
+.rightMargin {
+    margin-right: 15px;
 }
 
 .scrollableBtnBlock {
