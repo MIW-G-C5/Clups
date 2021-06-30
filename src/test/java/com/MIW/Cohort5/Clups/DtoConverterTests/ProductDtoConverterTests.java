@@ -19,12 +19,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductDtoConverterTests {
 
     @Test
-    void toModelTest() {
+    void productToDtoTest() {
         ProductDtoConverter productDtoConverter = new ProductDtoConverter();
         Category category = new Category("Cocktails", 38);
         Product product = new Product("Bloody Mary", BigDecimal.valueOf(2.50), category);
+
         ProductDto productDto = productDtoConverter.toDto(product);
+
         assertThat(productDto.getProductName()).isEqualTo("Bloody Mary");
+        assertThat(productDto.getProductPrice()).isEqualTo(BigDecimal.valueOf(2.50));
+        assertThat(productDto.getCategoryCode()).isEqualTo(38);
     }
 
 }
