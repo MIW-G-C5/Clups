@@ -5,14 +5,15 @@
     <title></title>
 </head>
 <body>
-<div class="container fitHeight" th:fragment="order">
-    <div class="d-flex align-items-start flex-column fitHeight" >
+<div class="container fitReceiptHeight" th:fragment="order">
+    <div class="d-flex align-items-start flex-column fitHeight receiptcss" >
 
         <div class="orderTable">
             <table>
                 <tr>
                     <th>RECEIPT</th>
                 </tr>
+
                 <tr th:each="orderItem : ${orderList}">
                     <td>
                         <a class="order"
@@ -37,6 +38,8 @@
         </table>
         </br>
 
+    </div>
+
         <div class="zeroPadding container-fluid fullWidth prepaidButtonBlockHeight">
             <div class="row zeroPadding container-fluid justify-content-between" th:if="${showUserSearch == false}">
                 <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
@@ -48,7 +51,7 @@
                     <div class="col-4">
                         <div class="form-group row"  th:object="${selectedCustomer}">
                             <div class="col-sm-7">
-                                <span id="fullName" th:text="*{fullName}"></span>
+                                <span id="fullName" th:text="*{fullName}" class="customerText"></span>
                             </div>
                             <div class="col-sm-7">
                                 <th:block th:if="${selectedCustomer.prepaidBalance != null}">
@@ -72,7 +75,6 @@
                 </div>
             </th:block>
         </div>
-    </div>
 </div>
 </body>
 </html>
