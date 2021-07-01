@@ -11,12 +11,12 @@
           th:action="@{/products/edit}" method="post"
           th:object="${product}">
 
-        <label for="productName">Product Name</label>
+        <label for="productName">Name</label>
         <div class="form-group input-group">
             <input type="text" id="productName" th:field="*{productName}">
         </div>
 
-        <label for="productPrice">Product Price</label>
+        <label for="productPrice">Price</label>
         <div class="form-group input-group">
             <input type="text" id="productPrice" th:field="*{productPrice}">
         </div>

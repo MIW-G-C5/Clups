@@ -21,6 +21,10 @@ a:focus, a:hover, a:active, a {
     border: solid 3px white;
 }
 
+.bottomMargin {
+    margin-bottom: 15px;
+}
+
 .buttonBlock {
     border-radius: 10px;
     border-color: white;
@@ -54,6 +58,7 @@ a:focus, a:hover, a:active, a {
 .customerText {
     font-weight: bold;
     font-size: larger;
+    overflow-wrap: break-word;
 }
 
 .editCategoriesAndProducts{
@@ -109,13 +114,11 @@ a:focus, a:hover, a:active, a {
 .prepaidButton {
     width: 90px;
     margin-left: 8%;
-
 }
 
 .prepaidButtonBlock {
     height: 15%;
     margin-top: 20px;
-    margin-right: -5%;
 }
 
 prepaidButtonCancel {
@@ -210,8 +213,13 @@ prepaidButtonCancel {
     overflow: auto;
 }
 
-.selectedButton{
+.selectedButton {
     background-color: darkslateblue;
+}
+
+.searchCustomerButton {
+    background-color: steelblue;
+    padding: 20px;
 }
 
 .searchFormInput {

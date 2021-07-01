@@ -11,7 +11,7 @@
           th:action="@{/categories/edit}" method="post"
           th:object="${category}">
 
-        <label for="categoryName">Category Name</label>
+        <label for="categoryName">Name</label>
         <div class="form-group input-group">
             <input type="text" id="categoryName" th:field="*{categoryName}">
         </div>
@@ -21,7 +21,7 @@
             <a class="btn btn-danger formButtons" th:href="@{/categories/delete}"
                th:classappend="${clearedToDelete == true} ? ' ' : disabled">Delete</a>
             <a class="btn btn-primary formButtons " th:href="@{/categories/cancel}">Cancel</a>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary formButtons">Save</button>
         </div>
         <p></p>
         <div th:if="${clearedToDelete == false}" class="alert alert-danger categoryAlert" role="alert">

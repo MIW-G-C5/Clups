@@ -19,16 +19,15 @@
                 </table>
             </a>
         </div>
+
         <div class="receiptBottom">
             <div class="receiptLine2"></div>
-
             <table>
                 <td class="totalPrice order alignTextRight">Total price:</td>
                 <td class="totalPriceTag order alignTextRight" th:text="' ' + '&#x20AC' + ' ' + ${orderTotal}"></td>
             </table>
         </div>
         </br>
-
     </div>
     </br>
 
@@ -39,13 +38,13 @@
         </div>
 
         <th:block th:if="${showUserSearch == true}">
-            <div class="row container-fluid justify-content-end fullWidth">
+            <div class="row justify-content-end fullWidth">
                 <div class="col-4">
-                    <div class="form-group row"  th:object="${selectedCustomer}">
-                        <div class="col-sm-7">
+                    <div class="row"  th:object="${selectedCustomer}">
+                        <div>
                             <span id="fullName" th:text="*{fullName}" class="customerText"></span>
                         </div>
-                        <div class="col-sm-7">
+                        <div>
                             <th:block th:if="${selectedCustomer.prepaidBalance != null}">
                                 <span id="prepaidBalance" th:text="' ' + '&#x20AC' + ' ' + *{prepaidBalance}"></span>
                             </th:block>
@@ -55,7 +54,7 @@
 
                 <div class="col-8">
 
-                    <div class="row container justify-content-end">
+                    <div class="row justify-content-end">
                         <th:block th:if="${balanceSufficient == true}">
                             <a class="btn btn-info prepaidButton" th:href="@{/order/payPrepaid}">PAY</a>
                         </th:block>
@@ -65,7 +64,7 @@
             </div>
 
             <div class="row" th:if="${balanceSufficient == false}">
-                <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert"
+                <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert topBottomMargin"
                    role="alert">The balance is not sufficient</p>
             </div>
         </th:block>

@@ -9,17 +9,17 @@
     <form th:action="@{/users/search}" id="searchForm">
         <div class="row zeroPadding justify-content-between">
             <div class="searchFormInput">
-                <input type="text" class="form-control topBottomMargin" name="request" placeholder="Leave blank to show all names"/>
+                <input type="text" class="form-control bottomMargin" name="request" placeholder="Leave blank to show all names"/>
             </div>
             <div class="searchFormButton">
-                <input type="submit" class="btn btn-primary topBottomMargin fullWidth" value="Filter"/>
+                <input type="submit" class="btn btn-primary fullWidth bottomMargin" value="Filter"/>
             </div>
         </div>
     </form>
     <div class="prepaidHeight">
         <div class="container-fluid zeroPadding scrollableBtnBlock">
             <div th:each="user : ${userList}">
-                <a class="btn btn-block buttonBlock categoriesBlock prepaidBlock"
+                <a class="btn btn-block buttonBlock searchCustomerButton prepaidBlock"
                    th:href="@{/order/customer{userCode}(userCode=${user.getUserCode})}">
                     <table>
                         <td class="prepaidBlock prepaidText" th:text="${user.fullName}"></td>
