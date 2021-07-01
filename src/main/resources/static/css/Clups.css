@@ -158,6 +158,8 @@ prepaidButtonCancel {
 .receiptBottom {
     position: absolute;
     bottom: 15px;
+    right: 15px;
+    left: 15px;
 }
 
 .receiptHeader {
@@ -254,7 +256,7 @@ prepaidButtonCancel {
     width: 70px;
     overflow: hidden;
     white-space: nowrap;
-    
+
 }
 
 .zeroPadding {
