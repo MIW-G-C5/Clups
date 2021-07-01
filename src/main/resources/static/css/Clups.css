@@ -1,6 +1,6 @@
 a:focus, a:hover, a:active, a {
     text-decoration: none;
-    color: mediumpurple;
+    color: dimgrey;
 }
 
 .addNewButton {
@@ -254,6 +254,7 @@ prepaidButtonCancel {
 
 .totalPriceTag {
     width: 70px;
+    color: dimgrey;
     overflow: hidden;
     white-space: nowrap;
 
