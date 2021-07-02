@@ -30,45 +30,6 @@
         </br>
     </div>
     </br>
-
-    <div class="container-fluid fullWidth prepaidButtonBlock">
-        <div class="row container-fluid justify-content-between" th:if="${showUserSearch == false}">
-            <a class="btn btn-info payButton" th:href="@{/order/clear}">CASH</a>
-            <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PREPAID</a>
-        </div>
-
-        <th:block th:if="${showUserSearch == true}">
-            <div class="row justify-content-end fullWidth">
-                <div class="col-4">
-                    <div class="row"  th:object="${selectedCustomer}">
-                        <div>
-                            <span id="fullName" th:text="*{fullName}" class="customerText"></span>
-                        </div>
-                        <div>
-                            <th:block th:if="${selectedCustomer.prepaidBalance != null}">
-                                <span id="prepaidBalance" th:text="' ' + '&#x20AC' + ' ' + *{prepaidBalance}"></span>
-                            </th:block>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-8">
-
-                    <div class="row justify-content-end">
-                        <th:block th:if="${balanceSufficient == true}">
-                            <a class="btn btn-info prepaidButton" th:href="@{/order/payPrepaid}">PAY</a>
-                        </th:block>
-                        <a class="btn btn-info prepaidButton prepaidButtonCancel" th:href="@{/order/cancel}">CANCEL</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" th:if="${balanceSufficient == false}">
-                <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert topBottomMargin"
-                   role="alert">The balance is not sufficient</p>
-            </div>
-        </th:block>
-    </div>
 </div>
 </body>
 </html>
