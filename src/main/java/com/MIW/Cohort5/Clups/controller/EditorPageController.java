@@ -139,7 +139,6 @@ public class EditorPageController {
             showCategoryForChangedProduct(productDto.getCategoryCode(), editorPageStateKeeper);
 
             clearForm(editorPageStateKeeper);
-//            editorPageStateKeeper.clearCurrentCategory();
         }
 
         return "redirect:/editor";
