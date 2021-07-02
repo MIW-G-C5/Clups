@@ -5,7 +5,6 @@ import com.MIW.Cohort5.Clups.model.Role;
 import com.MIW.Cohort5.Clups.model.User;
 import com.MIW.Cohort5.Clups.services.dtoConverters.UserDtoConverter;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

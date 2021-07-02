@@ -1,16 +1,13 @@
 package com.MIW.Cohort5.Clups.DtoConverterTests;
 
-import com.MIW.Cohort5.Clups.dtos.CategoryDto;
 import com.MIW.Cohort5.Clups.dtos.ProductDto;
 import com.MIW.Cohort5.Clups.model.Category;
 import com.MIW.Cohort5.Clups.model.Product;
-import com.MIW.Cohort5.Clups.services.dtoConverters.CategoryDtoConverter;
 import com.MIW.Cohort5.Clups.services.dtoConverters.ProductDtoConverter;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.*;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
