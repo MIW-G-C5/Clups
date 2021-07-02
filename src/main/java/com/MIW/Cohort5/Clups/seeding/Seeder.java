@@ -78,34 +78,40 @@ public class Seeder {
 
             userService.addUser(new User("admin",
                                          "admin",
-                                         "Mark Hoofdman", barmanager, BigDecimal.valueOf(0)));
+                                         "Mark Heads", barmanager, BigDecimal.valueOf(0)));
             userService.addUser(new User("bartender",
                                          "bartender",
                                          "Anna Tapper", bartender, BigDecimal.valueOf(2.5)));
             userService.addUser(new User("customer",
                                          "customer",
-                                         "Sjors Geldschieter", customer, BigDecimal.valueOf(50)));
-            userService.addUser(new User("piet",
-                                         "piet",
-                                         "Piet de Vrek", customer, BigDecimal.valueOf(10)));
-            userService.addUser(new User("klaas",
-                                         "klass",
-                                         "Klaas de Waard", barmanager, BigDecimal.valueOf(20)));
+                                         "George Bagman", customer, BigDecimal.valueOf(50)));
+            userService.addUser(new User("richard",
+                                         "richard",
+                                         "Richard Peter Morrison III", customer, BigDecimal.valueOf(10)));
+            userService.addUser(new User("carl",
+                                         "carl",
+                                         "Carl Host", barmanager, BigDecimal.valueOf(20)));
             userService.addUser(new User("lisa",
                                          "lisa",
-                                         "Lisa Geldschieter", customer, BigDecimal.valueOf(12.5)));
-            userService.addUser(new User("michiel",
-                                         "michiel",
-                                         "Michiel Snelders", customer, BigDecimal.valueOf(7.5)));
-            userService.addUser(new User("sjanet",
-                                         "sjanet",
-                                         "Sjanet Tuiten", bartender, BigDecimal.valueOf(0)));
-            userService.addUser(new User("anko",
-                                         "anko",
-                                         "Anko Wild", customer, BigDecimal.valueOf(15.25)));
+                                         "Lisa Bagman-Lewis", customer, BigDecimal.valueOf(12.5)));
+            userService.addUser(new User("michael",
+                                         "michael",
+                                         "Michael Sommerset", customer, BigDecimal.valueOf(7.5)));
+            userService.addUser(new User("gina",
+                                         "gina",
+                                         "Gina diAngelina", bartender, BigDecimal.valueOf(0)));
+            userService.addUser(new User("arnold",
+                                         "arnold",
+                                         "Arnold Wilder", customer, BigDecimal.valueOf(15.25)));
             userService.addUser(new User("annabeth",
                                          "annabeth",
                                          "Annabeth Maker", customer, BigDecimal.valueOf(0)));
+            userService.addUser(new User("reginald",
+                                         "reginald",
+                                         "Reginald Smith", customer, BigDecimal.valueOf(13.33)));
+            userService.addUser(new User("penny",
+                                         "penny",
+                                         "Penny Louise Worthington-Smythe", customer, BigDecimal.valueOf(13.33)));
         }
     }
 
@@ -148,6 +154,8 @@ public class Seeder {
 
             productService.addNew(new Product("Whipped Cream", BigDecimal.valueOf(1), findCategory(6)));
             productService.addNew(new Product("Mayonnaise", BigDecimal.valueOf(0.25), findCategory(6)));
+            productService.addNew(new Product("Ketchup", BigDecimal.valueOf(0.25), findCategory(6)));
+
         }
     }
 
