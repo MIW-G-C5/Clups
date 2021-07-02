@@ -48,13 +48,8 @@ public class EditorPageController {
         model.addAttribute("categoryFormState", editorPageStateKeeper.isShowCategoryForm());
         model.addAttribute("productFormState", editorPageStateKeeper.isShowProductForm());
 
-        if (editorPageStateKeeper.getCurrentCategory() == null) {
-            editorPageStateKeeper.setCurrentCategory(new CategoryDto());
-        }
-
-        if (editorPageStateKeeper.getCurrentProduct() == null) {
-            editorPageStateKeeper.setCurrentProduct(new ProductDto());
-        }
+        setupCategory(editorPageStateKeeper);
+        setupProduct(editorPageStateKeeper);
 
         model.addAttribute("category", editorPageStateKeeper.getCurrentCategory());
         model.addAttribute("product", editorPageStateKeeper.getCurrentProduct());
@@ -288,4 +283,17 @@ public class EditorPageController {
 
         return clearedToDelete;
     }
+
+    private void setupCategory(EditorPageStateKeeper editorPageStateKeeper) {
+        if (editorPageStateKeeper.getCurrentCategory() == null) {
+            editorPageStateKeeper.setCurrentCategory(new CategoryDto());
+        }
+    }
+
+    private void setupProduct(EditorPageStateKeeper editorPageStateKeeper) {
+        if (editorPageStateKeeper.getCurrentProduct() == null) {
+            editorPageStateKeeper.setCurrentProduct(new ProductDto());
+        }
+    }
+
 }

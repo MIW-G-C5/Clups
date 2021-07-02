@@ -9,7 +9,7 @@
     <form class="editCategoriesAndProducts" th:fragment="editUserForm"
           th:action="@{/accounts/edit}" method="post"
           th:object="${user}">
-        <label for="fullName">Fullname </label>
+        <label for="fullName">Name </label>
         <div class="form-group input-group">
             <input type="text" id="fullName" th:field="*{fullName}">
         </div>

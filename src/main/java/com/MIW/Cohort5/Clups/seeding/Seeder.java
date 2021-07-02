@@ -84,7 +84,28 @@ public class Seeder {
                                          "Anna Tapper", bartender, BigDecimal.valueOf(2.5)));
             userService.addUser(new User("customer",
                                          "customer",
-                                         "Sjors Geldschieter", customer, BigDecimal.valueOf(20)));
+                                         "Sjors Geldschieter", customer, BigDecimal.valueOf(50)));
+            userService.addUser(new User("piet",
+                                         "piet",
+                                         "Piet de Vrek", customer, BigDecimal.valueOf(10)));
+            userService.addUser(new User("klaas",
+                                         "klass",
+                                         "Klaas de Waard", barmanager, BigDecimal.valueOf(20)));
+            userService.addUser(new User("lisa",
+                                         "lisa",
+                                         "Lisa Geldschieter", customer, BigDecimal.valueOf(12.5)));
+            userService.addUser(new User("michiel",
+                                         "michiel",
+                                         "Michiel Snelders", customer, BigDecimal.valueOf(7.5)));
+            userService.addUser(new User("sjanet",
+                                         "sjanet",
+                                         "Sjanet Tuiten", bartender, BigDecimal.valueOf(0)));
+            userService.addUser(new User("anko",
+                                         "anko",
+                                         "Anko Wild", customer, BigDecimal.valueOf(15.25)));
+            userService.addUser(new User("annabeth",
+                                         "annabeth",
+                                         "Annabeth Maker", customer, BigDecimal.valueOf(0)));
         }
     }
 
@@ -104,20 +125,27 @@ public class Seeder {
             productService.addNew(new Product("Nuts", BigDecimal.valueOf(1), findCategory(1)));
             productService.addNew(new Product("Bitterballen", BigDecimal.valueOf(2.50), findCategory(1)));
             productService.addNew(new Product("Potato chips", BigDecimal.valueOf(2), findCategory(1)));
+            productService.addNew(new Product("Curly fries", BigDecimal.valueOf(4.25), findCategory(1)));
+
+
             productService.addNew(new Product("Heineken", BigDecimal.valueOf(2.00), findCategory(2)));
             productService.addNew(new Product("Grolsch", BigDecimal.valueOf(2.00), findCategory(2)));
             productService.addNew(new Product("Amstel", BigDecimal.valueOf(1.60), findCategory(2)));
             productService.addNew(new Product("Hertog Jan", BigDecimal.valueOf(2.60), findCategory(2)));
+
             productService.addNew(new Product("Red wine", BigDecimal.valueOf(2.50), findCategory(3)));
             productService.addNew(new Product("White wine", BigDecimal.valueOf(2.50), findCategory(3)));
             productService.addNew(new Product("Rosé", BigDecimal.valueOf(2.80), findCategory(3)));
+
             productService.addNew(new Product("Tea", BigDecimal.valueOf(1.50), findCategory(4)));
             productService.addNew(new Product("Coffee", BigDecimal.valueOf(1.50), findCategory(4)));
-            productService.addNew(new Product("Hot choc", BigDecimal.valueOf(2), findCategory(4)));
+            productService.addNew(new Product("Hot chocolate", BigDecimal.valueOf(2), findCategory(4)));
+
             productService.addNew(new Product("Coke", BigDecimal.valueOf(1.50), findCategory(5)));
             productService.addNew(new Product("Fanta", BigDecimal.valueOf(1.50), findCategory(5)));
             productService.addNew(new Product("Sprite", BigDecimal.valueOf(1.50), findCategory(5)));
             productService.addNew(new Product("Lemonade", BigDecimal.valueOf(0.50), findCategory(5)));
+
             productService.addNew(new Product("Whipped Cream", BigDecimal.valueOf(1), findCategory(6)));
             productService.addNew(new Product("Mayonnaise", BigDecimal.valueOf(0.25), findCategory(6)));
         }

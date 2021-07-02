@@ -64,6 +64,8 @@ public class MainPageController {
         model.addAttribute("orderTotal", mainPageStateKeeper.getOrder().calculateTotalCostOrder());
 
         model.addAttribute("selectedPage", "mainPage");
+        model.addAttribute("selectedCategory", mainPageStateKeeper.getCategoryCode());
+
 
         model.addAttribute("showUserSearch", mainPageStateKeeper.isShowUserSearch());
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
@@ -117,6 +119,7 @@ public class MainPageController {
         return "redirect:/order";
     }
 
+
     @GetMapping({"/order/{productCode}"})
     protected String addProductToOrder(@PathVariable("productCode") String productCodeString,
                                        @SessionAttribute("mainPageStateKeeper") MainPageStateKeeper mainPageStateKeeper) {
@@ -124,7 +127,12 @@ public class MainPageController {
         mainPageStateKeeper.getOrder().addToOrder(orderedProduct);
         return "redirect:/order";
     }
-
+////
+//    public String selectedProduct(@PathVariable("productCode") String productCodeString) {
+//        String selectedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString)).getProductName();
+//        return selectedProduct;
+//    }
+//
     @GetMapping({"/order/remove/{productCode}"})
     protected String removeProductFromOrder(
             @PathVariable("productCode") String productCodeString,

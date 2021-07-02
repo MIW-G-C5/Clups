@@ -11,14 +11,14 @@
           th:fragment="addNewCategoryEditor"
           th:object="${category}">
 
-        <label for="categoryName">Category Name</label>
+        <label for="categoryName">Name</label>
         <div class="form-group input-group">
             <input id="categoryName" th:field="*{categoryName}" type="text">
         </div>
 
         <div>
-            <a class="btn btn-primary formButtons " th:href="@{/editor/cancel}">Cancel</a>
-            <button class="btn btn-primary" type="submit">Save category</button>
+            <a class="btn btn-primary formButtons " th:href="@{/categories/cancel}">Cancel</a>
+            <button class="btn btn-primary formButtons" type="submit">Save</button>
         </div>
     </form>
 </div>

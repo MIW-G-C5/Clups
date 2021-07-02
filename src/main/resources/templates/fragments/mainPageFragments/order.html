@@ -6,75 +6,30 @@
 </head>
 <body>
 <div class="container fitReceiptHeight" th:fragment="order">
-    <div class="d-flex align-items-start flex-column fitHeight receiptcss" >
+    <div class="d-flex align-items-start flex-column receipt fitHeight orderTable" >
+        <h2 class="receiptHeader">RECEIPT</h2>
+        <div class="receiptLine"></div>
+        <div th:each="orderItem : ${orderList}">
+            <a class="order"
+               th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}">
+                <table class="fullWidth">
+                    <td class="receiptText receiptProductCount" th:text="${orderItem.count}"></td>
+                    <td class="receiptText receiptProduct" th:text="${orderItem.orderedProduct.productName}"></td>
+                    <td class="receiptText receiptProductPrice" th:text="'&#x20AC' + ' ' + ${orderItem.calculateTotalPrice}"></td>
+                </table>
+            </a>
+        </div>
 
-        <div class="orderTable">
+        <div class="receiptBottom">
+            <div class="receiptLine2"></div>
             <table>
-                <tr>
-                    <th>RECEIPT</th>
-                </tr>
-
-                <tr th:each="orderItem : ${orderList}">
-                    <td>
-                        <a class="order"
-                           th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}"
-                           th:text="${orderItem.count +
-                                    '   ' +
-                                    orderItem.orderedProduct.productName +
-                                    '   ' +
-                                    '&#x20AC' + ' ' +
-                                    orderItem.calculateTotalPrice}">
-                        </a>
-                    </td>
-                </tr>
+                <td class="totalPrice order alignTextRight">Total price:</td>
+                <td class="totalPriceTag order alignTextRight" th:text="' ' + '&#x20AC' + ' ' + ${orderTotal}"></td>
             </table>
         </div>
-
-        <table>
-            <tr class="order">
-                <td class="totalPrice alignTextRight">Total price:</td>
-                <td class="totalPriceTag alignTextRight" th:text="' ' + '&#x20AC' + ' ' + ${orderTotal}"></td>
-            </tr>
-        </table>
         </br>
-
     </div>
-
-        <div class="zeroPadding container-fluid fullWidth prepaidButtonBlockHeight">
-            <div class="row zeroPadding container-fluid justify-content-between" th:if="${showUserSearch == false}">
-                <a class="btn btn-info payButton" th:href="@{/order/clear}">PAY CASH</a>
-                <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PAY PREPAID</a>
-            </div>
-
-            <th:block th:if="${showUserSearch == true}">
-                <div class="row zeroPadding container-fluid fullWidth">
-                    <div class="col-4">
-                        <div class="form-group row"  th:object="${selectedCustomer}">
-                            <div class="col-sm-7">
-                                <span id="fullName" th:text="*{fullName}" class="customerText"></span>
-                            </div>
-                            <div class="col-sm-7">
-                                <th:block th:if="${selectedCustomer.prepaidBalance != null}">
-                                    <span id="prepaidBalance" th:text="' ' + '&#x20AC' + ' ' + *{prepaidBalance}"></span>
-                                </th:block>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-8 " >
-                        <th:block th:if="${balanceSufficient == true}">
-                            <a class="btn btn-info payButton" th:href="@{/order/payPrepaid}">PAY PREPAID</a>
-                            <a class="btn btn-info payButton" th:href="@{/order/cancel}">CANCEL</a>
-                        </th:block>
-                        <th:block th:if="${balanceSufficient == false}">
-                            <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger categoryAlert"
-                               role="alert">The balance is not sufficient</p>
-                            <a class="btn btn-info payButton" th:href="@{/order/cancel}">CANCEL</a>
-                        </th:block>
-                    </div>
-                </div>
-            </th:block>
-        </div>
+    </br>
 </div>
 </body>
 </html>

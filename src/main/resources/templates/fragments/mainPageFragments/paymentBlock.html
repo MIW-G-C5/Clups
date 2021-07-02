@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:fragment="paymentBlock">
+  <div class="container-fluid fullWidth prepaidButtonBlock topBottomMargin">
+    <div class="row container-fluid justify-content-between" th:if="${showUserSearch == false}">
+      <a class="btn btn-info payButton" th:href="@{/order/clear}">CASH</a>
+      <a class="btn btn-info payButton" th:href="@{/order/prepaid}">PREPAID</a>
+    </div>
+
+    <th:block th:if="${showUserSearch == true}">
+      <div class="row justify-content-end fullWidth leftMargin">
+        <div class="col-5 zeroPadding">
+          <table th:object="${selectedCustomer}">
+            <tr>
+              <td th:text="*{fullName}" class="customerText"></td>
+            </tr>
+            <th:block th:if="${selectedCustomer.prepaidBalance != null}">
+              <tr>
+                <td th:text="' ' + '&#x20AC' + ' ' + *{prepaidBalance}"></td>
+              </tr>
+            </th:block>
+          </table>
+        </div>
+
+        <div class="col-4">
+          <th:block th:if="${balanceSufficient == true}">
+            <a class="btn btn-info prepaidPayButton" th:href="@{/order/payPrepaid}">PAY</a>
+          </th:block>
+          <th:block th:if="${balanceSufficient == false}">
+            <p th:unless="${selectedCustomer.fullName == ''}" class="alert alert-danger prepaidAlert"
+               role="alert">Balance too low</p>
+          </th:block>
+        </div>
+        <div class="col-3 zeroPadding">
+          <a class="btn btn-info prepaidCancelButton" th:href="@{/order/cancel}">CANCEL</a>
+
+        </div>
+      </div>
+
+
+    </th:block>
+  </div>
+</div>
+</body>
+</html>
