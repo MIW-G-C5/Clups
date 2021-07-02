@@ -41,7 +41,8 @@ public class EditorPageController {
             @ModelAttribute("editorPageStateKeeper") EditorPageStateKeeper editorPageStateKeeper) {
 
         model.addAttribute("allCategories", categoryService.getAll());
-        if (editorPageStateKeeper.getCurrentCategory() != null) {
+        if (editorPageStateKeeper.getCurrentCategory() != null &&
+                editorPageStateKeeper.getCurrentCategory().getCategoryCode() > 0) {
             model.addAttribute("allProductsByCategory",
                     productService.getProductsByCategory(editorPageStateKeeper.getCurrentCategory().getCategoryCode()));
         }
