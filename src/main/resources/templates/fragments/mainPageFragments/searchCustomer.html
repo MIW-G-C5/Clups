@@ -6,6 +6,9 @@
 </head>
 <body>
 <div class="container fitHeight" th:fragment="searchCustomer">
+    <h2 class="receiptHeader"> SELECT CUSTOMER</h2>
+    <div class="receiptLine"></div>
+    <p></p>
     <form th:action="@{/users/search}" id="searchForm">
         <div class="row zeroPadding justify-content-between">
             <div class="searchFormInput">
@@ -19,7 +22,7 @@
     <div class="prepaidHeight">
         <div class="container-fluid zeroPadding scrollableBtnBlock">
             <div th:each="user : ${userList}">
-                <a class="btn btn-block buttonBlock searchCustomerButton prepaidBlock fullWidth"
+                <a class="btn btn-block buttonBlock btn-primary searchCustomerButton prepaidBlock fullWidth"
                    th:href="@{/order/customer{userCode}(userCode=${user.getUserCode})}">
                     <table class="fullWidth">
                         <td class="prepaidBlock prepaidText" th:text="${user.fullName}"></td>
