@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid zeroPadding btn-block scrollableBtnBlock button:focus" th:fragment="categoryOverviewEditor">
+    <div th:each="category : ${allCategories}">
+        <a class="btn btn-primary btn-lg btn-block buttonBlock categoriesBlock"
+           th:href="@{/editor/category/{categoryCode}(categoryCode=${category.categoryCode})}"
+           th:text="${category.categoryName}"
+           th:classappend="${selectedCategory == category.categoryCode} ? selectedButton : ' '">
+        </a>
+    </div>
+</div>
+</body>
+</html>

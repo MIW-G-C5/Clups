@@ -7,8 +7,8 @@
 <body>
 <div>
     <form class="editCategoriesAndProducts"
-          th:fragment="editCategory"
-          th:action="@{/categories/edit}" method="post"
+          th:fragment="editCategoryEditor"
+          th:action="@{/editor/edit/category}" method="post"
           th:object="${category}">
 
         <label for="categoryName">Category Name</label>
@@ -18,9 +18,9 @@
 
         <input type="hidden" th:field="*{categoryCode}">
         <div>
-            <a class="btn btn-danger formButtons" th:href="@{/categories/delete}"
+            <a class="btn btn-danger formButtons" th:href="@{/editor/delete/category}"
                th:classappend="${clearedToDelete == true} ? ' ' : disabled">Delete</a>
-            <a class="btn btn-primary formButtons " th:href="@{/categories/cancel}">Cancel</a>
+            <a class="btn btn-primary formButtons " th:href="@{/editor/cancel}">Cancel</a>
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
         <p></p>

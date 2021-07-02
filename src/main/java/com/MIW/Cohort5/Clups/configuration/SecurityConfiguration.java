@@ -35,13 +35,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    // TODO: 17/06/2021 Authentication is not yet functional: everyone can get on homepage, roles not distributed correctly.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
               http
                 .authorizeRequests()
                     .antMatchers("/css/**").permitAll()
-                    .antMatchers("/products", "/categories").hasAuthority("BARMANAGER")
+                    .antMatchers("/editor").hasAuthority("BARMANAGER")
                     .antMatchers("/accounts").hasAnyAuthority("BARMANAGER", "BARTENDER")
                     .antMatchers("/order").hasAnyAuthority("BARMANAGER", "BARTENDER")
                     .anyRequest().authenticated()

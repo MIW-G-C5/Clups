@@ -8,8 +8,8 @@
 <div>
     <form class="editCategoriesAndProducts"
           method="post"
-          th:action="@{/products/addNew}"
-          th:fragment="addNewProduct"
+          th:action="@{/editor/addNew/product}"
+          th:fragment="addNewProductEditor"
           th:object="${product}">
 
         <label for="productName">Product Name</label>

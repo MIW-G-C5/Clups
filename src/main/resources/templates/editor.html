@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="EN" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <meta charset="UTF-8">
+    <title>Editor</title>
+</head>
+<body>
+<nav th:replace="fragments/general :: navbar"></nav>
+<div class="container-fluid zeroPadding">
+    <div class="row topBottomMargin no-gutters justify-content-between">
+        <div class="col-7 borderedSection setMaxScreenSizeEditor">
+            <div class="row no-gutters fitHeight">
+                <div class="col-5 zeroPadding fitHeight">
+                    <div th:replace="fragments/editorFragments/categoryOverviewEditor :: categoryOverviewEditor"></div>
+                </div>
+                <div class="col-7 zeroPadding fitHeight">
+                    <div th:replace="fragments/editorFragments/productOverviewEditor :: productOverviewEditor"></div>
+                </div>
+            </div>
+        </div>
+
+        <block class="col-4 borderedSection">
+            <div th:if="${productFormState} == true">
+                <th:block th:if="${product.productName} == null">
+                    <div th:replace="fragments/editorFragments/addNewProductEditor :: addNewProductEditor"></div>
+                </th:block>
+                <th:block th:unless="${product.productName} == null">
+                    <div th:replace="/fragments/editorFragments/editProductEditor :: editProductEditor"></div>
+                </th:block>
+            </div>
+
+            <div th:if="${categoryFormState} == true">
+                <th:block th:if="${category.categoryName} == null">
+                    <div th:replace="fragments/editorFragments/addNewCategoryEditor :: addNewCategoryEditor"></div>
+                </th:block>
+                <th:block th:unless="${category.categoryName} == null">
+                    <div th:replace="fragments/editorFragments/editCategoryEditor :: editCategoryEditor"></div>
+                </th:block>
+            </div>
+        </block>
+    </div>
+
+    <div class="row topBottomMargin zeroPadding borderedRow">
+        <div class="col-4">
+            <div><a class="btn btn-info btn-lg" th:href="@{/editor/addNew/category}">Add new category</a></div>
+        </div>
+        <div class="col-4">
+            <div><a class="btn btn-info btn-lg" th:href="@{/editor/addNew/product}">Add new product</a></div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/general :: bottomScripts"></div>
+</div>
+</body>
+</html>

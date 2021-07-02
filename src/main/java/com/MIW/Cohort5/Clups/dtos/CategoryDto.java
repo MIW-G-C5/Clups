@@ -11,7 +11,7 @@ public class CategoryDto {
 
     private String categoryName;
 
-    private int categoryCode;
+    private Integer categoryCode;
 
     private List<ProductDto> products;
 
@@ -27,11 +27,15 @@ public class CategoryDto {
     }
 
     //This getter is used in the CategoryDtoConverter
-    public int getCategoryCode() {
-        return categoryCode;
+    public Integer getCategoryCode() {
+        if (categoryCode == null) {
+            return -1;
+        } else {
+            return categoryCode;
+        }
     }
 
-    public void setCategoryCode(int categoryCode) {
+    public void setCategoryCode(Integer categoryCode) {
         this.categoryCode = categoryCode;
     }
 
