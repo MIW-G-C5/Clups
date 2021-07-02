@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title></title>
 </head>
 <body>
-<div class="container-fluid zeroPadding scrollableBtnBlock" th:fragment="productOverviewPE">
+<div class="container-fluid zeroPadding scrollableBtnBlock" th:fragment="productOverviewEditor">
     <div th:each="product : ${allProductsByCategory}">
         <div>
             <a class="btn btn-primary btn-block buttonBlock productBlock"
-               th:href="@{/products/{productCode}(productCode=${product.productCode})}">
+                th:href="@{/editor/product/{productCode}(productCode=${product.productCode})}"
+                th:classappend="${selectedProduct == product.productCode} ? selectedButton : ' '">
 
                 <table>
                     <td class="productItem" th:text="${product.productName}"></td>

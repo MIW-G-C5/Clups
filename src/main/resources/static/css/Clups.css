@@ -21,6 +21,10 @@ a:focus, a:hover, a:active, a {
     border: solid 3px white;
 }
 
+.bottomMargin {
+    margin-bottom: 15px;
+}
+
 .buttonBlock {
     border-radius: 10px;
     border-color: white;
@@ -48,12 +52,15 @@ a:focus, a:hover, a:active, a {
 }
 
 .customerAccountBlock {
-    width: 300px;
+    padding: 20px;
+    margin-top: 0;
+    background-color: steelblue;
 }
 
 .customerText {
     font-weight: bold;
     font-size: larger;
+    overflow-wrap: break-word;
 }
 
 .editCategoriesAndProducts{
@@ -106,35 +113,38 @@ a:focus, a:hover, a:active, a {
     margin-bottom: 5%;
 }
 
-.prepaidButton {
-    width: 90px;
-    margin-left: 8%;
-
+.prepaidAlert {
+    width: 140px;
+    padding: .375rem .75rem;
+    overflow-wrap: break-word;
 }
 
 .prepaidButtonBlock {
     height: 15%;
     margin-top: 20px;
-    margin-right: -5%;
 }
 
-prepaidButtonCancel {
-    margin-right: -20px;
-    padding-right: 0;
-}
-
-.prepaidText {
-    overflow: hidden;
-    white-space: nowrap;
+.prepaidCancelButton {
+    width: 90px;
+    margin-right: 15px;
 }
 
 .prepaidHeight {
     height: calc(100% - 175px);
 }
 
+.prepaidPayButton {
+    width: 140px;
+}
+
 .prepaidSearchButton {
     width: 100px;
     margin-bottom: 25px;
+}
+
+.prepaidText {
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .productBlock {
@@ -210,8 +220,13 @@ prepaidButtonCancel {
     overflow: auto;
 }
 
-.selectedButton{
+.selectedButton {
     background-color: darkslateblue;
+}
+
+.searchCustomerButton {
+    background-color: steelblue;
+    padding: 20px;
 }
 
 .searchFormInput {
@@ -257,7 +272,6 @@ prepaidButtonCancel {
     color: dimgrey;
     overflow: hidden;
     white-space: nowrap;
-
 }
 
 .zeroPadding {

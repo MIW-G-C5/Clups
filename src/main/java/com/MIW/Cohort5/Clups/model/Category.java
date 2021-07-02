@@ -18,12 +18,12 @@ public class Category {
     private String categoryName;
 
     @Column(unique = true)
-    private int categoryCode;
+    private Integer categoryCode;
 
     @OneToMany (mappedBy ="productCategory", fetch = FetchType.EAGER)
     private List<Product> products;
 
-    public Category(String categoryName, int categoryCode, List<Product> products) {
+    public Category(String categoryName, Integer categoryCode, List<Product> products) {
         this.categoryName = categoryName;
         this.categoryCode = categoryCode;
         this.products = products;
@@ -41,22 +41,25 @@ public class Category {
         return products;
     }
 
-    public int getCategoryCode() {
-        return categoryCode;
+    public Integer getCategoryCode() {
+        if (categoryCode == null) {
+            return -1;
+        } else {
+            return categoryCode;
+        }
     }
 
     public String getCategoryName() {
         return categoryName;
     }
 
-    public void setCategoryCode(int categoryCode) {
+    public void setCategoryCode(Integer categoryCode) {
         this.categoryCode = categoryCode;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-
 
     public void setCategoryDbId(Integer categoryDbId) {
         this.categoryDbId = categoryDbId;

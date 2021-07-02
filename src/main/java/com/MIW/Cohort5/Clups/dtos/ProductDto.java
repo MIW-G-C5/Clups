@@ -12,7 +12,7 @@ public class ProductDto {
     
     private String productName;
 
-    private int productCode;
+    private Integer productCode;
 
     private BigDecimal productPrice;
 
@@ -38,11 +38,15 @@ public class ProductDto {
         this.productName = productName;
     }
 
-    public int getProductCode() {
-        return productCode;
+    public Integer getProductCode() {
+        if (productCode == null) {
+            return -1;
+        } else {
+            return productCode;
+        }
     }
 
-    public void setProductCode(int productCode) {
+    public void setProductCode(Integer productCode) {
         this.productCode = productCode;
     }
 

@@ -51,9 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
     //This method saves objects in the database.
     @Override
     public Category addNew(Category category) {
-
-
-        if (category.getCategoryCode() <= 0){
+        if (category.getCategoryCode() <= 0) {
             category.setCategoryCode(getHighestCategoryCode() + 1);
         }
 
@@ -93,4 +91,5 @@ public class CategoryServiceImpl implements CategoryService {
 
         return model;
     }
+
 }
