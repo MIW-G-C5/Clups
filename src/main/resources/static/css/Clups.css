@@ -224,10 +224,6 @@ a:focus, a:hover, a:active, a {
     overflow: auto;
 }
 
-.selectedButton {
-    background-color: darkslateblue;
-}
-
 .searchCustomerButton {
     background-color: steelblue;
     padding: 20px;
@@ -239,6 +235,10 @@ a:focus, a:hover, a:active, a {
 
 .searchFormButton {
     width: 30%;
+}
+
+.selectedButton {
+    background-color: darkslateblue;
 }
 
 .setMaxScreenSize {

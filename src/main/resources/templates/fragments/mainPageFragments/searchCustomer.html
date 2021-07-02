@@ -20,7 +20,8 @@
         <div class="container-fluid zeroPadding scrollableBtnBlock">
             <div th:each="user : ${userList}">
                 <a class="btn btn-block buttonBlock btn-primary searchCustomerButton prepaidBlock fullWidth"
-                   th:href="@{/order/customer{userCode}(userCode=${user.getUserCode})}">
+                   th:href="@{/order/customer{userCode}(userCode=${user.getUserCode})}"
+                   th:classappend="${selectedUser == user.userCode} ? selectedButton : ' ' ">
                     <table class="fullWidth">
                         <td class="prepaidBlock prepaidText" th:text="${user.fullName}"></td>
                         <td class="prepaidBlock prepaidText alignTextRight" th:text="'&#x20AC' + ' ' + ${user.prepaidBalance}"></td>
