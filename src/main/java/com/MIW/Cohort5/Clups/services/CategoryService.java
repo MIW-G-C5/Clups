@@ -26,5 +26,6 @@ public interface CategoryService {
 
     Category deleteCategory(CategoryDto categoryDto);
 
+    boolean isClearToDelete(CategoryDto categoryDto);
 
 }
