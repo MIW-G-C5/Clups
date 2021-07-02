@@ -205,8 +205,11 @@ a:focus, a:hover, a:active, a {
     width: 35px;
 }
 
+.receiptProductHeight {
+    height: calc(100% - 90px)
+}
+
 .receiptProductPrice {
-    position: absolute;
     right: 25px;
 }
 
