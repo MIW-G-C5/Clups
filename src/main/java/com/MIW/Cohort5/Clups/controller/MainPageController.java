@@ -100,9 +100,10 @@ public class MainPageController {
     // This methods ensures the view never throws a nullpointerException when evaluating the balance
     private boolean setupBalanceCheck(MainPageStateKeeper mainPageStateKeeper) {
         // check if there is a customer selected and there is an ordertotal to evaluate.
-        if (mainPageStateKeeper.getSelectedCustomer().getFullName() == "" ||
-                mainPageStateKeeper.getOrder().getOrderedItems().isEmpty()) {
+        if (mainPageStateKeeper.getSelectedCustomer().getFullName() == "") {
             return false;
+        } else if (mainPageStateKeeper.getOrder().getOrderedItems().isEmpty()){
+            return true;
         } else {
             Integer userCode = mainPageStateKeeper.getSelectedCustomer().getUserCode();
             BigDecimal orderTotal = mainPageStateKeeper.getOrder().calculateTotalCostOrder();
