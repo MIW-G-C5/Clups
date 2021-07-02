@@ -212,6 +212,7 @@ a:focus, a:hover, a:active, a {
 
 .receiptProductPrice {
     right: 25px;
+    text-align: end;
 }
 
 .rightMargin {
