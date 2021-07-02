@@ -6,19 +6,27 @@
 </head>
 <body>
 <div class="container fitReceiptHeight" th:fragment="order">
-    <div class="d-flex align-items-start flex-column receipt fitHeight orderTable" >
-        <h2 class="receiptHeader">RECEIPT</h2>
-        <div class="receiptLine"></div>
-        <div th:each="orderItem : ${orderList}">
-            <a class="order"
-               th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}">
-                <table class="fullWidth">
-                    <td class="receiptText receiptProductCount" th:text="${orderItem.count}"></td>
-                    <td class="receiptText receiptProduct" th:text="${orderItem.orderedProduct.productName}"></td>
-                    <td class="receiptText receiptProductPrice" th:text="'&#x20AC' + ' ' + ${orderItem.calculateTotalPrice}"></td>
-                </table>
-            </a>
+    <div class="d-flex flex-column receipt fitHeight ">
+        <div class="receiptProductHeight">
+            <h2 class="receiptHeader">RECEIPT</h2>
+            <div class="receiptLine"></div>
+            <div class="orderTable">
+                <div th:each="orderItem : ${orderList}">
+                    <a class="order"
+                       th:href="@{/order/remove/{productCode}(productCode=${orderItem.orderedProduct.productCode})}">
+                        <table class="fullWidth">
+                            <td class="receiptText receiptProductCount" th:text="${orderItem.count}"></td>
+                            <td class="receiptText receiptProduct" th:text="${orderItem.orderedProduct.productName}"></td>
+                            <td class="receiptText receiptProductPrice" th:text="'&#x20AC' + ' ' + ${orderItem.calculateTotalPrice}"></td>
+                        </table>
+                    </a>
+
+            </div>
+
+            </div>
+
         </div>
+
 
         <div class="receiptBottom">
             <div class="receiptLine2"></div>
