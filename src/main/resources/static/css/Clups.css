@@ -52,8 +52,9 @@ a:focus, a:hover, a:active, a {
 }
 
 .customerAccountBlock {
-    width: 300px;
+    padding: 20px;
     margin-top: 0;
+    background-color: steelblue;
 }
 
 .customerText {

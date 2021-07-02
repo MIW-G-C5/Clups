@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="customerAccountList" th:each="user : ${allUsers}">
-    <a class="btn btn-lg btn-block buttonBlock categoriesBlock"
+    <a class="btn btn-primary btn-lg btn-block buttonBlock customerAccountBlock"
        th:href="@{/accounts/{userCode}(userCode=${user.getUserCode()})}"
        th:classappend="${selectedUser == user.userCode} ? selectedButton : ' ' ">
         <table>
