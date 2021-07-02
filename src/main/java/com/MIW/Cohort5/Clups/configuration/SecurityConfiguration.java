@@ -35,7 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    // TODO: 17/06/2021 Authentication is not yet functional: everyone can get on homepage, roles not distributed correctly.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
               http
