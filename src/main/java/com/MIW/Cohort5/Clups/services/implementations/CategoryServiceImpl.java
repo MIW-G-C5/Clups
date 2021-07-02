@@ -87,9 +87,23 @@ public class CategoryServiceImpl implements CategoryService {
     public Category deleteCategory(CategoryDto categoryDto) {
         Category model = findModelByCode(categoryDto.getCategoryCode());
 
-        categoryRepository.delete(model);
+        if (isClearToDelete(categoryDto)) {
+            categoryRepository.delete(model);
+        } else {
+            throw new IllegalArgumentException("You can not delete a category that still contains products");
+        }
 
         return model;
+    }
+
+    @Override
+    public boolean isClearToDelete(CategoryDto categoryDto) {
+
+        if (categoryDto.getProducts() != null) {
+            return categoryDto.getProducts().isEmpty();
+        } else {
+            return true;
+        }
     }
 
 }
