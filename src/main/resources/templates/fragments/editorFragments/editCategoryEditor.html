@@ -20,14 +20,13 @@
         <div>
             <a class="btn btn-danger formButtons" th:href="@{/editor/delete/category}"
                th:classappend="${clearedToDelete == true} ? ' ' : disabled">Delete</a>
-            <a class="btn btn-primary formButtons " th:href="@{/editor/cancel}">Cancel</a>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-primary formButtons" th:href="@{/editor/cancel}">Cancel</a>
+            <button type="submit" class="btn btn-primary formButtons">Save</button>
         </div>
         <p></p>
         <div th:if="${clearedToDelete == false}" class="alert alert-danger categoryAlert" role="alert">
             <p>A category cannot be deleted when it contains products.</br>
-                <a th:href="@{/products/selectCategoryToClear/{categoryCode}(categoryCode=${category.categoryCode})}"
-                   th:object="${category}" class="categoryLink">Remove all products</a> from this category first.
+                Remove all products from this category first.
             </p>
         </div>
     </form>
