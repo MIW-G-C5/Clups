@@ -27,19 +27,14 @@
                 <a class="nav-link" th:href="@{/order}">Order</a>
             </li>
             <li class="nav-link topBottomPadding"
-                th:classappend="${selectedPage == 'productPage'} ? currentPage : ' '"
-                sec:authorize="hasAuthority('BARMANAGER')">
-                <a class="nav-link" th:href="@{/products}">Products</a>
-            </li>
-            <li class="nav-link topBottomPadding"
-                th:classappend="${selectedPage == 'categoryPage'} ? currentPage : ' '"
-                sec:authorize="hasAuthority('BARMANAGER')">
-                <a class="nav-link" th:href="@{/categories}">Categories</a>
-            </li>
-            <li class="nav-link topBottomPadding"
                 th:classappend="${selectedPage == 'userPage'} ? currentPage : ' '"
                 sec:authorize="hasAnyAuthority('BARMANAGER', 'BARTENDER')"> <!-- This is not an actual error //-->
                 <a class="nav-link" th:href="@{/accounts}">Accounts</a>
+            </li>
+            <li class="nav-link topBottomPadding"
+                th:classappend="${selectedPage == 'editorPage'} ? currentPage : ' '"
+                sec:authorize="hasAuthority('BARMANAGER')">
+                <a class="nav-link" th:href="@{/editor}">Editor</a>
             </li>
         </ul>
 
