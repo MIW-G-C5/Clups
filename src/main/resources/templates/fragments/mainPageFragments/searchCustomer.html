@@ -19,8 +19,8 @@
     <div class="prepaidHeight">
         <div class="container-fluid zeroPadding scrollableBtnBlock">
             <div th:each="user : ${userList}">
-                <a class="btn btn-block buttonBlock searchCustomerButton prepaidBlock fullWidth"
-                   th:href="@{/order/customer{userCode}(userCode=${user.getUserCode})}">
+                <a class="btn btn-block buttonBlock btn-primary searchCustomerButton prepaidBlock fullWidth"
+                   th:href="@{/order/customer{userCode}(userCode=${user.getUserCode})}"
                     <table class="fullWidth">
                         <td class="prepaidBlock prepaidText" th:text="${user.fullName}"></td>
                         <td class="prepaidBlock prepaidText alignTextRight" th:text="'&#x20AC' + ' ' + ${user.prepaidBalance}"></td>
