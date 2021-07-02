@@ -20,6 +20,12 @@ public class ProductDto {
 
     public ProductDto() {}
 
+    public ProductDto(String productName, int productCode, BigDecimal productPrice) {
+        this.productName = productName;
+        this.productCode = productCode;
+        this.productPrice = productPrice;
+    }
+
     public boolean equals(ProductDto other) {
         return this.productCode == other.productCode;
     }
