@@ -127,12 +127,7 @@ public class MainPageController {
         mainPageStateKeeper.getOrder().addToOrder(orderedProduct);
         return "redirect:/order";
     }
-////
-//    public String selectedProduct(@PathVariable("productCode") String productCodeString) {
-//        String selectedProduct = productService.findDtoByCode(Integer.parseInt(productCodeString)).getProductName();
-//        return selectedProduct;
-//    }
-//
+
     @GetMapping({"/order/remove/{productCode}"})
     protected String removeProductFromOrder(
             @PathVariable("productCode") String productCodeString,

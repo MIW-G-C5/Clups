@@ -59,7 +59,8 @@ public class EditorPageController {
         model.addAttribute("selectedProduct", editorPageStateKeeper.getCurrentProduct().getProductCode());
 
         model.addAttribute("selectedPage", "editorPage");
-        model.addAttribute("clearedToDelete", isClearToDelete(editorPageStateKeeper));
+        model.addAttribute(
+                "clearedToDelete", categoryService.isClearToDelete(editorPageStateKeeper.getCurrentCategory()));
 
         return "editor";
     }
@@ -138,7 +139,6 @@ public class EditorPageController {
             showCategoryForChangedProduct(productDto.getCategoryCode(), editorPageStateKeeper);
 
             clearForm(editorPageStateKeeper);
-//            editorPageStateKeeper.clearCurrentCategory();
         }
 
         return "redirect:/editor";
@@ -271,18 +271,6 @@ public class EditorPageController {
         editorPageStateKeeper.clearCurrentProduct();
         editorPageStateKeeper.setShowCategoryForm(false);
         editorPageStateKeeper.setShowProductForm(false);
-    }
-
-    private boolean isClearToDelete(EditorPageStateKeeper editorPageStateKeeper) {
-        boolean clearedToDelete = true;
-
-        if (editorPageStateKeeper.getCurrentCategory().getProducts() != null) {
-            if (!editorPageStateKeeper.getCurrentCategory().getProducts().isEmpty()) {
-                clearedToDelete = false;
-            }
-        }
-
-        return clearedToDelete;
     }
 
     private void setupCategory(EditorPageStateKeeper editorPageStateKeeper) {
