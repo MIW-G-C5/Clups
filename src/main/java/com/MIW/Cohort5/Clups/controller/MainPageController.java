@@ -65,7 +65,9 @@ public class MainPageController {
 
         model.addAttribute("selectedPage", "mainPage");
         model.addAttribute("selectedCategory", mainPageStateKeeper.getCategoryCode());
-
+        if (mainPageStateKeeper.getSelectedCustomer() != null) {
+            model.addAttribute("selectedUser", mainPageStateKeeper.getSelectedCustomer().getUserCode());
+        }
 
         model.addAttribute("showUserSearch", mainPageStateKeeper.isShowUserSearch());
         model.addAttribute("userList", mainPageStateKeeper.getSortedUsers());
