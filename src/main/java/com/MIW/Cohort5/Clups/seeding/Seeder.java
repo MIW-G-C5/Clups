@@ -76,14 +76,14 @@ public class Seeder {
             Role customer = roleRepository.findRoleByRoleName("CUSTOMER");
             Role barmanager = roleRepository.findRoleByRoleName("BARMANAGER");
 
-            userService.addUser(new User("admin",
-                                         "admin",
+            userService.addUser(new User("mark",
+                                         "mark",
                                          "Mark Heads", barmanager, BigDecimal.valueOf(0)));
-            userService.addUser(new User("bartender",
-                                         "bartender",
+            userService.addUser(new User("anna",
+                                         "anna",
                                          "Anna Tapper", bartender, BigDecimal.valueOf(2.5)));
-            userService.addUser(new User("customer",
-                                         "customer",
+            userService.addUser(new User("george",
+                                         "george",
                                          "George Bagman", customer, BigDecimal.valueOf(50)));
             userService.addUser(new User("richard",
                                          "richard",
@@ -118,6 +118,7 @@ public class Seeder {
     private void seedCategory() {
         if (categoryService.getAll().size() == 0) {
             categoryService.addNew(new Category("Snacks", 1));
+            categoryService.addNew(new Category("Pie", 7));
             categoryService.addNew(new Category("Beer", 2));
             categoryService.addNew(new Category("Wine", 3));
             categoryService.addNew(new Category("Warm beverages", 4));
@@ -131,8 +132,11 @@ public class Seeder {
             productService.addNew(new Product("Nuts", BigDecimal.valueOf(1), findCategory(1)));
             productService.addNew(new Product("Bitterballen", BigDecimal.valueOf(2.50), findCategory(1)));
             productService.addNew(new Product("Potato chips", BigDecimal.valueOf(2), findCategory(1)));
-            productService.addNew(new Product("Curly fries", BigDecimal.valueOf(4.25), findCategory(1)));
+            productService.addNew(new Product("Fries", BigDecimal.valueOf(4.25), findCategory(1)));
+            productService.addNew(new Product("Grilled cheese sandwich", BigDecimal.valueOf(3), findCategory(1)));
 
+
+            productService.addNew(new Product("Apple Pie", BigDecimal.valueOf(4), findCategory(7)));
 
             productService.addNew(new Product("Heineken", BigDecimal.valueOf(2.00), findCategory(2)));
             productService.addNew(new Product("Grolsch", BigDecimal.valueOf(2.00), findCategory(2)));
