@@ -264,12 +264,14 @@ public class UserDetailsServiceImpl implements UserService {
         }
     }
 
+    // Last equals("BARMANAGER") in return statement is purely for the demo.
+    // Should be deleted afterwards and fixed in another way.
     @Override
     public boolean loggedInUser(UserDto userDto) {
         Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
 
         if (userDto != null) {
-            return loggedInUser.getName().equals(userDto.getUsername());
+            return loggedInUser.getName().equals(userDto.getUsername()) && userDto.getUserRole().equals("BARMANAGER");
         } else {
             return false;
         }
