@@ -76,12 +76,12 @@ public class Seeder {
             Role customer = roleRepository.findRoleByRoleName("CUSTOMER");
             Role barmanager = roleRepository.findRoleByRoleName("BARMANAGER");
 
-            userService.addUser(new User("mark",
-                                         "mark",
-                                         "Mark Heads", barmanager, BigDecimal.valueOf(0)));
-            userService.addUser(new User("anna",
-                                         "anna",
-                                         "Anna Tapper", bartender, BigDecimal.valueOf(2.5)));
+            userService.addUser(new User("petra",
+                                         "petra",
+                                         "Petra Heads", barmanager, BigDecimal.valueOf(0)));
+            userService.addUser(new User("steve",
+                                         "steve",
+                                         "Steve Tapper", bartender, BigDecimal.valueOf(2.5)));
             userService.addUser(new User("george",
                                          "george",
                                          "George Bagman", customer, BigDecimal.valueOf(50)));
