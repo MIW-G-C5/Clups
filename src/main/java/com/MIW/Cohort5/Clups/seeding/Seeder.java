@@ -78,40 +78,40 @@ public class Seeder {
 
             userService.addUser(new User("petra",
                                          "petra",
-                                         "Petra Heads", barmanager, BigDecimal.valueOf(0)));
+                                         "Petra Young", barmanager, BigDecimal.valueOf(0)));
             userService.addUser(new User("steve",
                                          "steve",
-                                         "Steve Tapper", bartender, BigDecimal.valueOf(2.5)));
+                                         "Steve Martin", bartender, BigDecimal.valueOf(2.5)));
             userService.addUser(new User("george",
                                          "george",
-                                         "George Bagman", customer, BigDecimal.valueOf(50)));
-            userService.addUser(new User("richard",
-                                         "richard",
-                                         "Richard Peter Morrison III", customer, BigDecimal.valueOf(10)));
+                                         "George Anderson", customer, BigDecimal.valueOf(50)));
+            userService.addUser(new User("mary",
+                                         "mary",
+                                         "Mary Smith", customer, BigDecimal.valueOf(10)));
             userService.addUser(new User("carl",
                                          "carl",
-                                         "Carl Host", barmanager, BigDecimal.valueOf(20)));
+                                         "Carl Williams", barmanager, BigDecimal.valueOf(20)));
             userService.addUser(new User("lisa",
                                          "lisa",
-                                         "Lisa Bagman-Lewis", customer, BigDecimal.valueOf(12.5)));
-            userService.addUser(new User("michael",
-                                         "michael",
-                                         "Michael Sommerset", customer, BigDecimal.valueOf(7.5)));
-            userService.addUser(new User("gina",
-                                         "gina",
-                                         "Gina diAngelina", bartender, BigDecimal.valueOf(0)));
+                                         "Lisa Lewis", customer, BigDecimal.valueOf(12.5)));
+            userService.addUser(new User("james",
+                                         "james",
+                                         "James Smith", customer, BigDecimal.valueOf(7.5)));
+            userService.addUser(new User("maria",
+                                         "maria",
+                                         "Maria Garcia", bartender, BigDecimal.valueOf(0)));
             userService.addUser(new User("arnold",
                                          "arnold",
-                                         "Arnold Wilder", customer, BigDecimal.valueOf(15.25)));
-            userService.addUser(new User("annabeth",
-                                         "annabeth",
-                                         "Annabeth Maker", customer, BigDecimal.valueOf(0)));
-            userService.addUser(new User("reginald",
-                                         "reginald",
-                                         "Reginald Smith", customer, BigDecimal.valueOf(13.33)));
-            userService.addUser(new User("penny",
-                                         "penny",
-                                         "Penny Louise Worthington-Smythe", customer, BigDecimal.valueOf(13.33)));
+                                         "Arnold Jones", customer, BigDecimal.valueOf(15.25)));
+            userService.addUser(new User("jennifer",
+                                         "jennifer",
+                                         "Jennifer Taylor", customer, BigDecimal.valueOf(0)));
+            userService.addUser(new User("mark",
+                                         "mark",
+                                         "Mark Moore", customer, BigDecimal.valueOf(13.33)));
+            userService.addUser(new User("sarah",
+                                         "sarah",
+                                         "Sarah Lee", customer, BigDecimal.valueOf(13.33)));
         }
     }
 
