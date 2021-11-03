@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * Johnnie Meijer
  * j.j.meijer@st.hanze.nl
- *
+ * Yay
  * Decides who can do what.
  */
 
